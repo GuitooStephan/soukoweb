@@ -1,0 +1,119 @@
+<div class="container-fluid mt-4">
+    <ng-container *ngIf="loading; else noloading;">
+        <div class="row">
+            <div class="mx-auto my-5">
+                <div class="spinner-border text-primary m-2" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noloading>
+        <div class="row justify-content-between mb-4 align-items-center">
+            <div class="col-12 col-sm-5 px-0 d-flex mb-3 mb-md-0 align-item-start pt-3">
+                <div class="col-2 col-sm-3 col-md-1 col-md-2 px-0 d-flex align-items-start">
+                    <a [routerLink]="['/orders/list/']" class="mr-4 display-4 font-weight-light text-dark">
+                        <i class="uil uil-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="col-9 col-sm pr-0">
+                    <div class="d-flex align-items-center">
+                        <h1 class="my-0 mr-2">Order</h1>
+                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'PAID'" [class.badge-light]="order.payment_status == 'PENDING'">{{order.payment_status}}</span>
+                    </div>
+                    <p class="mb-0">#{{order.id}}</p>
+                    <p class="mb-1 text-primary">{{order.created_at | date}}</p>
+                    <p class="mb-0">
+                        <a class="mr-2" [routerLink]="['/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
+                        <a (click)="promptForDeletingOrder()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 d-flex align-items-center justify-content-start justify-content-sm-end">
+                <div class="media">
+                    <div class="avatar avatar-md rounded-circle d-flex align-items-center justify-content-around bg-soft-primary text-center text-primary">
+                        <i class="uil uil-user font-size-28"></i>
+                    </div>
+                    <div class="media-body ml-2">
+                        <p class="font-size-18 mb-2 font-weight-bold">{{order.customer.first_name + ' ' + order.customer.last_name}}</p>
+                        <p class="mb-0">{{ order.customer.city ? order.customer.city : '' + ' ' + order.customer.country }}</p>
+                        <p class="mb-0">{{ order.customer.phone_number ? order.customer.phone_number : '' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mb-4">Payments</h4>
+                        <ng-container *ngIf="order.payments.length; else nopayments;">
+                            <div class="d-flex justify-content-center mb-3">
+                                <div class="col-10">
+                                    <div class="card border border-light-dark">
+                                        <div class="card-body">
+                                            <p class="mb-1 text-center text-dark-success">{{ percentage | percent }} completed</p>
+                                            <mat-progress-bar mode="determinate" class="bar-success" [value]="percentage * 100"></mat-progress-bar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-size-13">Details</p>
+                                <p class="text-center font-size-13">
+                                    <a (click)="recordPayment()" href="javascript:void(0)">
+                                        <i class="uil uil-plus"></i>
+                                        Record Payment
+                                    </a>
+                                </p>
+                            </div>
+                            <ng-container *ngFor="let payment of order.payments">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 font-size-16">{{payment.created_at | date}}</p>
+                                    <p class="mb-0 font-size-16 text-right">{{payment.amount | currency:'¢':'symbol':'1.0-0' }}</p>
+                                </div>
+                                <hr>
+                            </ng-container>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="mb-0 font-size-16">Cost</p>
+                                <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:'¢':'symbol':'1.0-0' }}</p>
+                            </div>
+                        </ng-container>
+                        <ng-template #nopayments>
+                            <p class="mb-4 text-center">
+                                <a (click)="recordPayment()" href="javascript:void(0)">
+                                    <i class="uil uil-plus"></i>
+                                    Record Payment
+                                </a>
+                            </p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
+                <h4 class="mb-3">Order Items</h4>
+                <div class="table-responsive mb-5">
+                    <table class="table m-0 table-striped">
+                        <tbody>
+                            <ng-container *ngFor="let item of order.order_items">
+                                <tr class="border-2 mb-3">
+                                    <td>
+                                        <span class="font-weight-bold">Product:</span>
+                                        {{item.product.name}}
+                                    </td>
+                                    <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>
+                                    <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:'¢':'symbol':'1.2-2'}}</td>
+                                </tr>
+                            </ng-container>
+                            <tr>
+                                <td class="font-weight-bold">Total Cost</td>
+                                <td></td>
+                                <td class="font-weight-bold">{{order.total_amount | currency:'¢':'symbol':'1.2-2'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

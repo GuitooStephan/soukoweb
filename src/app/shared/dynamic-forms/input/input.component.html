@@ -1,0 +1,21 @@
+<div class="form-group mb-4" [formGroup]="group">
+    <label class="form-control-label" [for]="field.name">{{field.label}}</label>
+    <input 
+        [type]="field.inputType" class="form-control"
+        [formControlName]="field.name"
+        [placeholder]="field.placeholder"
+        [maxlength]="field.maxlength" 
+        [attr.id]="field.name"
+        #input 
+        [min]="field.min" 
+        [max]="field.max" 
+        aria-required="true" 
+        aria-invalid="false">
+    <ng-container *ngIf="group.get(field.name).invalid && (group.get(field.name).dirty || group.get(field.name).touched)">
+        <ng-container *ngFor="let validation of field.validations;">
+            <div *ngIf="group.get(field.name).hasError(validation.name)" class="text-danger small mb-0 mt-2">
+                {{validation.message}}
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

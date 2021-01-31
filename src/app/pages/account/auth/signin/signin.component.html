@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row h-100-vh">
+        <div class="col-lg-4 d-none d-lg-flex position-relative bg-dark p-5 align-items-center">
+            <p class="text-light position-absolute authentication-logo">Souko</p>
+            <div class="">
+                <h1 class="text-primary mb-2 font-weight-bold">
+                    Welcome to Souko
+                </h1>
+                <p class="mb-0 font-size-18">The best shop management platform for small businesses.</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 bg-gray p-5">
+            <p class="text-lg-right">
+                Don't have an account ?
+                <a [routerLink]="['/account/auth/sign-up']">Sign Up</a>
+            </p>
+            <div class="my-5">
+                <h1 class="mb-0 font-weight-bold">Sign In</h1>
+                <p class="mb-0">Kindly, input your details</p>
+            </div>
+            <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
+            <a [routerLink]="['/account/auth/forgot-password']">Forgot password?</a>
+            <div class="mt-5 d-flex align-items-center">
+                <button (click)="signIn()" class="btn btn-primary">
+                    Sign In
+                    <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                </button>
+                <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="form-group align-items-center mb-4" [formGroup]="group">
+    <label class="form-control-label" [for]="field.name">{{field.label}}</label>
+    <textarea 
+        class="form-control" 
+        [formControlName]="field.name" 
+        [attr.id]="field.name" 
+        rows="3" 
+        aria-required="true"
+        aria-invalid="false" 
+        [placeholder]="field.placeholder"></textarea>
+</div>
+<ng-container *ngIf="group.get(field.name).invalid && (group.get(field.name).dirty || group.get(field.name).touched)">
+    <ng-container *ngFor="let validation of field.validations;">
+        <div *ngIf="group.get(field.name).hasError(validation.name)" class="text-danger small mb-0 mt-2">
+            {{validation.message}}
+        </div>
+    </ng-container>
+</ng-container>

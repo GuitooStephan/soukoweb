@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between justify-content-lg-end">
+    <span (click)="toggleMenu()" class="d-block d-lg-none cursor-pointer"><i [attr.data-feather]="'menu'" appFeatherIcon></i></span>
+    <ul class="navbar-nav justify-content-end flex-row align-items-center">
+        <li class="nav-item d-none d-md-block">
+            <a [routerLink]="['/orders/create']" class="btn btn-primary mr-3" href="javascript:void(0)"> 
+                Record Order
+                <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+            </a>
+        </li>
+        <li class="nav-item d-none d-md-block">
+            <a class="btn btn-primary mr-3" (click)="addProduct()" href="javascript:void(0)"> 
+                Add Product
+                <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+            </a>
+        </li>
+        <li ngbDropdown class="nav-item d-md-none">
+            <button class="btn btn-primary" id="topBarMoreActions" ngbDropdownToggle>More Actions</button>
+            <div ngbDropdownMenu aria-labelledby="topBarMoreActions" class="dropdown-menu">
+                <a [routerLink]="['/orders/create']" ngbDropdownItem>
+                    Record Order
+                    <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+                </a>
+                <a href="javascript:void(0)" (click)="addProduct()" ngbDropdownItem>
+                    Add Product
+                    <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+                </a>
+            </div>
+        </li>
+        <li ngbDropdown placement="bottom-left" class="nav-item">
+            <div ngbDropdownToggle id="profileDropdown" class="avatar cursor-pointer avatar-md rounded-circle d-flex justify-content-center align-items-center bg-white text-primary">
+                <i [attr.data-feather]="'user'" appFeatherIcon></i>
+            </div>
+            <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
+                <a [routerLink]="['/my-profile']" ngbDropdownItem>
+                    Profile
+                </a>
+                <a href="javascript:void(0)" (click)="logout()" ngbDropdownItem>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

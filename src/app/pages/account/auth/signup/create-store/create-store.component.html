@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row h-100-vh">
+        <div class="col-lg-4 d-none d-lg-block bg-dark p-5">
+            <p class="text-light">Souko</p>
+            <div class="mt-5">
+                <ul class="list-unstyled mt-4">
+                    <li class="mb-4">
+                        <span class="mr-3 text-success"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
+                        <span class="text-uppercase">USER DETAILS</span>
+                    </li>
+                    <li class="mb-4">
+                        <span class="mr-3 text-primary"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
+                        <span class="text-primary text-uppercase">STORE DETAILS</span>
+                    </li>
+                    <li class="mb-4">
+                        <span class="mr-3"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
+                        <span class="text-uppercase">COMPLETE</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 bg-gray p-5">
+            <p class="text-lg-right">
+                Would you like to continue later ?
+                <a href="javascript:void(0)" (click)="signOut()">Sign Out</a>
+            </p>
+            <div class="my-5">
+                <h1 class="mb-0 font-weight-bold">Create Your Store</h1>
+                <p class="mb-0">Kindly, input your details</p>
+            </div>
+            <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
+            <div class="mt-4 d-flex align-items-center">
+                <button (click)="createStore()" class="btn btn-primary">
+                    Create Store
+                    <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                </button>
+                <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

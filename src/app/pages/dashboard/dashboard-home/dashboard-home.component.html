@@ -1,0 +1,139 @@
+<div class="container-fluid mt-4">
+    <div class="d-md-flex justify-content-md-between align-items-md-center mb-4">
+        <div class="mb-3 mb-md-0">
+            <h2>Welcome, <span class="text-primary">Guy Stephane</span></h2>
+        </div>
+        <div class="d-flex align-items-center">
+            <div ngbDropdown class="mr-2">
+                <button class="btn btn-outline-dark" id="homeMoreActions" ngbDropdownToggle>More Actions</button>
+                <div ngbDropdownMenu aria-labelledby="homeMoreActions" class="dropdown-menu">
+                    <a [routerLink]="['/orders/create']" ngbDropdownItem>
+                        Record Order
+                        <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+                    </a>
+                    <a href="javascript:void(0)" (click)="addProduct()" ngbDropdownItem>
+                        Add Product
+                        <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-group mr-2">
+                <div class="form-inline">
+                    <select class="custom-select" [(ngModel)]="metricsFilter" (change)="fetchMetrics()">
+                        <option selected value="0">This Week</option>
+                        <option value="1">This Month</option>
+                        <option value="2">This Year</option>
+                        <option value="3">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body bg-dark rounded-xl">
+                    <div class="media">
+                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
+                            <i [attr.data-feather]="'credit-card'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <p class="font-size-16 mb-2 text-light font-weight-bold">Profit</p>
+                            <h1 *ngIf="metrics" class="text-primary my-0">{{ metrics.profitReport.profit | currency:'¢':'symbol':'1.0-0' }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body bg-dark rounded-xl">
+                    <div class="media">
+                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
+                            <i [attr.data-feather]="'hash'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <p class="font-size-16 mb-2 text-light font-weight-bold">Num. of Orders</p>
+                            <h1 *ngIf="metrics" class="text-primary my-0">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4">
+            <div class="card">
+                <div class="card-body bg-dark rounded-xl">
+                    <div class="media">
+                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
+                            <i [attr.data-feather]="'star'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <p class="font-size-16 mb-2 text-light font-weight-bold">Best Selling</p>
+                            <h4 *ngIf="metrics" class="text-primary my-0">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="metrics" class="row">
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="card rounded-xl">
+                <div class="card-body">
+                    <ng-container *ngIf="metrics.ordersReport.orders_record.length; else noOrdersRecord;">
+                        <ng-container *ngIf="ordersMetricsGraph">
+                            <apx-chart
+                                #apexchart
+                                class="apex-charts"
+                                [series]="ordersMetricsGraph.series"
+                                [chart]="ordersMetricsGraph.chart"
+                                [colors]="ordersMetricsGraph.colors"
+                                [stroke]="ordersMetricsGraph.stroke"
+                                [dataLabels]="ordersMetricsGraph.dataLabels"
+                                [tooltip]="ordersMetricsGraph.tooltip"
+                                [responsive]="ordersMetricsGraph.responsive"
+                                [legend]="ordersMetricsGraph.legend"
+                                [xaxis]="ordersMetricsGraph.xaxis"
+                                [stroke]="ordersMetricsGraph.stroke"
+                                [markers]="ordersMetricsGraph.markers"
+                            ></apx-chart>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noOrdersRecord>
+                        <div class="p-4 text-center">
+                            <h5>No orders record available</h5>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card rounded-xl">
+                <div class="card-body">
+                    <h3 class="mb-3">Low Stock Products</h3>
+                    <ng-container *ngIf="metrics.stockReport.low_products.length; else noLowProducts">
+                        <ng-container *ngFor="let product of metrics.stockReport.low_products">
+                            <div class="media mb-4">
+                                <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-primary text-center text-white">
+                                    <i [attr.data-feather]="'arrow-down'" appFeatherIcon></i>
+                                </div>
+                                <div class="media-body ml-4">
+                                    <p class="font-size-16 mb-2 font-weight-bold">{{ product.name }}</p>
+                                    <p *ngIf="metrics" class="my-0">
+                                        <span class="font-weight-bold">{{product.total_stock}}</span>
+                                        products left
+                                    </p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noLowProducts>
+                        <div class="p-4 text-center">
+                            <h5>No products available</h5>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

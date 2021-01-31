@@ -1,0 +1,8 @@
+<div class="row" [formGroup]="group">
+    <div class="col-12">
+        <div class="form-group clearfix d-grid">
+            <label class="control-label form-label" [for]="field.name">{{field.label}}</label>
+            <input #countrySelect class="form-control d-block" (focusout)="selectCountry($event)" [placeholder]="field.placeholder">
+        </div>
+    </div>
+</div>

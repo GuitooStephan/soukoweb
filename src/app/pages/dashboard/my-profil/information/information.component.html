@@ -1,0 +1,21 @@
+<div class="row mb-5">
+    <div class="col-lg-12">
+        <ng-container *ngIf="user">
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label class="form-control-label" for="email">Email</label>
+                    <input type="text" disabled class="form-control" id="email" [value]="user.email">
+                </div>
+            </div>
+        </ng-container>
+        <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
+    </div>
+    <div class="col-12">
+        <button (click)="updateInformation()" class="btn btn-primary">
+            Update Information
+        </button>
+        <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>

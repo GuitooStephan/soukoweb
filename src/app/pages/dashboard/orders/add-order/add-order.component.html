@@ -1,0 +1,119 @@
+<div class="container-fluid mt-4 px-4">
+    <div class="d-flex mb-5 align-item-start">
+        <div class="d-flex align-items-start">
+            <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="goBack()">
+                <i [attr.data-feather]="'arrow-left'" appFeatherIcon></i>
+            </a>
+        </div>
+        <div>
+            <h1 class="my-0">Record New Order</h1>
+            <p class="mb-0">Make sure to fill all required fields</p>
+        </div>
+    </div>
+    <div *ngIf="form" [formGroup]="form">
+        <div class="mb-2">
+            <h3 class="my-0">Customer</h3>
+            <p class="mb-0">Enter customer details</p>
+        </div>
+        <div class="mb-4">
+            <div class="form-group mb-2">
+                <mat-form-field floatLabel="never" shouldLabelFloat="false" appearance="standard">
+                    <label class="form-control-label" for="customer">Search customer</label>
+                    <input type="text" id="customer" class="form-control autocomplete" placeholder="Enter customer name" aria-label="Number" matInput formControlName="customer_name" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCustomer" (optionSelected)="customerSelected($event)">
+                        <mat-option *ngFor="let option of customerOptions" [value]="option">
+                            {{option.first_name + ' ' + option.last_name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <ng-container *ngIf="form.get('customer_name').invalid && (form.get('customer_name').dirty || form.get('customer_name').touched)">
+                    <div *ngIf="form.get('customer_name').hasError('required')" class="text-danger small mb-0 mt-2">
+                        Customer is required
+                    </div>
+                </ng-container>
+            </div>
+            <a (click)="createCustomer()" href="javascript:void(0)">Add new customer</a>
+        </div>
+        <div class="mb-2">
+            <h3 class="my-0">Items</h3>
+            <p class="mb-0">Products and their quantity</p>
+        </div>
+        <div class="mb-4">
+            <ng-container *ngFor="let item of o.controls; let i = index;">
+                <div class="row" [formGroup]="item">
+                    <div class="col-12 col-lg-6 mb-2 mb-lg-0 form-group">
+                        <mat-form-field floatLabel="never" shouldLabelFloat="false" appearance="standard">
+                            <label class="form-control-label" for="customer">Product</label>
+                            <input type="text" id="customer" class="form-control autocomplete" placeholder="Enter product name" aria-label="Number" matInput formControlName="product_name" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProduct" (optionSelected)="productSelected($event, i)">
+                                <mat-option *ngFor="let option of productOptions" [value]="option">
+                                    {{option.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <ng-container *ngIf="item.get('total_stock').value">
+                            <div class="text-primary small my-0">
+                                The total stock is {{ item.get('total_stock').value }}
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.get('product_name').invalid && (item.get('product_name').dirty || item.get('product_name').touched)">
+                            <div *ngIf="item.get('product_name').hasError('required')" class="text-danger small mb-0 mt-2">
+                                Product is required
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-2 mb-md-0 form-group">
+                        <label class="form-control-label" [for]="'quantity' + 1">Quantity</label>
+                        <input type="text" [id]="'quantity' + 1" formControlName="quantity" class="form-control" placeholder="Enter quantity">
+                        <ng-container *ngIf="item.get('quantity').invalid && (item.get('quantity').dirty || item.get('quantity').touched)">
+                            <div *ngIf="item.get('quantity').hasError('required')" class="text-danger small mb-0 mt-2">
+                                Quantity is required
+                            </div>
+                            <div *ngIf="item.get('quantity').hasError('pattern')" class="text-danger small mb-0 mt-2">
+                                Quantity should be a number
+                            </div>
+                            <div *ngIf="item.get('quantity').hasError('max')" class="text-danger small mb-0 mt-2">
+                                Quantity should not exceed your stock
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-md-0 d-flex justify-content-between align-items-center">
+                        <div class="pl-0 form-group" [class.col-12]="i === 0" [class.col-11]="i > 0" [class.pr-0]="i === 0">
+                            <label class="form-control-label" [for]="'cost' + 1">Cost</label>
+                            <input type="text" [id]="'cost' + 1" formControlName="cost" class="form-control" placeholder="Enter cost">
+                            <ng-container *ngIf="item.get('cost').invalid && (item.get('cost').dirty || item.get('cost').touched)">
+                                <div *ngIf="item.get('cost').hasError('required')" class="text-danger small mb-0 mt-2">
+                                    Cost is required
+                                </div>
+                                <div *ngIf="item.get('cost').hasError('pattern')" class="text-danger small mb-0 mt-2">
+                                    Cost should be a decimal number
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="i > 0">
+                            <span (click)="removeOrderItem(i)" class="text-danger is-a"><i class="fa fa-2x fa-trash-o"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <hr class="d-block d-lg-none">
+            </ng-container>
+            <div class="my-3">
+                <button class="btn btn-primary" (click)="addOrderItem()">
+                    Add new order item
+                    <i [attr.data-feather]="'plus'" appFeatherIcon></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="mt-4 mb-5">
+        <p class="my-0 font-size-16 mb-0">Total</p>
+        <h2 class="my-0">{{ total | currency:'¢':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="mb-5">
+        <button (click)="createOrder()" class="btn btn-primary">
+            Record Order
+            <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+        </button>
+    </div>
+</div>

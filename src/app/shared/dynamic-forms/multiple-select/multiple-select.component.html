@@ -1,0 +1,15 @@
+<div class="form-group mb-4" [formGroup]="group">
+    <label class="form-control-label" [for]="field.name">{{field.label}}</label>
+    <ng-select [items]="items" [bindValue]="'value'" [multiple]="true" [attr.id]="field.name"
+        [formControlName]="field.name" [placeholder]="field.placeholder" required>
+    </ng-select>
+
+    <ng-container
+        *ngIf="group.get(field.name).invalid && (group.get(field.name).dirty || group.get(field.name).touched)">
+        <ng-container *ngFor="let validation of field.validations;">
+            <p *ngIf="group.get(field.name).hasError(validation.name)" class="text-danger small mb-0 mt-2">
+                {{validation.message}}
+            </p>
+        </ng-container>
+    </ng-container>
+</div>

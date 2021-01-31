@@ -1,0 +1,15 @@
+<div class="container-fluid pb-0">
+    <ng-container *ngIf="loading">
+        <div class="row mb-5 justify-content-center">
+            <div class="spinner-border text-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-container>
+    <form [class]="formClasses" [formGroup]="form" (ngSubmit)="handleSubmit($event)">
+        <div class="row justify-content-center">
+            <ng-container *ngFor="let field of fields;" dynamicField [field]="field" [group]="form">
+            </ng-container>
+        </div>
+    </form>
+</div>
