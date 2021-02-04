@@ -1,4 +1,4 @@
-<div class="container-fluid p-5">
+<div class="container-fluid p-5" [formGroup]="form">
     <div class="d-flex mb-5 align-item-start">
         <div class="d-flex align-items-start">
             <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
@@ -10,7 +10,28 @@
     </div>
     <div class="row">
         <div class="col-12 px-0">
-            <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
+            <p class="text-warning mb-1">The remaining amount is {{ remainingAmount | currency:'¢':'symbol':'1.0-0' }}</p>
+            <input class="custom-checkbox mr-2" formControlName="full_payment" type="checkbox" value="" id="paying_now">
+            <label class="form-check-label mb-4" for="paying_now">
+                Making a full payment
+            </label>
+        </div>
+        <div class="col-12 px-0 mb-4">
+            <div>
+                <label for="amount">Amount</label>
+                <input type="text" class="form-control" formControlName="amount">
+                <ng-container *ngIf="form.get('amount').invalid && (form.get('amount').dirty || form.get('amount').touched)">
+                    <div *ngIf="form.get('amount').hasError('required')" class="text-danger small mb-0 mt-2">
+                        Amount is required
+                    </div>
+                    <div *ngIf="form.get('amount').hasError('pattern')" class="text-danger small mb-0 mt-2">
+                        Amount should be a number
+                    </div>
+                    <div *ngIf="form.get('amount').hasError('max')" class="text-danger small mb-0 mt-2">
+                        Amount should not exceed the remaining amount
+                    </div>
+                </ng-container>
+            </div>
         </div>
         <div class="col-12 px-0">
             <button (click)="recordPayment()" class="btn btn-primary">

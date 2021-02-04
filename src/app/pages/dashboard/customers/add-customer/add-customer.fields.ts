@@ -42,6 +42,11 @@ export const AddCustomerFields: FieldConfig[] = [
         validations: [
             {
                 name: 'required',
+                validator: Validators.required,
+                message: 'Email format is required'
+            },
+            {
+                name: 'email',
                 validator: Validators.email,
                 message: 'Email format is not valid'
             }

@@ -4,7 +4,7 @@
             <h2>Welcome, <span class="text-primary">Guy Stephane</span></h2>
         </div>
         <div class="d-flex align-items-center">
-            <div ngbDropdown class="mr-2">
+            <div ngbDropdown class="mr-4">
                 <button class="btn btn-outline-dark" id="homeMoreActions" ngbDropdownToggle>More Actions</button>
                 <div ngbDropdownMenu aria-labelledby="homeMoreActions" class="dropdown-menu">
                     <a [routerLink]="['/orders/create']" ngbDropdownItem>
@@ -19,6 +19,7 @@
             </div>
             <div class="btn-group mr-2">
                 <div class="form-inline">
+                    <span class="mr-2">Filter metrics by:</span>
                     <select class="custom-select" [(ngModel)]="metricsFilter" (change)="fetchMetrics()">
                         <option selected value="0">This Week</option>
                         <option value="1">This Month</option>
@@ -78,8 +79,38 @@
     </div>
     <div *ngIf="metrics" class="row">
         <div class="col-12 col-md-6 col-lg-8">
+            <div class="card rounded-xl mb-4">
+                <div class="card-body">
+                    <h3 class="mb-3">Profit Per day</h3>
+                    <ng-container *ngIf="metrics.profitReport.profit_report.length; else noProfitRecord;">
+                        <ng-container *ngIf="profitMetricsGraph">
+                            <apx-chart
+                                #apexchart
+                                class="apex-charts"
+                                [series]="profitMetricsGraph.series"
+                                [chart]="profitMetricsGraph.chart"
+                                [colors]="profitMetricsGraph.colors"
+                                [stroke]="profitMetricsGraph.stroke"
+                                [dataLabels]="profitMetricsGraph.dataLabels"
+                                [tooltip]="profitMetricsGraph.tooltip"
+                                [responsive]="profitMetricsGraph.responsive"
+                                [legend]="profitMetricsGraph.legend"
+                                [xaxis]="profitMetricsGraph.xaxis"
+                                [stroke]="profitMetricsGraph.stroke"
+                                [markers]="profitMetricsGraph.markers"
+                            ></apx-chart>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noProfitRecord>
+                        <div class="p-4 text-center">
+                            <h5>No profit report available</h5>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
             <div class="card rounded-xl">
                 <div class="card-body">
+                    <h3 class="mb-3">Orders Per day</h3>
                     <ng-container *ngIf="metrics.ordersReport.orders_record.length; else noOrdersRecord;">
                         <ng-container *ngIf="ordersMetricsGraph">
                             <apx-chart

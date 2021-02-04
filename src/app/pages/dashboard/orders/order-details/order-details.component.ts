@@ -50,12 +50,22 @@ export class OrderDetailsComponent implements OnInit {
   recordPayment() {
     const modalRef = this.modal.open(RecordPaymentComponent, { centered: true, size: 'lg' });
     modalRef.componentInstance.orderId = this.route.snapshot.params.id;
+    modalRef.componentInstance.remainingAmount = this.order.total_amount - +_.sumBy( this.order.payments, 'amount' );
     modalRef.result.then((result) => {
       if (result === 'success') {
         this.notificationService.success(null, 'Payment recorded successfully!');
         this.fetchOrder();
       }
     }, (_) => { });
+  }
+
+  payOrder() {
+    this.ordersService.recordPayment( { order_id: this.order.id, amount: this.order.total_amount } ).subscribe(
+      data => {
+        this.notificationService.success( null, 'Order has been paid' );
+        this.fetchOrder();
+      }
+    );
   }
 
   promptForDeletingOrder(): void {
