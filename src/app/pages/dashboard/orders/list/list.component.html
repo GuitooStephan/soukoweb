@@ -58,14 +58,18 @@
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:'¢':'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:'¢':'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'PAID'" [class.badge-light]="order.payment_status == 'PENDING'">{{order.payment_status}}</span></td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Pending'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span></td>
                                 <td ngbDropdown container="body" class="cursor-pointer">
                                     <span ngbDropdownToggle class="no-dropdown-arrow"><i class="fa fa-ellipsis-h"></i></span>
                                     <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
-                                        <a [routerLink]="['/orders/edit', order.id]" ngbDropdownItem>
+                                        <a (click)="goToDetails(order)" href="javascript:void(0)" ngbDropdownItem>
+                                            View
+                                        </a>
+                                        <a *ngIf="order.payment_status === 'Pending'" [routerLink]="['/orders/edit', order.id]" ngbDropdownItem>
                                             Edit
                                         </a>
-                                        <a (click)="promptForDeletingOrder( order )" href="javascript:void(0)" ngbDropdownItem>
+                                        <a *ngIf="order.payment_status === 'Pending'" (click)="recordPayment(order)" href="javascript:void(0)" ngbDropdownItem>Mark as paid</a>
+                                        <a *ngIf="order.payment_status === 'Pending'" (click)="promptForDeletingOrder( order )" href="javascript:void(0)" ngbDropdownItem>
                                             Delete
                                         </a>
                                     </div>

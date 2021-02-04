@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -9,7 +10,9 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
+import { RecordPaymentComponent } from '../record-payment/record-payment.component';
 
+declare var _;
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -32,6 +35,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private router: Router,
     public dialog: MatDialog,
+    private modal: NgbModal,
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private ordersService: OrdersService
@@ -128,6 +132,18 @@ export class ListComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  recordPayment( order ) {
+    const modalRef = this.modal.open(RecordPaymentComponent, { centered: true, size: 'lg' });
+    modalRef.componentInstance.orderId = order.id;
+    modalRef.componentInstance.remainingAmount = order.total_amount - +_.sumBy( order.payments, 'amount' );
+    modalRef.result.then((result) => {
+      if (result === 'success') {
+        this.notificationService.success(null, 'Payment recorded successfully!');
+        this.fetchOrders();
+      }
+    }, (_) => { });
   }
 
 }

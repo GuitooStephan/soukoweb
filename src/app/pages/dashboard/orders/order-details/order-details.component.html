@@ -19,7 +19,7 @@
                 <div class="col-9 col-sm pr-0">
                     <div class="d-flex align-items-center">
                         <h1 class="my-0 mr-2">Order</h1>
-                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'PAID'" [class.badge-light]="order.payment_status == 'PENDING'">{{order.payment_status}}</span>
+                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Pending'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span>
                     </div>
                     <p class="mb-0">#{{order.id}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="font-size-13">Details</p>
-                                <p class="text-center font-size-13">
+                                <p *ngIf="order.payment_status !== 'Paid'" class="text-center font-size-13">
                                     <a (click)="recordPayment()" href="javascript:void(0)">
                                         <i class="uil uil-plus"></i>
                                         Record Payment
@@ -75,15 +75,23 @@
                                 <hr>
                             </ng-container>
                             <div class="d-flex align-items-center justify-content-between">
-                                <p class="mb-0 font-size-16">Cost</p>
+                                <p class="mb-0 font-size-16">Total</p>
                                 <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:'¢':'symbol':'1.0-0' }}</p>
                             </div>
                         </ng-container>
                         <ng-template #nopayments>
-                            <p class="mb-4 text-center">
+                            <p class="mb-2 text-center">
                                 <a (click)="recordPayment()" href="javascript:void(0)">
                                     <i class="uil uil-plus"></i>
-                                    Record Payment
+                                    Record Payment (Partial Payment)
+                                </a>
+                            </p>
+                            <p class="mb-2 text-center">
+                                or
+                            </p>
+                            <p class="mb-2 text-center">
+                                <a class="btn btn-primary" (click)="payOrder()" href="javascript:void(0)">
+                                    Mark as Paid (Full Payment)
                                 </a>
                             </p>
                         </ng-template>

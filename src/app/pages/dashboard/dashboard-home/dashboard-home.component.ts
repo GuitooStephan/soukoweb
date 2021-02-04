@@ -20,6 +20,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
   fetchMetrics$;
 
   ordersMetricsGraph;
+  profitMetricsGraph;
 
   user;
   metrics;
@@ -76,6 +77,16 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       ordersMetricsGraph.series.push( { name: 'Orders', data: this.metrics.ordersReport.orders_record.map( _o => _o.orders ) } );
       ordersMetricsGraph.xaxis.categories.push( ...this.metrics.ordersReport.orders_record.map( d => d.date ) );
       this.ordersMetricsGraph = ordersMetricsGraph;
+    }, 1000 );
+
+    this.profitMetricsGraph = null;
+    const profitMetricsGraph = { ...linewithDataChart };
+    profitMetricsGraph.series = [];
+    profitMetricsGraph.xaxis.categories = [];
+    setTimeout( () => {
+      profitMetricsGraph.series.push( { name: 'Profit', data: this.metrics.profitReport.profit_report.map( _o => _o.profit ) } );
+      profitMetricsGraph.xaxis.categories.push( ...this.metrics.profitReport.profit_report.map( d => d.date ) );
+      this.profitMetricsGraph = profitMetricsGraph;
     }, 1000 );
   }
 

@@ -82,7 +82,7 @@ export class CreateStoreComponent implements OnInit {
       data => {
         const categories = data.results;
         // tslint:disable-next-line: max-line-length
-        Categories.push( ..._.xorBy( _.filter(Categories, i => i.value !== ''), categories.map( i => ({ label: i.name, id: i.id }) ), 'value') );
+        Categories.push( ..._.xorBy( _.filter(Categories, i => i.value !== ''), categories.map( i => ({ label: i.name, value: i.id }) ), 'value') );
       }
     );
   }

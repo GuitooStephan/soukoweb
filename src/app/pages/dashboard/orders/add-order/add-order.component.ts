@@ -63,6 +63,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       customer_id: [ '', Validators.required ],
       customer_name: [ '', Validators.required ],
+      paying_now: [ false ],
       order_items: new FormArray([])
     });
 
@@ -141,6 +142,12 @@ export class AddOrderComponent implements OnInit, OnDestroy {
           } )
         );
         return combineLatest( [ ...calls ] );
+      } ),
+      flatMap( orderItems => {
+        if ( formValue.paying_now ) {
+          const orderId = orderItems[0]['order'];
+          return this.ordersService.recordPayment( { order_id: orderId, amount: +this.total } );
+        }
       } )
     ).subscribe(
       data => {
