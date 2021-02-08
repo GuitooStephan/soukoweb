@@ -33,6 +33,7 @@ import { MyProfilComponent } from './my-profil/my-profil.component';
     FormsModule,
     NgApexchartsModule,
     ProductsModule,
+    LayoutsModule,
     NgbModalModule,
     OrdersModule,
     CustomersModule,

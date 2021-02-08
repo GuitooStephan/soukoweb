@@ -7,6 +7,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { CoreModule } from 'src/app/core/core.module';
     CommonModule,
     ForgotPasswordRoutingModule,
     SharedModule,
+    LayoutsModule,
     CoreModule
   ]
 })

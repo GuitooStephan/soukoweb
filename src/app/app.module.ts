@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LayoutsModule } from './shared/layouts/layouts.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CoreModule,
     SharedModule,
     PagesModule,
+    LayoutsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(rootReducers, {
       metaReducers,

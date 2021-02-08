@@ -1,13 +1,14 @@
 <div class="container-fluid">
     <div class="row h-100-vh">
         <div class="col-lg-4 d-none d-lg-flex position-relative bg-dark p-5 align-items-center">
-            <p class="text-light position-absolute authentication-logo">Souko</p>
+            <a [routerLink]="['/account/auth/sign-in']"><img class="position-absolute authentication-logo" width="80" height="auto" src="../../../../../../assets/images/logo-yellow.png" alt="logo"></a>
             <div class="">
                 <h1 class="text-primary mb-2 font-weight-bold">
                     Welcome to Souko
                 </h1>
                 <p class="mb-0 font-size-18">You are a few clicks away from joining us</p>
             </div>
+            <app-dev-info></app-dev-info>
         </div>
         <div class="col-12 col-lg-8 bg-gray p-5">
             <p class="text-lg-right">

@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { DevInfoComponent } from './dev-info/dev-info.component';
 
 
 
 @NgModule({
   declarations: [
     SideBarComponent,
-    TopBarComponent
+    TopBarComponent,
+    DevInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     SideBarComponent,
-    TopBarComponent
+    TopBarComponent,
+    DevInfoComponent
   ]
 })
 export class LayoutsModule { }
