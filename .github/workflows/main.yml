@@ -10,7 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: product_environment
+    environment: production_environment
     env:
       AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
     strategy:
@@ -27,7 +27,7 @@ jobs:
           npm install
           npm install -g @angular/cli@9
       - name: Build Application
-        run: ng build --configuration=staging --build-optimizer
+        run: ng build --configuration=production --build-optimizer
       - uses: jakejarvis/s3-sync-action@master
         name: Upload App to S3 Bucket
         with:
