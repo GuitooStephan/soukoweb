@@ -59,13 +59,7 @@ export const CreateUserFields: FieldConfig[] = [
         wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
         name: 'username',
         placeholder: 'Enter your username',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Username is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'date',
@@ -94,6 +88,26 @@ export const CreateUserFields: FieldConfig[] = [
                 name: 'required',
                 validator: Validators.required,
                 message: 'Password is required'
+            }
+        ]
+    },
+    {
+        type: 'password',
+        label: 'Re-Enter Password',
+        inputType: 'password',
+        wrapper_classes: 'col-md-12 px-0 mb-1',
+        placeholder: 'Confirm your password',
+        name: 'confirm_password',
+        validations: [
+            {
+                name: 'required',
+                validator: Validators.required,
+                message: 'Password is required'
+            },
+            {
+                name: 'incorrect',
+                validator: Validators.nullValidator,
+                message: 'Passwords do not match'
             }
         ]
     },

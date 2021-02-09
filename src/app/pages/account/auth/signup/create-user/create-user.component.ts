@@ -9,6 +9,9 @@ import * as ErrorActions from 'src/app/core/store/actions/error.actions';
 import * as AuthActions from 'src/app/core/store/actions/auth.actions';
 import { selectError } from 'src/app/core/store/selectors/error.selectors';
 import { selectLoading } from 'src/app/core/store/selectors/loading.selectors';
+import { FormGroup } from '@angular/forms';
+
+declare var _;
 
 @Component({
   selector: 'app-create-user',
@@ -65,7 +68,17 @@ export class CreateUserComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch( AuthActions.createUser( { data: { payload: this.createUserForm.value } } ) );
+    this.store.dispatch( AuthActions.createUser( { data: { payload: _.omit( this.createUserForm.value, ['confirm_password'] ) } } ) );
+  }
+
+  matchPasswordValidator(group: FormGroup) {
+    const pass = group.controls.password.value;
+    const confirmPass = group.controls.confirm_password.value;
+    if (pass !== confirmPass) {
+      group.controls.confirm_password.setErrors({ incorrect: true });
+      return { notSame: true };
+    }
+    return null;
   }
 
 }
