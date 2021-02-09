@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:8000/api/v1/',
-  // base_url: 'https://souko-api.herokuapp.com/api/v1/',
+  // base_url: 'http://localhost:8000/api/v1/',
+  base_url: 'https://api.souko.me',
 };
 
 /*
