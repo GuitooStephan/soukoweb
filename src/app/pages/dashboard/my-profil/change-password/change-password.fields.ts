@@ -23,7 +23,7 @@ export const ChangePasswordFields: FieldConfig[] = [
         inputType: 'password',
         wrapper_classes: 'col-12 px-0',
         name: 'new_password',
-        placeholder: '',
+        placeholder: 'Enter your new password',
         validations: [
             {
                 name: 'required',
@@ -38,7 +38,7 @@ export const ChangePasswordFields: FieldConfig[] = [
         inputType: 'password',
         wrapper_classes: 'col-12 px-0',
         name: 'confirm_new_password',
-        placeholder: '',
+        placeholder: 'Confirm your new password',
         validations: [
             {
                 name: 'required',
