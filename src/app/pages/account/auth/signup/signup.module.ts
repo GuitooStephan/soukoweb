@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
 import { CreateStoreComponent } from './create-store/create-store.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
   ],
   imports: [
     CommonModule,
+    LayoutsModule,
     SignupRoutingModule,
     SharedModule,
     CoreModule

@@ -40,7 +40,7 @@ export class ErrorEffects {
             // let err = error.error.message;
             // (err != null) ? err = err : err = 'There was an error whiles trying to make your request. Please try again';
         } else if (error.status === 401) {
-            // this.store.dispatch(AuthActions.signOut());
+            this.store.dispatch(AuthActions.signOut());
             // this.notify.dialogWarning(`${error.status} - ${JSON.stringify(error.error.message)} `);
             errorMessage = { message: 'User token has expired.' };
         } else if (error.status === 500) {

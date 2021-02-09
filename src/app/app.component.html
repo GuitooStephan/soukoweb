@@ -1,10 +1,10 @@
 <div class="menu-wrapper d-flex d-lg-none">
     <a href="javascript:void(0)" (click)="toggleMenu()" class="close-button display-4 font-weight-light text-dark">×</a>
-    <div class="menu">
+    <div class="menu position-relative">
         <div class="menu-container mb-5">
-            <h3 class="mb-0">Souko</h3>
+            <a (click)="toggleMenu()" [routerLink]="['/']"><img width="80" height="auto" src="../assets/images/logo-yellow.png" alt="logo"></a>
         </div>
-        <div class="menu-container">
+        <div class="menu-container mb-5">
             <ul class="list-unstyled">
                 <li class="mb-4">
                     <a (click)="toggleMenu()" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-18 font-weight-bold">
@@ -39,5 +39,6 @@
             </ul>
         </div>
     </div>
+    <app-dev-info></app-dev-info>
 </div>
 <router-outlet></router-outlet>

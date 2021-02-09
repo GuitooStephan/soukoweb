@@ -1274,6 +1274,10 @@ body[data-layout="topnav"] .profile-dropdown {
 }
 
 @media (min-width: 992px) {
+  .left-lg-4-p {
+    left: 33.33333% !important;
+  }
+
   .w-lg-700 {
     width: 700px;
   }
@@ -4625,7 +4629,12 @@ mat-datepicker-toggle {
 /* Logo */
 .authentication-logo {
   left: 3rem;
-  top: 3rem;
+  top: 3.2rem;
+}
+
+.dev-info {
+  bottom: 2rem;
+  left: 3rem;
 }
 
 .left-wrapper .authentication-logo {
