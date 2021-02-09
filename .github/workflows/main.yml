@@ -23,7 +23,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g @angular/cli@9
       - name: Build Application
         run: ng build --configuration=staging --build-optimizer
       - uses: jakejarvis/s3-sync-action@master
