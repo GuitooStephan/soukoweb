@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between justify-content-lg-end">
-    <button class="navbar-toggler  order-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler order-0 border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i [attr.data-feather]="'menu'" appFeatherIcon></i>
     </button>
     <div class="collapse navbar-collapse order-2" id="navbarNav">
@@ -49,7 +49,7 @@
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </a>
         </li>
-        <li ngbDropdown class="nav-item d-md-none">
+        <li ngbDropdown class="nav-item d-md-none mr-3">
             <button class="btn btn-primary" id="topBarMoreActions" ngbDropdownToggle>More Actions</button>
             <div ngbDropdownMenu aria-labelledby="topBarMoreActions" class="dropdown-menu">
                 <a [routerLink]="['/orders/create']" ngbDropdownItem>

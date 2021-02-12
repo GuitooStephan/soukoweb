@@ -17,7 +17,7 @@
 </ng-container>
 <ng-template #noloading>
     <ng-container *ngIf="buyers.length; else noBuyers;">
-        <div class="table-responsive">
+        <div class="table-responsive mb-4">
             <table class="table m-0 table-striped">
                 <tbody>
                     <ng-container *ngFor="let buyer of buyers">
@@ -31,7 +31,7 @@
             </table>
         </div>
         <ng-container *ngIf="count > 10">
-            <div class="mt-3 mb-5 d-flex justify-content-center align-items-center">
+            <div class="mb-5 d-flex justify-content-center align-items-center">
                 <ngb-pagination [maxSize]="5" [rotate]="true" size="sm" class="d-flex justify-content-end" (pageChange)="fetchPage($event)" [collectionSize]="count" [(page)]="page" aria-label="Custom pagination">
                     <ng-template ngbPaginationPrevious>
                         <span><i [attr.data-feather]="'arrow-left'" appFeatherIcon></i></span>
