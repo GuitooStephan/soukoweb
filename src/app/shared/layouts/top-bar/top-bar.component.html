@@ -1,6 +1,42 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between justify-content-lg-end">
-    <span (click)="toggleMenu()" class="d-block d-lg-none cursor-pointer"><i [attr.data-feather]="'menu'" appFeatherIcon></i></span>
-    <ul class="navbar-nav justify-content-end flex-row align-items-center">
+    <button class="navbar-toggler  order-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i [attr.data-feather]="'menu'" appFeatherIcon></i>
+    </button>
+    <div class="collapse navbar-collapse order-2" id="navbarNav">
+        <ul class="navbar-nav d-flex d-lg-none">
+            <li class="nav-item">
+                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link font-size-18 font-weight-bold">
+                    <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/products']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                    <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/orders']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                    <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/customers']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                    <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
+                    <span>Customers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['/my-store']" routerLinkActive="active" href="javascript:void(0)" class="nav-link font-size-18 font-weight-bold">
+                    <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
+                    <span>My Store</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <ul class="navbar-nav justify-content-end flex-row align-items-center order-1">
         <li class="nav-item d-none d-md-block">
             <a [routerLink]="['/orders/create']" class="btn btn-primary mr-3" href="javascript:void(0)"> 
                 Record Order

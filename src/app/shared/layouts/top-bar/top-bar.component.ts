@@ -13,7 +13,6 @@ import { AddProductComponent } from 'src/app/pages/dashboard/products/add-produc
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  menu = new TimelineMax( { ease: Back.easeOut.config(2), paused: true } );
 
   constructor(
     private modal: NgbModal,
@@ -21,9 +20,7 @@ export class TopBarComponent implements OnInit {
     private store: Store<AppState>
   ) { }
 
-  ngOnInit(): void {
-    this.createMenuAnim();
-  }
+  ngOnInit(): void { }
 
   addProduct() {
     const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
@@ -34,17 +31,8 @@ export class TopBarComponent implements OnInit {
     }, (_) => { });
   }
 
-  createMenuAnim(){
-    this.menu.to( '.menu-wrapper', 1, { clipPath: 'circle(100%)' } );
-    this.menu.to( '.menu-container', .5, { opacity: 1, y: '30px', stagger: 0.1 }, '-=1' );
-  }
-
   logout() {
     this.store.dispatch( AuthActions.signOut() );
-  }
-
-  toggleMenu() {
-    this.menu.restart();
   }
 
 }
