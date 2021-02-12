@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -18,12 +18,14 @@ declare var _;
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, OnDestroy {
   @ViewChild(DynamicFormComponent, { static: false }) createUserForm: DynamicFormComponent;
 
   fields = CreateUserFields;
   error = '';
   loading = false;
+
+  selectError$;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +43,7 @@ export class CreateUserComponent implements OnInit {
 
     // Subscribe to error state
     this.store.dispatch( ErrorActions.clearError() );
-    this.store.pipe( select( selectError ) ).subscribe(
+    this.selectError$ = this.store.pipe( select( selectError ) ).subscribe(
       error => {
         if ( error ) {
           this.error = error.error.email ? error.error.email : 'Error occured. Kindly retry';
@@ -60,6 +62,10 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.selectError$.unsubscribe();
   }
 
   createUser() {

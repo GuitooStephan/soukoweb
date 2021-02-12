@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -21,13 +21,17 @@ declare var _: any;
   templateUrl: './create-store.component.html',
   styleUrls: ['./create-store.component.css']
 })
-export class CreateStoreComponent implements OnInit {
+export class CreateStoreComponent implements OnInit, OnDestroy {
   @ViewChild(DynamicFormComponent, { static: false }) createUserForm: DynamicFormComponent;
 
   fields = CreateStoreFields;
   error = '';
   loading = false;
   user: any;
+
+  selectError$;
+  selectUser$;
+  selectLoading$;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,13 +43,13 @@ export class CreateStoreComponent implements OnInit {
   ) {
     this.setUpSEO();
 
-    this.store.pipe( select( selectLoading ) ).subscribe(
+    this.selectLoading$ = this.store.pipe( select( selectLoading ) ).subscribe(
       status => {
         this.loading = status;
       }
     );
 
-    this.store.pipe( select( selectUser ) ).subscribe(
+    this.selectUser$ = this.store.pipe( select( selectUser ) ).subscribe(
       user => {
         if ( user ) {
           this.user = user;
@@ -55,7 +59,7 @@ export class CreateStoreComponent implements OnInit {
 
     // Subscribe to error state
     this.store.dispatch( ErrorActions.clearError() );
-    this.store.pipe( select( selectError ) ).subscribe(
+    this.selectError$ = this.store.pipe( select( selectError ) ).subscribe(
       error => {
         if ( error ) {
           this.error = 'Error occured. Kindly retry';
@@ -66,6 +70,12 @@ export class CreateStoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.selectError$.unsubscribe();
+    this.selectUser$.unsubscribe();
+    this.selectLoading$.unsubscribe();
   }
 
   setUpSEO() {

@@ -22,7 +22,7 @@ export class OrdersService {
     }
 
     deleteOrder( orderId ): Observable<any> {
-        return this.apiService.delete( `${ApiConstants.ORDERS_URL}${orderId}` );
+        return this.apiService.delete( `${ApiConstants.ORDERS_URL}${orderId}/` );
     }
 
     createOrderItem(payload): Observable<any> {
