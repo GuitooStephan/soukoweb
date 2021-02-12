@@ -4765,6 +4765,10 @@ mat-datepicker-toggle {
   content: none; 
 }
 
+.dropdown-item {
+  padding: 1rem 1.5rem !important;
+}
+
 /* Full Screen Navigation */
 .menu-wrapper {
   clip-path: circle(0%);
