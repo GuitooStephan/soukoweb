@@ -34,15 +34,15 @@ export class CustomersService {
     }
 
     fetchCustomer( customerId ): Observable<any> {
-        return this.apiService.get( `${ApiConstants.CUSTOMERS_URL}${customerId}` );
+        return this.apiService.get( `${ApiConstants.CUSTOMERS_URL}${customerId}/` );
     }
 
     updateCustomer( customerId, payload ): Observable<any> {
-        return this.apiService.put( `${ApiConstants.CUSTOMERS_URL}${customerId}`, payload );
+        return this.apiService.put( `${ApiConstants.CUSTOMERS_URL}${customerId}/`, payload );
     }
 
     deleteCustomer( customerId ): Observable<any> {
-        return this.apiService.delete( `${ApiConstants.CUSTOMERS_URL}${customerId}` );
+        return this.apiService.delete( `${ApiConstants.CUSTOMERS_URL}${customerId}/` );
     }
 
     fetchOrders( customerId, offset= 0, q= null, payment_status= null ) {

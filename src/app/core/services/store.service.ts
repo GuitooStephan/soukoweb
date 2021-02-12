@@ -16,7 +16,7 @@ export class StoreService {
     }
 
     fetchStore( storeId ): Observable<any> {
-        return this.apiService.get( `${ApiConstants.STORE_URL}${storeId}` );
+        return this.apiService.get( `${ApiConstants.STORE_URL}${storeId}/` );
     }
 
     fetchProfitReport( storeId, period ): Observable<any> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
@@ -16,12 +16,14 @@ import { NotificationService } from 'src/app/core/services/notification.service'
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
   @ViewChild(DynamicFormComponent, { static: false }) signInForm: DynamicFormComponent;
 
   fields = SignInFields;
   error = '';
   loading = false;
+
+  selectError$;
 
   constructor(
     private store: Store<AppState>,
@@ -40,7 +42,7 @@ export class SigninComponent implements OnInit {
 
     // Subscribe to error state
     this.store.dispatch( ErrorActions.clearError() );
-    this.store.pipe( select( selectError ) ).subscribe(
+    this.selectError$ = this.store.pipe( select( selectError ) ).subscribe(
       error => {
         if ( error ) {
           this.notificationService.error( null, 'Kindly check your credentials and retry' );
@@ -59,6 +61,10 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.selectError$.unsubscribe();
   }
 
   signIn() {
