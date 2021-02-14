@@ -19,6 +19,9 @@
     <ng-container *ngIf="buyers.length; else noBuyers;">
         <div class="table-responsive mb-4">
             <table class="table m-0 table-striped">
+                <colgroup>
+                    <col class="col-4">
+                </colgroup>
                 <tbody>
                     <ng-container *ngFor="let buyer of buyers">
                         <tr class="border-2 mb-3">
