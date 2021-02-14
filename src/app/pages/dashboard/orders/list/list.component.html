@@ -48,6 +48,9 @@
         <ng-container *ngIf="orders.length; else noOrders;">
             <div class="table-responsive mb-5">
                 <table class="table m-0 table-striped">
+                    <colgroup>
+                        <col class="col-4">
+                    </colgroup>
                     <tbody>
                         <ng-container *ngFor="let order of orders">
                             <tr class="border-2 mb-3">
@@ -60,7 +63,7 @@
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:'¢':'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Pending'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span></td>
                                 <td ngbDropdown container="body" class="cursor-pointer">
-                                    <span ngbDropdownToggle class="no-dropdown-arrow"><i class="fa fa-ellipsis-h"></i></span>
+                                    <span ngbDropdownToggle class="no-dropdown-arrow"><i class="fa fa-2x fa-ellipsis-v"></i></span>
                                     <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
                                         <a (click)="goToDetails(order)" href="javascript:void(0)" ngbDropdownItem>
                                             View
