@@ -40,7 +40,9 @@ export class AuthService {
     return this.apiService.post(`${ApiConstants.USERS_URL}login/`, payload)
       .pipe(
         map(data => {
-          this.jwtService.saveToken(data.token);
+          if ( data.user.is_email_confirmed ) {
+            this.jwtService.saveToken(data.token);
+          }
           return data;
         })
       );

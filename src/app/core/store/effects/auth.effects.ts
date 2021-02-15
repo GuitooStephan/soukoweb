@@ -62,9 +62,15 @@ export class AuthEffects {
                             map(user => {
                                 if ( !user.user.is_onboarded ) {
                                     this.router.navigate( ['/account/auth/sign-up/create-store'] );
-                                } else {
-                                    this.router.navigateByUrl( action.data.returnUrl );
+                                    return AuthActions.signInIncomplete();
                                 }
+
+                                if ( !user.user.is_email_confirmed ) {
+                                    this.notificationService.error( null, 'Kindly confirm your email.' )
+                                    return AuthActions.signInIncomplete();
+                                }
+
+                                this.router.navigateByUrl( action.data.returnUrl );
                                 return AuthActions.signInSuccess({ data: { user, storeId: user.user.admin.store_id } });
                             }),
                             catchError(err => of(ErrorActions.loadError({ error: err })))
