@@ -29,6 +29,8 @@ const loadingReducerConstructor = createReducer(
     on(StoreActions.emptyStore, (state, { }) => (false)),
     on( AuthActions.signOut, ( state, {} ) => ( false ) ),
 
+    on( AuthActions.signInIncomplete, ( state, {} ) => ( false ) ),
+
     on(ErrorActions.loadError, (state, { }) => (false)),
 );
 
