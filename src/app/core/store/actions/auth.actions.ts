@@ -30,6 +30,10 @@ export const signInSuccess = createAction(
     props<{ data: any }>()
 );
 
+export const signInIncomplete = createAction(
+    '[Auth] Sign In Incomplete'
+);
+
 export const signOut = createAction(
     '[Auth] Sign Out'
 );

@@ -1330,6 +1330,10 @@ body[data-layout="topnav"] .profile-dropdown {
   .navbar-toggle {
     display: none;
   }
+
+  .flex-grow-lg-0 {
+    flex-grow: 0 !important;
+  }
 }
 
 @media (max-width: 991.98px) {
