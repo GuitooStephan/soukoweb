@@ -60,13 +60,13 @@ export class AuthEffects {
                     action => {
                         return this.authService.signIn(action.data.payload).pipe(
                             map(user => {
-                                if ( !user.user.is_onboarded ) {
-                                    this.router.navigate( ['/account/auth/sign-up/create-store'] );
+                                if ( !user.user.is_email_confirmed ) {
+                                    this.notificationService.error( null, 'Kindly confirm your email.' )
                                     return AuthActions.signInIncomplete();
                                 }
 
-                                if ( !user.user.is_email_confirmed ) {
-                                    this.notificationService.error( null, 'Kindly confirm your email.' )
+                                if ( !user.user.is_onboarded ) {
+                                    this.router.navigate( ['/account/auth/sign-up/create-store'] );
                                     return AuthActions.signInIncomplete();
                                 }
 
