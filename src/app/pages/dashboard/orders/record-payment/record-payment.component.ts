@@ -34,10 +34,9 @@ export class RecordPaymentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.selectStore$ = this.store.pipe( select( selectStore ) )
-    .pipe( first() )
     .subscribe( myStore => {
       this.myStore = myStore;
-      this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+      this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
       this.setUpForm();
     } );
   }

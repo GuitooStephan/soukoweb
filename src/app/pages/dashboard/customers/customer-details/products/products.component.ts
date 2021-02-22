@@ -36,11 +36,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.setupForm();
 
     this.selectStore$ = this.store.pipe( select( selectStore ) )
-    .pipe( first() )
     .subscribe(
       data => {
         this.myStore = data;
-        this.currency = ICC.getAllInfoByISO( this.myStore.country ).currency;
+        this.currency = data ? ICC.getAllInfoByISO( data.country ).symbol : null;
       }
     );
 

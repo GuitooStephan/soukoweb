@@ -40,10 +40,9 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     private ordersService: OrdersService
   ) {
     this.selectStore$ = this.store.pipe( select( selectStore ) )
-    .pipe( first() )
     .subscribe( myStore => {
       this.myStore = myStore;
-      this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+      this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
       this.fetchOrder();
     } );
   }
