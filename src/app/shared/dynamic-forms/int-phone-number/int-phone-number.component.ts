@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../field.interface';
+import { SearchCountryField, TooltipLabel, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-int-phone-number',
@@ -13,24 +14,18 @@ export class IntPhoneNumberComponent implements OnInit, AfterViewInit {
   field: FieldConfig;
   group: FormGroup;
 
-  constructor(
-    private cdr: ChangeDetectorRef
-  ) { }
+  SearchCountryField = SearchCountryField;
+	TooltipLabel = TooltipLabel;
+	CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+
+  constructor( ) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
     this.class = this.field.wrapper_classes || 'col-lg-12';
-    setTimeout( () => this.cdr.markForCheck(), 100 );
-  }
-
-  hasError(e) {
-    this.group.get( `${this.field.name}` ).setErrors( { notValid: !e } );
-  }
-
-  getNumber(e) {
-    this.group.get(this.field.name).setValue(e);
   }
 
 }

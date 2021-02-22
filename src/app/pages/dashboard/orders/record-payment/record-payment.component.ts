@@ -1,14 +1,19 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 import { OrdersService } from 'src/app/core/services/orders.service';
+import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import * as ICC from 'iso-country-currency';
 
 @Component({
   selector: 'app-record-payment',
   templateUrl: './record-payment.component.html',
   styleUrls: ['./record-payment.component.css']
 })
-export class RecordPaymentComponent implements OnInit {
+export class RecordPaymentComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   @Input() orderId;
@@ -16,13 +21,28 @@ export class RecordPaymentComponent implements OnInit {
 
   loading = false;
 
+  selectStore$;
+  myStore;
+  currency;
+
   constructor(
     private ordersService: OrdersService,
     private activeModal: NgbActiveModal,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
+    this.selectStore$ = this.store.pipe( select( selectStore ) )
+    .pipe( first() )
+    .subscribe( myStore => {
+      this.myStore = myStore;
+      this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+      this.setUpForm();
+    } );
+  }
+
+  setUpForm() {
     this.form = this.fb.group({
       full_payment: [ false ],
       amount: [ 0, [ Validators.required, Validators.pattern( /^\d*\.?\d{0,2}$/ ), Validators.max( +this.remainingAmount ) ] ]
@@ -37,6 +57,10 @@ export class RecordPaymentComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.selectStore$.unsubscribe();
   }
 
   recordPayment() {

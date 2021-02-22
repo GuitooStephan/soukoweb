@@ -28,8 +28,8 @@
                     <ng-container *ngFor="let product of products">
                         <tr class="border-2 mb-3">
                             <td (click)="goToDetails(product)" class="cursor-pointer font-weight-bold">{{product.name}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Buy. Price:</span> {{product.buying_price | currency:'¢':'symbol':'1.2-2'}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Sell. Price:</span> {{product.selling_price | currency:'¢':'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Buy. Price:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Sell. Price:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
                             <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Num. Orders</span> {{product.num_of_orders}}</td>
                             <td (click)="goToDetails(product)" class="cursor-pointer"><span class="badge badge-pill" [class.badge-soft-success]="product.total_stock >= 10" [class.badge-soft-danger]="product.total_stock < 10">{{product.total_stock}} left</span></td>
                         </tr>

@@ -51,8 +51,13 @@ export class AddCustomerComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const value = this.customerForm.value;
+    if ( ! ( typeof value.phone_number === 'string' )  ) {
+      value.phone_number = value.phone_number.e164Number;
+    }
+
     this.loading = true;
-    this.customersService.createCustomer( { store_id: this.user.admin.store_id, ...this.customerForm.value } ).subscribe(
+    this.customersService.createCustomer( { store_id: this.user.admin.store_id, ...value } ).subscribe(
       data => {
         this.loading = false;
         this.activeModal.close( 'success' );

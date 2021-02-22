@@ -8,10 +8,12 @@ import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
+import * as ICC from 'iso-country-currency';
 
 @Component({
   selector: 'app-list',
@@ -28,6 +30,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   selectUser$;
   user;
+  myStore;
+  currency;
 
   constructor(
     private fb: FormBuilder,
@@ -43,10 +47,13 @@ export class ListComponent implements OnInit, OnDestroy {
 
     this.selectUser$ = combineLatest([
       this.route.queryParams,
-      this.store.pipe( select( selectUser ) )
+      this.store.pipe( select( selectUser ) ),
+      this.store.pipe( select( selectStore ) )
     ]).subscribe(
-      ([params, user]) => {
+      ([params, user, myStore]) => {
         this.user = user;
+        this.myStore = myStore;
+        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
         this.page = params.page ? params.page : 1;
         this.fetchProducts( ( this.page - 1 ) * 10 );
       }

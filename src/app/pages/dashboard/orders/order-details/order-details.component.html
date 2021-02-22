@@ -70,13 +70,13 @@
                             <ng-container *ngFor="let payment of order.payments">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <p class="mb-0 font-size-16">{{payment.created_at | date}}</p>
-                                    <p class="mb-0 font-size-16 text-right">{{payment.amount | currency:'¢':'symbol':'1.0-0' }}</p>
+                                    <p class="mb-0 font-size-16 text-right">{{payment.amount | currency:currency:'symbol':'1.0-0' }}</p>
                                 </div>
                                 <hr>
                             </ng-container>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="mb-0 font-size-16">Total</p>
-                                <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:'¢':'symbol':'1.0-0' }}</p>
+                                <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:currency:'symbol':'1.0-0' }}</p>
                             </div>
                         </ng-container>
                         <ng-template #nopayments>
@@ -110,13 +110,13 @@
                                         {{item.product.name}}
                                     </td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>
-                                    <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:'¢':'symbol':'1.2-2'}}</td>
+                                    <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>
                                 </tr>
                             </ng-container>
                             <tr>
                                 <td class="font-weight-bold">Total Cost</td>
                                 <td></td>
-                                <td class="font-weight-bold">{{order.total_amount | currency:'¢':'symbol':'1.2-2'}}</td>
+                                <td class="font-weight-bold">{{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-12 px-0">
-            <p class="text-warning mb-1">The remaining amount is {{ remainingAmount | currency:'¢':'symbol':'1.0-0' }}</p>
+            <p class="text-warning mb-1">The remaining amount is {{ remainingAmount | currency:currency:'symbol':'1.0-0' }}</p>
             <input class="custom-checkbox mr-2" formControlName="full_payment" type="checkbox" value="" id="paying_now">
             <label class="form-check-label mb-4" for="paying_now">
                 Making a full payment

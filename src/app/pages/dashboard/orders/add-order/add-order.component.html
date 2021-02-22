@@ -115,7 +115,7 @@
     <hr>
     <div class="mt-4 mb-5">
         <p class="my-0 font-size-16 mb-0">Total</p>
-        <h2 class="my-0">{{ total | currency:'¢':'symbol':'1.0-0' }}</h2>
+        <h2 class="my-0">{{ total | currency:currency:'symbol':'1.0-0' }}</h2>
     </div>
     <div class="mb-5">
         <button (click)="createOrder()" class="btn btn-primary">

@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomersService } from 'src/app/core/services/customers.service';
+import * as ICC from 'iso-country-currency';
+import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { select, Store } from '@ngrx/store';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   orders = [];
@@ -17,13 +22,27 @@ export class OrdersComponent implements OnInit {
 
   loading = false;
 
+  selectStore$;
+  myStore;
+  currency;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private store: Store<AppState>,
     private customersService: CustomersService
   ) {
     this.setupForm();
+
+    this.selectStore$ = this.store.pipe( select( selectStore ) )
+    .pipe( first() )
+    .subscribe(
+      data => {
+        this.myStore = data;
+        this.currency = ICC.getAllInfoByISO( this.myStore.country ).currency;
+      }
+    );
 
     this.route.queryParams.subscribe(
       params => {
@@ -34,6 +53,10 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.selectStore$.unsubscribe();
   }
 
   setupForm() {

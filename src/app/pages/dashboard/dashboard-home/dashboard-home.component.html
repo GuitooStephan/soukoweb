@@ -40,7 +40,7 @@
                         </div>
                         <div class="media-body ml-4">
                             <p class="font-size-16 mb-2 text-light font-weight-bold">Profit</p>
-                            <h1 *ngIf="metrics" class="text-primary my-0">{{ metrics.profitReport.profit | currency:'¢':'symbol':'1.0-0' }}</h1>
+                            <h1 *ngIf="metrics" class="text-primary my-0 text-break">{{ metrics.profitReport.profit | currency:currency:'symbol':'1.0-0' }}</h1>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="media-body ml-4">
                             <p class="font-size-16 mb-2 text-light font-weight-bold">Num. of Orders</p>
-                            <h1 *ngIf="metrics" class="text-primary my-0">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h1>
+                            <h1 *ngIf="metrics" class="text-primary my-0 text-break">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h1>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="media-body ml-4">
                             <p class="font-size-16 mb-2 text-light font-weight-bold">Best Selling</p>
-                            <h4 *ngIf="metrics" class="text-primary my-0">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h4>
+                            <h4 *ngIf="metrics" class="text-primary my-0 text-break">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h4>
                         </div>
                     </div>
                 </div>
