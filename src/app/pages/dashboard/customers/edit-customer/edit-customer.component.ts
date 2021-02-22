@@ -35,7 +35,12 @@ export class EditCustomerComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.customersService.updateCustomer( this.customer.id, this.customerForm.value ).subscribe(
+    const value = this.customerForm.value;
+    if ( ! ( typeof value.phone_number === 'string' )  ) {
+      value.phone_number = value.phone_number.e164Number;
+    }
+
+    this.customersService.updateCustomer( this.customer.id, value ).subscribe(
       data => {
         this.activeModal.close( 'success' );
       }

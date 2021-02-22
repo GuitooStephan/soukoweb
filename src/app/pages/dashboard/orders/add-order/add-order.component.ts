@@ -4,13 +4,15 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { first, flatMap, map, startWith } from 'rxjs/operators';
 import { CustomersService } from 'src/app/core/services/customers.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { AddCustomerComponent } from '../../customers/add-customer/add-customer.component';
 
@@ -27,7 +29,9 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   productOptions = [];
 
   user;
-  selectUser$;
+  selectData$;
+  myStore;
+  currency;
 
   total = 0.00;
 
@@ -42,11 +46,16 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private notificationService: NotificationService
   ) {
-    this.selectUser$ = this.store.pipe( select( selectUser ) )
+    this.selectData$ = combineLatest( [
+      this.store.pipe( select( selectUser ) ),
+      this.store.pipe( select( selectStore ) )
+    ] )
     .pipe( first() )
     .subscribe(
-      data => {
-        this.user = data;
+      ([user, myStore]) => {
+        this.user = user;
+        this.myStore = myStore;
+        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
         this.setupForm();
       }
     );
@@ -56,7 +65,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.selectUser$.unsubscribe();
+    this.selectData$.unsubscribe();
   }
 
   setupForm() {
@@ -147,6 +156,8 @@ export class AddOrderComponent implements OnInit, OnDestroy {
         if ( formValue.paying_now ) {
           const orderId = orderItems[0]['order'];
           return this.ordersService.recordPayment( { order_id: orderId, amount: +this.total } );
+        } else {
+          return of( null );
         }
       } )
     ).subscribe(

@@ -1,23 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
+import * as ICC from 'iso-country-currency';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
   product;
 
   loading = false;
+
+  selectStore$;
+  myStore;
+  currency;
 
   constructor(
     private store: Store<AppState>,
@@ -28,10 +35,20 @@ export class ProductDetailsComponent implements OnInit {
     private notificationService: NotificationService,
     private productsService: ProductsService
   ) {
-    this.fetchProduct();
+    this.selectStore$ = this.store.pipe( select( selectStore ) )
+    .pipe( first() )
+    .subscribe( myStore => {
+      this.myStore = myStore;
+      this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+      this.fetchProduct();
+    } );
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.selectStore$.unsubscribe();
   }
 
   fetchProduct() {

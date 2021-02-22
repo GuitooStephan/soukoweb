@@ -103,7 +103,12 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const payload = { user_id: this.user.id, ..._.pickBy( {...this.createUserForm.value} , _.identity) };
+    const value = this.createUserForm.value;
+    if ( ! ( typeof value.phone_number === 'string' )  ) {
+      value.phone_number = value.phone_number.e164Number;
+    }
+
+    const payload = { user_id: this.user.id, ..._.pickBy( {...value} , _.identity) };
     this.store.dispatch( StoreActions.createStore( { data: { payload } } ) );
   }
 

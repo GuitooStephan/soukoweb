@@ -10,6 +10,8 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 
 declare var _: any;
@@ -30,8 +32,10 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   productOptions = [];
   total = 0;
 
-  selectUser$;
+  selectData$;
   user;
+  myStore;
+  currency;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,11 +48,16 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     private ordersService: OrdersService,
     private productsService: ProductsService
   ) {
-    this.selectUser$ = this.store.pipe( select( selectUser ) )
+    this.selectData$ = combineLatest( [
+      this.store.pipe( select( selectUser ) ),
+      this.store.pipe( select( selectStore ) )
+    ] )
     .pipe( first() )
     .subscribe(
-      data => {
-        this.user = data;
+      ([user, myStore]) => {
+        this.user = user;
+        this.myStore = myStore;
+        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
         this.fetchOrder();
       }
     );
@@ -58,7 +67,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.selectUser$.unsubscribe();
+    this.selectData$.unsubscribe();
   }
 
   fetchOrder() {

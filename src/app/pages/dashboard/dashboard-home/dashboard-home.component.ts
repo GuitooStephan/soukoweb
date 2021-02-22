@@ -9,6 +9,8 @@ import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent } from '../products/add-product/add-product.component';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import * as ICC from 'iso-country-currency';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -16,7 +18,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
   styleUrls: ['./dashboard-home.component.css']
 })
 export class DashboardHomeComponent implements OnInit, OnDestroy {
-  selectUser$;
+  selectData$;
   fetchMetrics$;
 
   ordersMetricsGraph;
@@ -27,17 +29,25 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
 
   metricsFilter = '0';
 
+  myStore;
+  currency;
+
   constructor(
     private store: Store<AppState>,
     private storeService: StoreService,
     private modal: NgbModal,
     private notificationService: NotificationService
   ) {
-    this.selectUser$ = this.store.pipe( select( selectUser ) )
+    this.selectData$ = combineLatest( [
+      this.store.pipe( select( selectUser ) ),
+      this.store.pipe( select( selectStore ) )
+    ] )
     .pipe( first() )
     .subscribe(
-      user => {
+      ([user, myStore]) => {
         this.user = user;
+        this.myStore = myStore;
+        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
         this.fetchMetrics();
       }
     );
@@ -47,7 +57,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.selectUser$.unsubscribe();
+    this.selectData$.unsubscribe();
     this.fetchMetrics$.unsubscribe();
   }
 

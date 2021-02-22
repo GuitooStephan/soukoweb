@@ -8,6 +8,8 @@ import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { RecordPaymentComponent } from '../record-payment/record-payment.component';
@@ -29,6 +31,8 @@ export class ListComponent implements OnInit, OnDestroy {
   orders = [];
 
   selectUser$;
+  myStore;
+  currency;
 
   constructor(
     private fb: FormBuilder,
@@ -44,10 +48,13 @@ export class ListComponent implements OnInit, OnDestroy {
 
     this.selectUser$ = combineLatest([
       this.route.queryParams,
-      this.store.pipe( select( selectUser ) )
+      this.store.pipe( select( selectUser ) ),
+      this.store.pipe( select( selectStore ) )
     ]).subscribe(
-      ([params, user]) => {
+      ([params, user, myStore]) => {
         this.user = user;
+        this.myStore = myStore;
+        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
         this.page = params.page ? params.page : 1;
         this.fetchOrders( ( this.page - 1 ) * 10 );
       }

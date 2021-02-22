@@ -75,7 +75,12 @@ export class MyStoreComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    this.storeService.updateStore( this.myStore.id, this.myStoreForm.value ).subscribe(
+    const value = this.myStoreForm.value;
+    if ( ! ( typeof value.phone_number === 'string' )  ) {
+      value.phone_number = value.phone_number.e164Number;
+    }
+
+    this.storeService.updateStore( this.myStore.id, value ).subscribe(
       data => {
         this.notificationService.success( null, 'Store updated.' );
         this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );

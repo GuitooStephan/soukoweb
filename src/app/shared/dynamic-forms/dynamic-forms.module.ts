@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SelectComponent } from './select/select.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { Ng2TelInputModule } from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { CountriesComponent } from './countries/countries.component';
 import { MultipleSelectComponent } from './multiple-select/multiple-select.component';
 import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.component';
@@ -44,7 +44,7 @@ import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.com
     MatInputModule,
     MatNativeDateModule,
     NgSelectModule,
-    Ng2TelInputModule
+    NgxIntlTelInputModule
   ],
   entryComponents: [
     InputComponent,

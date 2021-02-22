@@ -52,8 +52,8 @@
                                 {{order.created_at | date}}
                             </td>
                             <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
-                            <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:'¢':'symbol':'1.2-2'}}</td>
-                            <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:'¢':'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>
                             <td (click)="goToDetails(order)" class="cursor-pointer"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'PAID'" [class.badge-light]="order.payment_status == 'PENDING'">{{order.payment_status}}</span></td>
                         </tr>
                     </ng-container>

@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
+import { AppState } from 'src/app/core/store/reducers/root.reducers';
+import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { RecordPaymentComponent } from '../record-payment/record-payment.component';
+import * as ICC from 'iso-country-currency';
 
 declare var _: any;
 
@@ -14,12 +19,16 @@ declare var _: any;
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css']
 })
-export class OrderDetailsComponent implements OnInit {
+export class OrderDetailsComponent implements OnInit, OnDestroy {
   order;
   loading = false;
 
   cost = 0;
   percentage = 0.00;
+
+  selectStore$;
+  myStore;
+  currency;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +36,23 @@ export class OrderDetailsComponent implements OnInit {
     private notificationService: NotificationService,
     private modal: NgbModal,
     private dialog: MatDialog,
+    private store: Store<AppState>,
     private ordersService: OrdersService
   ) {
-    this.fetchOrder();
+    this.selectStore$ = this.store.pipe( select( selectStore ) )
+    .pipe( first() )
+    .subscribe( myStore => {
+      this.myStore = myStore;
+      this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+      this.fetchOrder();
+    } );
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.selectStore$.unsubscribe();
   }
 
   fetchOrder() {
