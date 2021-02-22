@@ -50,12 +50,11 @@ export class AddOrderComponent implements OnInit, OnDestroy {
       this.store.pipe( select( selectUser ) ),
       this.store.pipe( select( selectStore ) )
     ] )
-    .pipe( first() )
     .subscribe(
       ([user, myStore]) => {
         this.user = user;
         this.myStore = myStore;
-        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+        this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
         this.setupForm();
       }
     );

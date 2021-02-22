@@ -53,7 +53,7 @@ export class ListComponent implements OnInit, OnDestroy {
       ([params, user, myStore]) => {
         this.user = user;
         this.myStore = myStore;
-        this.currency = ICC.getAllInfoByISO( myStore.country ).symbol;
+        this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
         this.page = params.page ? params.page : 1;
         this.fetchProducts( ( this.page - 1 ) * 10 );
       }
