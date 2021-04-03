@@ -34,25 +34,18 @@ export class ErrorEffects {
     );
 
     handleError(error: HttpErrorResponse) {
-        let errorMessage = null;
+        let errors = _.values(error.error);
+        (errors.length) ? errors = errors : errors[0] = ['There was an error whiles trying to make your request. Please try again'];
         if (error.status === 400) {
-            errorMessage = { message: error.error };
-            // let err = error.error.message;
-            // (err != null) ? err = err : err = 'There was an error whiles trying to make your request. Please try again';
+            errors.forEach( e => this.notificationService.error(false, e) );
         } else if (error.status === 401) {
             this.store.dispatch(AuthActions.signOut());
-            // this.notify.dialogWarning(`${error.status} - ${JSON.stringify(error.error.message)} `);
-            errorMessage = { message: 'User token has expired.' };
+            this.notificationService.error( null, error.error.detail);
         } else if (error.status === 500) {
-            this.notificationService.error( null, 'Error occured. Kindly retry or contact our team for assistance if error persists.' )
+            this.notificationService.error( null, 'Error occured. Kindly retry or contact our team for assistance if error persists.' );
             this.handleServerError(error);
-        } else {
-            errorMessage = throwError(error.error);
-            // return 'Your session has expired, Log back in to continue using the Dashboard';
-            // tslint:disable-next-line:max-line-length
-            // this.notify.dialogInfo(`${error.status} - ${JSON.stringify(error.error.message)} \n Your session has expired, Log back in to continue using the Dashboard`);
         }
-        return throwError(errorMessage);
+        return throwError(error);
     }
 
     handleServerError(error: HttpErrorResponse) {
