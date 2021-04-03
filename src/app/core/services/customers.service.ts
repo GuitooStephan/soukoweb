@@ -45,13 +45,16 @@ export class CustomersService {
         return this.apiService.delete( `${ApiConstants.CUSTOMERS_URL}${customerId}/` );
     }
 
-    fetchOrders( customerId, offset= 0, q= null, payment_status= null ) {
+    fetchOrders( customerId, offset= 0, q= null, payment_status= null, confirmed=null ) {
         let url = `${ApiConstants.CUSTOMERS_URL}${customerId}/orders/?offset=${offset}&limit=10`;
         if ( q ) {
             url = this.utilsService.updateQueryStringParameter( url, 'search', q );
         }
         if ( payment_status ) {
             url = this.utilsService.updateQueryStringParameter( url, 'payment_status', payment_status );
+        }
+        if ( confirmed !== null ) {
+            url = this.utilsService.updateQueryStringParameter( url, 'confirmed', confirmed );
         }
         return this.apiService.get( url );
     }
@@ -62,6 +65,10 @@ export class CustomersService {
             url = this.utilsService.updateQueryStringParameter( url, 'search', q );
         }
         return this.apiService.get( url );
+    }
+
+    placeOrderAnonymous( storeId, payload ): Observable<any> {
+        return this.apiService.post( `${ApiConstants.CUSTOMERS_URL}store/${storeId}/orders/place-order/`, payload );
     }
 
 }

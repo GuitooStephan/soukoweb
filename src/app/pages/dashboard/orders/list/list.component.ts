@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,8 +20,6 @@ declare var _;
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-
   loading = false;
 
   user;
@@ -34,8 +31,11 @@ export class ListComponent implements OnInit, OnDestroy {
   myStore;
   currency;
 
+  q = '';
+  paymentStatus = 'ALL';
+  confirmationStatus = 'ALL';
+
   constructor(
-    private fb: FormBuilder,
     private store: Store<AppState>,
     private router: Router,
     public dialog: MatDialog,
@@ -44,8 +44,6 @@ export class ListComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private ordersService: OrdersService
   ) {
-    this.setupForm();
-
     this.selectUser$ = combineLatest([
       this.route.queryParams,
       this.store.pipe( select( selectUser ) ),
@@ -56,6 +54,9 @@ export class ListComponent implements OnInit, OnDestroy {
         this.myStore = myStore;
         this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
         this.page = params.page ? params.page : 1;
+        this.q = params.q ? params.q : '';
+        this.paymentStatus = params.paymentStatus ? params.paymentStatus : 'ALL';
+        this.confirmationStatus = params.confirmationStatus ? params.confirmationStatus : 'ALL';
         this.fetchOrders( ( this.page - 1 ) * 10 );
       }
     );
@@ -68,37 +69,12 @@ export class ListComponent implements OnInit, OnDestroy {
     this.selectUser$.unsubscribe();
   }
 
-  setupForm() {
-    this.form = this.fb.group({
-      q: [ '' ],
-      payment_status: [ 'all' ]
-    });
-
-    this.form.get( 'q' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          this.fetchOrders( 0, data.trim(), this.form.get( 'payment_status' ).value );
-        } else {
-          this.fetchOrders( 0, null, this.form.get( 'payment_status' ).value );
-        }
-      }
-    );
-
-    this.form.get( 'payment_status' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          const _data = data === 'all' ? '' : data;
-          this.fetchOrders( 0, this.form.get( 'q' ).value, _data );
-        } else {
-          this.fetchOrders( 0, this.form.get( 'q' ).value );
-        }
-      }
-    );
-  }
-
-  fetchOrders( offset= 0, q= null, payment_status= null ) {
+  fetchOrders( offset= 0 ) {
     this.loading = true;
-    this.ordersService.fetchOrders( this.user.admin.store_id, offset, q, payment_status ).subscribe(
+    const q = this.q === '' ? null : this.q;
+    const paymentStatus = this.paymentStatus === 'ALL' ? null : this.paymentStatus;
+    const confirmed = this.confirmationStatus === 'ALL' ? null : this.confirmationStatus === 'CONFIRMED' ? true : false;
+    this.ordersService.fetchOrders( this.user.admin.store_id, offset, q, paymentStatus, confirmed ).subscribe(
       data => {
         this.count = data.count;
         this.orders = data.results;
@@ -118,6 +94,45 @@ export class ListComponent implements OnInit, OnDestroy {
       {
         relativeTo: this.route,
         queryParams: { page: newPage },
+        queryParamsHandling: 'merge'
+      }
+    );
+  }
+
+  searchOrders( e ) {
+    if ( ( e.keyCode === 8 || e.keyCode === 46 ) && this.q === '' ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: null },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+
+    if ( e.keyCode === 13 ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: this.q },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+  }
+
+  filterOrders() {
+    const paymentStatus = this.paymentStatus === 'ALL' ? null : this.paymentStatus;
+    const confirmationStatus = this.confirmationStatus === 'ALL' ? null : this.confirmationStatus;
+    console.log(this.paymentStatus);
+    console.log(this.confirmationStatus);
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: { page: null, paymentStatus, confirmationStatus },
         queryParamsHandling: 'merge'
       }
     );
@@ -148,9 +163,16 @@ export class ListComponent implements OnInit, OnDestroy {
     modalRef.result.then((result) => {
       if (result === 'success') {
         this.notificationService.success(null, 'Payment recorded successfully!');
-        this.fetchOrders();
+        this.fetchOrders( ( this.page - 1 ) * 10 );
       }
     }, (_) => { });
+  }
+
+  confirmOrder( order ) {
+    this.ordersService.updateOrder( order.id, { confirmed: true } ).subscribe( data => {
+      this.notificationService.success( null, 'Order has been confirmed.' );
+      this.fetchOrders( ( this.page - 1 ) * 10 );
+    } );
   }
 
 }

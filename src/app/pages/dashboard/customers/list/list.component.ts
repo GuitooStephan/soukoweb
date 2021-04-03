@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,8 +18,6 @@ import { EditCustomerComponent } from '../edit-customer/edit-customer.component'
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-
   selectUser$;
   user;
 
@@ -30,18 +27,17 @@ export class ListComponent implements OnInit, OnDestroy {
 
   loading = false;
 
+  q = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private modal: NgbModal,
-    private fb: FormBuilder,
     private store: Store<AppState>,
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private customerService: CustomersService
   ) {
-    this.setupForm();
-
     this.selectUser$ = combineLatest([
       this.route.queryParams,
       this.store.pipe( select( selectUser ) )
@@ -49,6 +45,7 @@ export class ListComponent implements OnInit, OnDestroy {
       ([params, user]) => {
         this.user = user;
         this.page = params.page ? params.page : 1;
+        this.q = params.q ? params.q : '';
         this.fetchCustomers( ( this.page - 1 ) * 10 );
       }
     );
@@ -61,24 +58,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this.selectUser$.unsubscribe();
   }
 
-  setupForm() {
-    this.form = this.fb.group({
-      q: [ '' ]
-    });
-
-    this.form.get( 'q' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          this.fetchCustomers( 0, data.trim() );
-        } else {
-          this.fetchCustomers( 0 );
-        }
-      }
-    );
-  }
-
-  fetchCustomers( offset, q= null ) {
+  fetchCustomers( offset ) {
     this.loading = true;
+    const q = this.q ? this.q : null;
     this.customerService.getStoreCustomers(
       this.user.admin.store_id,
       offset,
@@ -102,6 +84,30 @@ export class ListComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge'
       }
     );
+  }
+
+  searchCustomers( e ) {
+    if ( ( e.keyCode === 8 || e.keyCode === 46 ) && this.q === '' ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: null },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+
+    if ( e.keyCode === 13 ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: this.q },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
   }
 
   createCustomer() {

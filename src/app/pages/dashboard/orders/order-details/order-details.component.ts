@@ -105,4 +105,11 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  confirmOrder() {
+    this.ordersService.updateOrder( this.order.id, { confirmed: true } ).subscribe( data => {
+      this.notificationService.success( null, 'Order has been confirmed.' );
+      this.fetchOrder();
+    } );
+  }
+
 }

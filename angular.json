@@ -54,6 +54,7 @@
               "src/assets/js/lodash.js",
               "src/assets/js/owl.carousel.min.js",
               "src/assets/js/moment.min.js",
+              "src/assets/js/colcade.js",
               "src/assets/js/moment-duration-format.min.js",
               "src/assets/js/jquery.magnific-popup.min.js",
               "node_modules/country-select-js/build/js/countrySelect.js"

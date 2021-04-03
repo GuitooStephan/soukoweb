@@ -13,16 +13,16 @@
         <div class="col-12 col-lg-8 bg-gray p-5">
             <p class="text-lg-right">
                 Already have an account?
-                <a [routerLink]="['/account/auth/sign-in']">Sign In</a>
+                <a [routerLink]="['/account/auth/sign-in']">Log In</a>
             </p>
             <div class="my-5">
-                <h1 class="mb-0 font-weight-bold">Sign Up</h1>
+                <h1 class="mb-0 font-weight-bold">Create Account</h1>
                 <p class="mb-0">Kindly input your details</p>
             </div>
             <dynamic-form [formClasses]="''" #form [groupValidator]="matchPasswordValidator" [fields]="fields"></dynamic-form>
             <div class="mt-4 d-flex align-items-center">
                 <button (click)="createUser()" class="btn btn-primary">
-                    Sign Up
+                    Create Account
                     <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
                 </button>
                 <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">

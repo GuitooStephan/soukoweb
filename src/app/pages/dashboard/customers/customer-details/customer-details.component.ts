@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,7 @@ export class CustomerDetailsComponent implements OnInit {
     private customerService: CustomersService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private notificationService: NotificationService,
     private modal: NgbModal
   ) {
@@ -47,6 +49,10 @@ export class CustomerDetailsComponent implements OnInit {
         this.fetchCustomer();
       }
     }, (_) => { });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

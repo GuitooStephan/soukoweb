@@ -10,6 +10,7 @@ import { errorReducer } from './error.reducers';
 import * as deepmerge from 'deepmerge';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { storeReducer } from './store.reducers';
+import { cartReducer } from './cart.reducers';
 
 declare var _: any;
 
@@ -23,13 +24,15 @@ export interface State {
     user: any | null;
     store: any | null;
     error: any | null;
+    cart: any | null;
 }
 
 export const reducers: ActionReducerMap<State> = {
     loading: loadingReducer,
     user: userReducer,
     store: storeReducer,
-    error: errorReducer
+    error: errorReducer,
+    cart: cartReducer
 };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {

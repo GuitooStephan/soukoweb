@@ -3,6 +3,20 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 
 export const AddProductFields: FieldConfig[] = [
     {
+        type: 'file',
+        wrapper_classes: 'col-lg-12 px-0',
+        name: 'product_picture_url',
+        label: 'Upload Product Picture',
+        placeholder: 'Upload product picture',
+        validations: [
+            {
+                name: 'required',
+                validator: Validators.required,
+                message: 'Picture is required'
+            }
+        ]
+    },
+    {
         type: 'input',
         label: 'Name',
         inputType: 'text',

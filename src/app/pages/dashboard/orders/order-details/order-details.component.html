@@ -19,13 +19,18 @@
                 <div class="col-9 col-sm pr-0">
                     <div class="d-flex align-items-center">
                         <h1 class="my-0 mr-2">Order</h1>
-                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Pending'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span>
+                        <span class="badge badge-pill px-3 py-2 mr-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span>
+                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span>
                     </div>
                     <p class="mb-0">#{{order.id}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
                     <p class="mb-0">
                         <a class="mr-2" [routerLink]="['/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
-                        <a (click)="promptForDeletingOrder()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a>
+                        <a (click)="promptForDeletingOrder()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a> 
+                        <ng-container *ngIf="!order.confirmed">
+                            |
+                            <a href="javascript:void(0)" (click)="confirmOrder()">Mark as confirmed <i class="uil uil-check-circle"></i></a>
+                        </ng-container>
                     </p>
                 </div>
             </div>
@@ -35,7 +40,7 @@
                         <i class="uil uil-user font-size-28"></i>
                     </div>
                     <div class="media-body ml-2">
-                        <p class="font-size-18 mb-2 font-weight-bold">{{order.customer.first_name + ' ' + order.customer.last_name}}</p>
+                        <p class="font-size-18 font-weight-bold"><a [routerLink]="['/customers', order.customer.id]">{{order.customer.first_name + ' ' + order.customer.last_name}}</a></p>
                         <p class="mb-0">{{ order.customer.city ? order.customer.city : '' + ' ' + order.customer.country }}</p>
                         <p class="mb-0">{{ order.customer.phone_number ? order.customer.phone_number : '' }}</p>
                     </div>
@@ -107,7 +112,7 @@
                                 <tr class="border-2 mb-3">
                                     <td>
                                         <span class="font-weight-bold">Product:</span>
-                                        {{item.product.name}}
+                                        <a [routerLink]="['/products', item.product.id]">{{item.product.name}}</a>
                                     </td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>

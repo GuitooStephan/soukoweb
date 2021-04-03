@@ -41,13 +41,16 @@ export class OrdersService {
         return this.apiService.get( `${ApiConstants.ORDERS_URL}${orderId}/` );
     }
 
-    fetchOrders( storeId, offset= 0, q= null, payment_status= null ) {
+    fetchOrders( storeId, offset= 0, q= null, payment_status= null, confirmed=null ) {
         let url = `${ApiConstants.STORE_URL}${storeId}/orders/?offset=${offset}&limit=10`;
         if ( q ) {
             url = this.utilsService.updateQueryStringParameter( url, 'search', q );
         }
         if ( payment_status ) {
             url = this.utilsService.updateQueryStringParameter( url, 'payment_status', payment_status );
+        }
+        if ( confirmed !== null ) {
+            url = this.utilsService.updateQueryStringParameter( url, 'confirmed', confirmed );
         }
         return this.apiService.get( url );
     }

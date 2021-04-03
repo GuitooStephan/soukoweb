@@ -52,7 +52,7 @@ export const MyStoreFields: FieldConfig[] = [
         type: 'input',
         label: 'City',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'city',
         placeholder: 'Enter your city',
         validations: [
@@ -66,7 +66,7 @@ export const MyStoreFields: FieldConfig[] = [
     {
         type: 'countries',
         label: 'Country',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'country',
         placeholder: 'Enter your country',
         validations: [
@@ -81,7 +81,7 @@ export const MyStoreFields: FieldConfig[] = [
         type: 'input',
         label: 'Instagram Handle',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'instagram_handle',
         placeholder: 'Enter your handle',
         validations: []
@@ -90,7 +90,7 @@ export const MyStoreFields: FieldConfig[] = [
         type: 'input',
         label: 'Facebook Handle',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'facebook_handle',
         placeholder: 'Enter your handle',
         validations: []

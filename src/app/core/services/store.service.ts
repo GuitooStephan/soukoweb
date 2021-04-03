@@ -12,11 +12,15 @@ export class StoreService {
     ) { }
 
     createStore(payload): Observable<any> {
-        return this.apiService.post(`${ApiConstants.STORE_URL}`, payload);
+        return this.apiService._post(`${ApiConstants.STORE_URL}`, payload);
     }
 
     fetchStore( storeId ): Observable<any> {
         return this.apiService.get( `${ApiConstants.STORE_URL}${storeId}/` );
+    }
+
+    fetchStoreForCustomers( storeId ): Observable<any> {
+        return this.apiService.get( `${ApiConstants.CUSTOMERS_URL}store/${storeId}/` );
     }
 
     fetchProfitReport( storeId, period ): Observable<any> {
@@ -33,6 +37,10 @@ export class StoreService {
 
     updateStore( storeId, payload ): Observable<any> {
         return this.apiService.put( `${ApiConstants.STORE_URL}${storeId}/`, payload );
+    }
+
+    updateLogo( storeId, payload ): Observable<any> {
+        return this.apiService._put( `${ApiConstants.STORE_URL}${storeId}/`, payload );
     }
 
 }

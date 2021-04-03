@@ -7,7 +7,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -20,7 +20,13 @@ import { RecordPaymentComponent } from './record-payment/record-payment.componen
 
 
 @NgModule({
-  declarations: [AddOrderComponent, ListComponent, EditOrderComponent, OrderDetailsComponent, RecordPaymentComponent],
+  declarations: [
+    AddOrderComponent,
+    ListComponent,
+    EditOrderComponent,
+    OrderDetailsComponent,
+    RecordPaymentComponent
+  ],
   imports: [
     CommonModule,
     OrdersRoutingModule,
@@ -31,6 +37,7 @@ import { RecordPaymentComponent } from './record-payment/record-payment.componen
     MatOptionModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    FormsModule,
     NgbDropdownModule,
     NgbPaginationModule,
     OrderDetailsModule,

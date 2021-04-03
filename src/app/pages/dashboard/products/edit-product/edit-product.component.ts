@@ -55,7 +55,19 @@ export class EditProductComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    this.productService.editProduct( this.product.id, this.productForm.value ).subscribe(
+    this.loading = true;
+    const value = this.productForm.value;
+    const formData: FormData = new FormData();
+
+    if ( typeof value.product_picture_url !== 'string'  ) {
+      formData.append( 'product_picture_url', value.product_picture_url, value.product_picture_url.name );
+    }
+    formData.append( 'name', value.name );
+    formData.append( 'description', value.description );
+    formData.append( 'buying_price', value.buying_price );
+    formData.append( 'selling_price', value.selling_price );
+
+    this.productService.editProduct( this.product.id, formData ).subscribe(
       data => {
         this.activeModal.close( 'success' );
       }

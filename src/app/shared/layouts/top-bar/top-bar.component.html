@@ -1,7 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between justify-content-lg-end">
+<nav class="navbar navbar-expand-lg justify-content-between justify-content-lg-start">
     <button class="navbar-toggler order-0 border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <i [attr.data-feather]="'menu'" appFeatherIcon></i>
     </button>
+    <ng-container *ngIf="myStore">
+        <a class="ml-auto ml-sm-0" [routerLink]="['/my-store']">
+            <div class="media w-max-200 ml-3 ml-lg-0 align-items-center">
+                <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
+                    <div class="avatar rounded-circle d-flex align-items-center justify-content-around text-center">
+                        <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
+                    </div>
+                </ng-container>
+                <ng-template #noLogo>
+                    <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="48" name="{{ myStore.name }}"></ngx-avatar>
+                </ng-template>
+                <div class="d-none d-sm-block media-body ml-3 white-space-nowrap text-overflow-ellipsis overflow-hidden">
+                    <h5 class="text-dark my-0">{{myStore.name}}</h5>
+                </div>
+            </div>
+        </a>
+    </ng-container>
     <div class="collapse navbar-collapse order-2 flex-grow-lg-0 flex-grow-1" id="navbarNav">
         <ul class="navbar-nav d-flex d-lg-none">
             <li class="nav-item">
@@ -36,7 +53,7 @@
             </li>
         </ul>
     </div>
-    <ul class="navbar-nav justify-content-end flex-row align-items-center order-1">
+    <ul class="ml-3 ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
         <li class="nav-item d-none d-md-block">
             <a [routerLink]="['/orders/create']" class="btn btn-primary mr-3" href="javascript:void(0)"> 
                 Record Order
@@ -49,7 +66,7 @@
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </a>
         </li>
-        <li ngbDropdown class="nav-item d-md-none mr-3">
+        <li ngbDropdown class="nav-item d-md-none mr-3" display="dynamic" placement="bottom-right">
             <button class="btn btn-primary" id="topBarMoreActions" ngbDropdownToggle>More Actions</button>
             <div ngbDropdownMenu aria-labelledby="topBarMoreActions" class="dropdown-menu">
                 <a [routerLink]="['/orders/create']" ngbDropdownItem>
@@ -62,11 +79,15 @@
                 </a>
             </div>
         </li>
-        <li ngbDropdown placement="bottom-left" class="nav-item">
+        <li ngbDropdown placement="bottom-left" class="nav-item" display="dynamic" autoClose="outside">
             <div ngbDropdownToggle id="profileDropdown" class="avatar cursor-pointer avatar-md rounded-circle d-flex justify-content-center align-items-center bg-white text-primary">
                 <i [attr.data-feather]="'user'" appFeatherIcon></i>
             </div>
             <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
+                <p *ngIf="myStore" class="mb-0" ngbDropdownItem>
+                    <a href="javascript:void(0)" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'" title="{{ 'https://souko.me/customer/place-order/' + myStore.id + '/select-products' }}" class="mr-2"><i class="uil uil-copy"></i></a>
+                    Copy customers' link
+                </p>
                 <a [routerLink]="['/my-profile']" ngbDropdownItem>
                     Profile
                 </a>

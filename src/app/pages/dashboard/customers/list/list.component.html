@@ -10,13 +10,13 @@
             </button>
         </div>
     </div>
-    <div *ngIf="form" class="input-group mb-4" [formGroup]="form">
+    <div class="input-group mb-4">
         <div class="input-group-prepend">
             <span class="input-group-text text-primary">
                 <i [attr.data-feather]="'search'" appFeatherIcon></i>
             </span>
         </div>
-        <input type="text" class="form-control" formControlName="q" placeholder="Search for customers">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchCustomers($event)" placeholder="Search for customers">
     </div>
     <ng-container *ngIf="loading; else noloading;">
         <div class="row" *ngIf="loading">

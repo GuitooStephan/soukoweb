@@ -7,11 +7,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
 import { NgbDropdownModule, NgbModalModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListComponent } from './list/list.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductDetailsModule } from './product-details/product-details.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
@@ -27,6 +28,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     SharedModule,
     LayoutsModule,
     NgbModalModule,
+    AvatarModule,
+    FormsModule,
     NgbPaginationModule,
     NgbDropdownModule,
     ReactiveFormsModule,

@@ -14,11 +14,11 @@ export class ProductsService {
     ) { }
 
     addProduct(payload): Observable<any> {
-        return this.apiService.post(`${ApiConstants.PRODUCTS_URL}`, payload);
+        return this.apiService._post(`${ApiConstants.PRODUCTS_URL}`, payload);
     }
 
     editProduct( productId, payload ): Observable<any> {
-        return this.apiService.put( `${ApiConstants.PRODUCTS_URL}${productId}/`, payload );
+        return this.apiService._put( `${ApiConstants.PRODUCTS_URL}${productId}/`, payload );
     }
 
     deleteProduct( productId ): Observable<any> {
@@ -57,6 +57,14 @@ export class ProductsService {
 
     fetchBuyers( productId, offset= 0, q= null ): Observable<any> {
         let url = `${ApiConstants.PRODUCTS_URL}${productId}/customers/?offset=${offset}&limit=10`;
+        if ( q ) {
+            url = this.utilsService.updateQueryStringParameter( url, 'search', q );
+        }
+        return this.apiService.get( url );
+    }
+
+    fetchProductsForCustomers( storeId, offset= 0, q= null, limit= 10 ): Observable<any> {
+        let url = `${ApiConstants.CUSTOMERS_URL}store/${storeId}/products/?offset=${offset}&limit=${limit}`;
         if ( q ) {
             url = this.utilsService.updateQueryStringParameter( url, 'search', q );
         }
