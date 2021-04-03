@@ -7,6 +7,7 @@ import { AccountModule } from './account/account.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutsModule } from '../shared/layouts/layouts.module';
+import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LayoutsModule } from '../shared/layouts/layouts.module';
     PagesRoutingModule,
     AccountModule,
     DashboardModule,
-    LayoutsModule
+    LayoutsModule,
+    CustomerDashboardModule
   ]
 })
 export class PagesModule { }

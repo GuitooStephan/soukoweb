@@ -10,6 +10,7 @@ import { SelectComponent } from '../select/select.component';
 import { CountriesComponent } from '../countries/countries.component';
 import { MultipleSelectComponent } from '../multiple-select/multiple-select.component';
 import { IntPhoneNumberComponent } from '../int-phone-number/int-phone-number.component';
+import { FileComponent } from '../file/file.component';
 
 const componentMapper = {
   input: InputComponent,
@@ -18,6 +19,7 @@ const componentMapper = {
   multiselect: MultipleSelectComponent,
   phone_number: IntPhoneNumberComponent,
   select: SelectComponent,
+  file: FileComponent,
   checkbox: CheckboxComponent,
   textarea: TextAreaComponent,
   password: PasswordComponent

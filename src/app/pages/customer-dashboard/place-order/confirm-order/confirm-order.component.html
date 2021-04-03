@@ -1,0 +1,74 @@
+<div class="container-fluid p-5">
+    <div class="d-flex mb-5 align-items-center">
+        <div class="d-flex align-items-start">
+            <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
+        </div>
+        <div>
+            <h1 class="my-0">Place Your Order</h1>
+        </div>
+    </div>
+    <ng-container *ngIf="products.length">
+        <div class="row my-4">
+            <ng-container *ngFor="let p of products; let i = index;">
+                <div class="col-12 px-0 mb-3 d-block d-lg-flex align-items-center justify-content-between" [formGroup]="o.controls[i]">
+                    <div class="d-flex align-items-center mr-3 mb-2 mb-lg-0">
+                        <div class="rounded-xl avatar-xl mr-4">
+                            <img class="img-fit rounded-xl" [src]="p.product.compressed_product_picture_url" alt="profile picture">
+                        </div>
+                        <div class="px-0">
+                            <h3 class="font-weight-bold mb-1">
+                                {{p.product.name}}
+                                <span class="text-danger cursor-pointer" (click)="removeFromCart(p.product)"><i class="uil uil-minus-circle"></i></span>
+                            </h3>
+                            <p class="mb-1">{{p.product.description}}</p>
+                            <h3 class="font-weight-bold text-primary">{{p.product.selling_price | currency:currency:'symbol':'1.2-2'}}</h3>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 col-8 col-md-6 col-lg-3">
+                        <div class="input-group-prepend text-center cursor-pointer" (click)="decreaseQuantity(o.controls[i])">
+                            <span class="input-group-text"><i class="uil uil-minus"></i></span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="quantity">
+                        <div class="input-group-append cursor-pointer" (click)="increaseQuantity(o.controls[i])">
+                            <span class="input-group-text"><i class="uil uil-plus"></i></span>
+                        </div>
+                        <ng-container *ngIf="o.controls[i].get('quantity').invalid">
+                            <div *ngIf="o.controls[i].get('quantity').hasError('max')" class="text-danger small mb-0 mt-2">
+                                Quantity must not exceed {{p.product.total_stock}}
+                            </div>
+                            <div *ngIf="o.controls[i].get('quantity').hasError('pattern')" class="text-danger small mb-0 mt-2">
+                                Quantity must be a number
+                            </div>
+                            <div *ngIf="o.controls[i].get('quantity').hasError('min')" class="text-danger small mb-0 mt-2">
+                                Quantity must be at least one
+                            </div>
+                            <div *ngIf="o.controls[i].get('quantity').hasError('required')" class="text-danger small mb-0 mt-2">
+                                Quantity is required
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <hr>
+        <div class="mt-4 mb-5 d-block d-lg-flex justify-content-between align-items-center">
+            <p class="mb-2 mb-lg-0 font-size-18 mb-0 font-weight-bold">Total</p>
+            <h3 class="my-0 text-lg-center text-primary">{{ total | currency:currency:'symbol':'1.0-0' }}</h3>
+        </div>
+        <h3 class="mb-4">Customer Information</h3>
+        <div class="row mb-4">
+            <div class="col-12 px-0">
+                <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <button (click)="placeOrder()" class="btn btn-primary">
+                Place your order 
+                <i class="uil uil-plus"></i>
+            </button>
+            <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </ng-container>
+</div><!-- end container -->

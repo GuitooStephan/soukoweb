@@ -9,7 +9,7 @@ import { NgbDatepickerModule, NgbDropdownModule, NgbModalModule, NgbPaginationMo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsModule } from './customer-details/customer-details.module';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
@@ -26,6 +26,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     CustomersRoutingModule,
     MatDialogModule,
     CoreModule,
+    FormsModule,
     SharedModule,
     NgbModalModule,
     ReactiveFormsModule,

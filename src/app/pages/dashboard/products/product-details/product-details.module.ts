@@ -9,11 +9,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { NgbModalModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [StocksComponent, BuyersComponent, AddStockComponent],
+  declarations: [
+    StocksComponent,
+    BuyersComponent,
+    AddStockComponent
+  ],
   imports: [
     CommonModule,
     ProductDetailsRoutingModule,
@@ -21,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     SharedModule,
     MatDialogModule,
+    FormsModule,
     NgbModalModule,
     NgbPaginationModule
   ]

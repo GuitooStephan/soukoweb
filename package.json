@@ -60,7 +60,6 @@
     "ngx-infinite-scroll": "^9.1.0",
     "ngx-intl-tel-input": "^3.0.5",
     "ngx-mask": "^9.1.4",
-    "ngx-numeral": "0.0.1-beta.0",
     "pdfmake": "^0.1.69",
     "rxjs": "~6.5.4",
     "smooth-scrollbar": "^8.5.3",

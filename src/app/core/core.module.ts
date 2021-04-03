@@ -13,12 +13,14 @@ import { NotificationService } from './services/notification.service';
 import { StoreEffects } from './store/effects/store.effects';
 import { AuthGuard } from './guards/auth.guard';
 import { ChildrenAuthGuard } from './guards/children-auth.guard';
+import { ThousandSuffixePipe } from './pipes/thousand-suffix.pipe';
 
 
 
 @NgModule({
   declarations: [
     FeatherIconDirective,
+    ThousandSuffixePipe
   ],
   imports: [
     CommonModule,
@@ -36,10 +38,12 @@ import { ChildrenAuthGuard } from './guards/children-auth.guard';
     NotificationService,
     httpInterceptorProviders,
     AuthGuard,
-    ChildrenAuthGuard
+    ChildrenAuthGuard,
+    ThousandSuffixePipe
   ],
   exports: [
-    FeatherIconDirective
+    FeatherIconDirective,
+    ThousandSuffixePipe
   ]
 })
 export class CoreModule { }

@@ -17,12 +17,26 @@
                     </a>
                 </div>
                 <div class="col-9 col-sm text-sm-center text-md-left pr-0">
-                    <h1 class="my-0">{{product.name}}</h1>
-                    <p class="mb-0">{{product.description}}</p>
-                    <p class="mb-0">
-                        <a (click)="editProduct()" class="mr-2" href="javascript:void(0)">Edit <i class="uil uil-pen"></i></a> |
-                        <a (click)="promptForDeletingProduct()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a>
-                    </p>
+                    <div class="media">
+                        <ng-container *ngIf="product.compressed_product_picture_url; else noProductPicture;">
+                            <a [href]="product.compressed_product_picture_url" class="lightbox">
+                                <div class="avatar-lg rounded-circle d-flex align-items-center justify-content-around text-center">
+                                    <img class="img-fit rounded-circle" [src]="product.compressed_product_picture_url" alt="product picture">
+                                </div>
+                            </a>
+                        </ng-container>
+                        <ng-template #noProductPicture>
+                            <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="72" name="{{product.name}}"></ngx-avatar>
+                        </ng-template>
+                        <div class="media-body ml-3">
+                            <h3 class="my-0">{{product.name}}</h3>
+                            <p class="mb-0">{{product.description}}</p>
+                            <p class="mb-0">
+                                <a (click)="editProduct()" class="mr-2" href="javascript:void(0)">Edit <i class="uil uil-pen"></i></a> |
+                                <a (click)="promptForDeletingProduct()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 d-flex align-items-center justify-content-between">

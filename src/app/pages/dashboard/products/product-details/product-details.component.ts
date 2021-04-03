@@ -12,6 +12,7 @@ import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/co
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import * as ICC from 'iso-country-currency';
 
+declare var $;
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -56,6 +57,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       data => {
         this.product = data;
         this.loading = false;
+        setTimeout( () => {
+          this.setupLightBox();
+        }, 500 );
       }
     );
   }
@@ -87,6 +91,17 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  setupLightBox() {
+    $(document).ready( () => {
+      $('.lightbox').magnificPopup({
+        type: 'image'
+      });
+      $('.lightbox-video').magnificPopup({
+        type: 'iframe'
+      });
+    } );
   }
 
 }

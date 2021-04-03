@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,13 +14,15 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import * as ICC from 'iso-country-currency';
 
+declare var $;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  q = '';
 
   loading = false;
   products = [];
@@ -34,7 +35,6 @@ export class ListComponent implements OnInit, OnDestroy {
   currency;
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private store: Store<AppState>,
     private modal: NgbModal,
@@ -43,8 +43,6 @@ export class ListComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private route: ActivatedRoute
   ) {
-    this.setupForm();
-
     this.selectUser$ = combineLatest([
       this.route.queryParams,
       this.store.pipe( select( selectUser ) ),
@@ -55,6 +53,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.myStore = myStore;
         this.currency = myStore ? ICC.getAllInfoByISO( myStore.country ).symbol : null;
         this.page = params.page ? params.page : 1;
+        this.q = params.q ? params.q : '';
         this.fetchProducts( ( this.page - 1 ) * 10 );
       }
     );
@@ -67,24 +66,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this.selectUser$.unsubscribe();
   }
 
-  setupForm() {
-    this.form = this.fb.group({
-      q: [ '' ]
-    });
-
-    this.form.get( 'q' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          this.fetchProducts( 0, data.trim() );
-        } else {
-          this.fetchProducts( 0 );
-        }
-      }
-    );
-  }
-
-  fetchProducts( offset, q=null ) {
+  fetchProducts( offset ) {
     this.loading = true;
+    const q = this.q === '' ? null : this.q;
     this.productsService.fetchProducts(
       this.user.admin.store_id,
       offset,
@@ -94,6 +78,9 @@ export class ListComponent implements OnInit, OnDestroy {
         this.count = data.count;
         this.products = data.results;
         this.loading = false;
+        setTimeout( () => {
+          this.setupLightBox();
+        }, 500 );
       }
     );
   }
@@ -104,10 +91,34 @@ export class ListComponent implements OnInit, OnDestroy {
       [],
       {
         relativeTo: this.route,
-        queryParams: { page: newPage },
+        queryParams: { page: newPage, q: this.q },
         queryParamsHandling: 'merge'
       }
     );
+  }
+
+  searchProducts( e ) {
+    if ( ( e.keyCode === 8 || e.keyCode === 46 ) && this.q === '' ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: null },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+
+    if ( e.keyCode === 13 ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: this.q },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
   }
 
   addProduct() {
@@ -151,6 +162,17 @@ export class ListComponent implements OnInit, OnDestroy {
 
   goToDetails( product ) {
     this.router.navigate( [ 'products', product.id ] );
+  }
+
+  setupLightBox() {
+    $(document).ready( () => {
+      $('.lightbox').magnificPopup({
+        type: 'image'
+      });
+      $('.lightbox-video').magnificPopup({
+        type: 'iframe'
+      });
+    } );
   }
 
 }

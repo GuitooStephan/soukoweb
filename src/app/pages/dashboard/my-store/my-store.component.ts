@@ -10,6 +10,8 @@ import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import * as StoreActions from 'src/app/core/store/actions/store.actions';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/dynamic-form.component';
 import { MyStoreFields } from './my-store.fields';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateLogoComponent } from './update-logo/update-logo.component';
 
 declare var _: any;
 
@@ -31,7 +33,8 @@ export class MyStoreComponent implements OnInit, OnDestroy, AfterViewInit {
     private store: Store<AppState>,
     private categoriesService: CategoriesService,
     private notificationService: NotificationService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private modal: NgbModal
   ) {
     this.fetchCategories();
   }
@@ -42,7 +45,6 @@ export class MyStoreComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.loading = true;
     this.selectStore$ = this.store.pipe( select( selectStore ) )
-    .pipe( first() )
     .subscribe(
       data => {
         this.myStore = data;
@@ -86,6 +88,17 @@ export class MyStoreComponent implements OnInit, OnDestroy, AfterViewInit {
         this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );
       }
     );
+  }
+
+  updateLogo() {
+    const modalRef = this.modal.open(UpdateLogoComponent, { centered: true, size: 'lg' });
+    modalRef.componentInstance.storeId = this.myStore.id;
+    modalRef.result.then((result) => {
+      if (result === 'success') {
+        this.notificationService.success( null, 'Store Logo updated.' );
+        this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );
+      }
+    }, (_) => { });
   }
 
 }

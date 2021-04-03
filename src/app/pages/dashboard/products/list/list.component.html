@@ -10,13 +10,13 @@
             </button>
         </div>
     </div>
-    <div *ngIf="form" class="input-group mb-4" [formGroup]="form">
+    <div class="input-group mb-4">
         <div class="input-group-prepend">
             <span class="input-group-text text-primary">
-                <i [attr.data-feather]="'search'" appFeatherIcon></i>
+                <i class="uil uil-search"></i>
             </span>
         </div>
-        <input type="text" class="form-control" formControlName="q" placeholder="Search for products">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products">
     </div>
     <ng-container *ngIf="loading; else noloading;">
         <div class="row" *ngIf="loading">
@@ -31,13 +31,26 @@
         <ng-container *ngIf="products.length; else noProducts;">
             <div class="table-responsive mb-4">
                 <table class="table m-0 table-striped">
-                    <colgroup>
-                        <col class="col-4">
-                    </colgroup>
                     <tbody>
                         <ng-container *ngFor="let product of products">
                             <tr class="border-2 mb-3">
-                                <td (click)="goToDetails(product)" class="cursor-pointer font-weight-bold">{{product.name}}</td>
+                                <td class="font-weight-bold">
+                                    <div class="media align-items-center">
+                                        <ng-container *ngIf="product.compressed_product_picture_url; else noProductPicture;">
+                                            <a [href]="product.compressed_product_picture_url" class="lightbox">
+                                                <div class="avatar-sm rounded-circle d-flex align-items-center justify-content-around text-center">
+                                                    <img class="img-fit rounded-circle" [src]="product.compressed_product_picture_url" alt="product picture">
+                                                </div>
+                                            </a>
+                                        </ng-container>
+                                        <ng-template #noProductPicture>
+                                            <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="36" name="{{product.name}}"></ngx-avatar>
+                                        </ng-template>
+                                        <div class="media-body ml-2">
+                                            <a class="text-dark" href="javascript:void(0)" (click)="goToDetails(product)">{{product.name}}</a>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Buy. Price:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Sell. Price:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Num. Orders</span> {{product.num_of_orders}}</td>

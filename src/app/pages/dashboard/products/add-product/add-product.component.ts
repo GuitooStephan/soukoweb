@@ -49,8 +49,21 @@ export class AddProductComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.productService.addProduct( { store_id: this.user.admin.store_id, ...this.productForm.value } ).subscribe(
+    this.loading = true;
+    const value = this.productForm.value;
+    const formData: FormData = new FormData();
+
+    formData.append( 'store_id', this.user.admin.store_id );
+    formData.append( 'product_picture_url', value.product_picture_url, value.product_picture_url.name );
+    formData.append( 'name', value.name );
+    formData.append( 'description', value.description );
+    formData.append( 'buying_price', value.buying_price );
+    formData.append( 'selling_price', value.selling_price );
+    formData.append( 'quantity', value.quantity );
+
+    this.productService.addProduct( formData ).subscribe(
       data => {
+        this.loading = false;
         this.activeModal.close( 'success' );
       }
     );

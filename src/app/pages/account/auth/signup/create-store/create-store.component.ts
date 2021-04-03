@@ -109,7 +109,19 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
     }
 
     const payload = { user_id: this.user.id, ..._.pickBy( {...value} , _.identity) };
-    this.store.dispatch( StoreActions.createStore( { data: { payload } } ) );
+
+    const formData: FormData = new FormData();
+
+    if ( payload.logo_url ) { formData.append( 'logo_url', payload.logo_url, payload.logo_url.name ); }
+    if ( payload.instagram_handle ) { formData.append( 'instagram_handle', payload.instagram_handle ); }
+    if ( payload.facebook_handle ) { formData.append( 'facebook_handle', payload.facebook_handle ); }
+    formData.append( 'name', payload.name );
+    formData.append( 'user_id', payload.user_id );
+    formData.append( 'categories_ids', payload.categories_ids );
+    formData.append( 'phone_number', payload.phone_number );
+    formData.append( 'city', payload.city );
+    formData.append( 'country', payload.country );
+    this.store.dispatch( StoreActions.createStore( { data: { payload: formData } } ) );
   }
 
   signOut() {

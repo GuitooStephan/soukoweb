@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomersService } from 'src/app/core/services/customers.service';
 import * as ICC from 'iso-country-currency';
@@ -14,7 +13,9 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  q = '';
+  paymentStatus = 'ALL';
+  confirmationStatus = 'ALL';
 
   orders = [];
   page = 0;
@@ -27,14 +28,11 @@ export class OrdersComponent implements OnInit, OnDestroy {
   currency;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>,
     private customersService: CustomersService
   ) {
-    this.setupForm();
-
     this.selectStore$ = this.store.pipe( select( selectStore ) )
     .subscribe(
       data => {
@@ -46,6 +44,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe(
       params => {
         this.page = params.page ? params.page : 1;
+        this.q = params.q ? params.q : '';
+        this.paymentStatus = params.paymentStatus ? params.paymentStatus : 'ALL';
+        this.confirmationStatus = params.confirmationStatus ? params.confirmationStatus : 'ALL';
         this.fetchOrders( ( this.page - 1 ) * 10 );
       }
     );
@@ -58,37 +59,12 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.selectStore$.unsubscribe();
   }
 
-  setupForm() {
-    this.form = this.fb.group({
-      q: [ '' ],
-      payment_status: [ 'all' ]
-    });
-
-    this.form.get( 'q' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          this.fetchOrders( 0, data.trim(), this.form.get( 'payment_status' ).value );
-        } else {
-          this.fetchOrders( 0, null, this.form.get( 'payment_status' ).value );
-        }
-      }
-    );
-
-    this.form.get( 'payment_status' ).valueChanges.subscribe(
-      data => {
-        if ( data ) {
-          const _data = data === 'all' ? '' : data;
-          this.fetchOrders( 0, this.form.get( 'q' ).value, _data );
-        } else {
-          this.fetchOrders( 0, this.form.get( 'q' ).value );
-        }
-      }
-    );
-  }
-
-  fetchOrders( offset= 0, q= null, payment_status= null ) {
+  fetchOrders( offset= 0 ) {
     this.loading = true;
-    this.customersService.fetchOrders( this.route.parent.snapshot.params.id, offset, q, payment_status ).subscribe(
+    const q = this.q === '' ? null : this.q;
+    const paymentStatus = this.paymentStatus === 'ALL' ? null : this.paymentStatus;
+    const confirmed = this.confirmationStatus === 'ALL' ? null : this.confirmationStatus === 'CONFIRMED' ? true : false;
+    this.customersService.fetchOrders( this.route.parent.snapshot.params.id, offset, q, paymentStatus, confirmed ).subscribe(
       data => {
         this.count = data.count;
         this.orders = data.results;
@@ -108,6 +84,43 @@ export class OrdersComponent implements OnInit, OnDestroy {
       {
         relativeTo: this.route,
         queryParams: { page: newPage },
+        queryParamsHandling: 'merge'
+      }
+    );
+  }
+
+  searchOrders( e ) {
+    if ( ( e.keyCode === 8 || e.keyCode === 46 ) && this.q === '' ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: null },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+
+    if ( e.keyCode === 13 ) {
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: { page: null, q: this.q },
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
+  }
+
+  filterOrders() {
+    const paymentStatus = this.paymentStatus === 'ALL' ? null : this.paymentStatus;
+    const confirmationStatus = this.confirmationStatus === 'ALL' ? null : this.confirmationStatus;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: { page: null, paymentStatus, confirmationStatus },
         queryParamsHandling: 'merge'
       }
     );

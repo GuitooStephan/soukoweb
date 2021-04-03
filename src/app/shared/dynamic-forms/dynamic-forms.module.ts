@@ -19,6 +19,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { CountriesComponent } from './countries/countries.component';
 import { MultipleSelectComponent } from './multiple-select/multiple-select.component';
 import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.component';
+import { FileComponent } from './file/file.component';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.com
     SelectComponent,
     CountriesComponent,
     MultipleSelectComponent,
-    IntPhoneNumberComponent
+    IntPhoneNumberComponent,
+    FileComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,7 @@ import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.com
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
+    DropzoneModule,
     MatNativeDateModule,
     NgSelectModule,
     NgxIntlTelInputModule

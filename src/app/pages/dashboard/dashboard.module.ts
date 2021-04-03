@@ -16,13 +16,16 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MyProfilModule } from './my-profil/my-profil.module';
 import { MyProfilComponent } from './my-profil/my-profil.component';
+import { AvatarModule } from 'ngx-avatar';
+import { UpdateLogoComponent } from './my-store/update-logo/update-logo.component';
 
 
 @NgModule({
   declarations: [
     DashboardHomeComponent,
     MyStoreComponent,
-    MyProfilComponent
+    MyProfilComponent,
+    UpdateLogoComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,11 @@ import { MyProfilComponent } from './my-profil/my-profil.component';
     CustomersModule,
     SharedModule,
     CoreModule,
+    AvatarModule,
     MyProfilModule
+  ],
+  entryComponents: [
+    UpdateLogoComponent
   ]
 })
 export class DashboardModule { }

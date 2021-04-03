@@ -6,6 +6,8 @@ import { CoreModule } from 'src/app/core/core.module';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DevInfoComponent } from './dev-info/dev-info.component';
+import { AvatarModule } from 'ngx-avatar';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 
@@ -19,6 +21,8 @@ import { DevInfoComponent } from './dev-info/dev-info.component';
     CommonModule,
     RouterModule,
     CoreModule,
+    AvatarModule,
+    ClipboardModule,
     NgbDropdownModule,
     NgbModalModule
   ],

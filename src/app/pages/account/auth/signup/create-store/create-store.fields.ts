@@ -4,6 +4,14 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 
 export const CreateStoreFields: FieldConfig[] = [
     {
+        type: 'file',
+        wrapper_classes: 'col-lg-12 px-0',
+        name: 'logo_url',
+        label: 'Upload Store Logo',
+        placeholder: 'Upload store logo',
+        validations: []
+    },
+    {
         type: 'input',
         label: 'Name',
         inputType: 'text',

@@ -1,11 +1,11 @@
-<div *ngIf="form" class="row align-items-center mb-4" [formGroup]="form">
+<div class="row align-items-center mb-4">
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text text-primary">
                 <i class="uil uil-search"></i>
             </span>
         </div>
-        <input type="text" class="form-control" formControlName="q" placeholder="Search for products">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products">
     </div>
 </div>
 <ng-container *ngIf="loading; else noloading;">
@@ -19,7 +19,7 @@
 </ng-container>
 <ng-template #noloading>
     <ng-container *ngIf="products.length; else noProducts;">
-        <div class="table-responsive mb-4">
+        <div class="table-responsive mb-5">
             <table class="table m-0 table-striped">
                 <colgroup>
                     <col class="col-4">

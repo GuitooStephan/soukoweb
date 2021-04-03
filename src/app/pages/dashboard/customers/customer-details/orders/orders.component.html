@@ -1,31 +1,47 @@
-<div *ngIf="form" class="row align-items-center mb-4" [formGroup]="form">
+<div class="row align-items-center mb-4">
     <div class="col-12 col-sm-10 mb-2 mb-sm-0 px-0 input-group">
         <div class="input-group-prepend">
             <span class="input-group-text text-primary">
                 <i class="uil uil-search"></i>
             </span>
         </div>
-        <input type="text" class="form-control" formControlName="q" placeholder="Search for orders">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchOrders($event)" placeholder="Search for orders with customer first name or last name">
     </div>
-    <div class="col-12 col-sm-2 px-0" ngbDropdown container="body">
+    <div class="col-12 col-sm-2 px-0" ngbDropdown container="body" display="dynamic" placement="bottom-right">
         <button ngbDropdownToggle class="btn btn-block btn-soft-primary no-dropdown-arrow text-primary">
             Filter
             <i class="uil uil-filter"></i>
         </button>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right p-4">
-            <p class="mb-2 font-size-14 font-weight-normal">By Status</p>
-            <div class="row align-items-center">
-                <div class="col-6 mb-2 radio radio-primary radio-single">
-                    <input type="radio" id="all" value="all" formControlName="payment_status">
-                    <label for="all" class="mb-0">All</label>
+            <p class="mb-2 font-size-14 font-weight-normal">By Payment Status</p>
+            <div class="row align-items-center mb-4">
+                <div class="col-6 mb-2 form-check">
+                    <input class="form-check-input" type="radio" name="payment_status" id="all" [value]="'ALL'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
+                    <label class="form-check-label" for="all" class="mb-0">All</label>
                 </div>
-                <div class="col-6 mb-2 radio radio-primary radio-single">
-                    <input type="radio" id="PAID" value="PAID" formControlName="payment_status">
-                    <label for="PAID" class="mb-0">Paid</label>
+                <div class="col-6 mb-2 form-check">
+                    <input class="form-check-input" type="radio" name="payment_status" id="PAID" [value]="'PAID'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
+                    <label class="form-check-label" for="PAID" class="mb-0">Paid</label>
                 </div>
-                <div class="col-6 radio radio-primary radio-single">
-                    <input type="radio" id="PENDING" value="PENDING" formControlName="payment_status">
-                    <label for="PENDING">Pending</label>
+                <div class="col-6 form-check">
+                    <input class="form-check-input" type="radio" name="payment_status" id="PENDING" [value]="'PENDING'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
+                    <label class="form-check-label" for="PENDING">Not Paid</label>
+                </div>
+            </div>
+            <hr>
+            <p class="mb-2 font-size-14 font-weight-normal">By Confirmation Status</p>
+            <div class="row align-items-center mb-4">
+                <div class="col-6 mb-2 form-check">
+                    <input class="form-check-input" type="radio" name="confirmed" id="confirmationStatusAll" [value]="'ALL'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
+                    <label class="form-check-label" for="confirmationStatusAll" class="mb-0">All</label>
+                </div>
+                <div class="col-6 mb-2 form-check">
+                    <input class="form-check-input" type="radio" name="confirmed" id="NOT_CONFIRMED" [value]="'NOT_CONFIRMED'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
+                    <label class="form-check-label" for="NOT_CONFIRMED" class="mb-0">Not Confirmed</label>
+                </div>
+                <div class="col-6 form-check">
+                    <input class="form-check-input" type="radio" name="confirmed" id="CONFIRMED" [value]="'CONFIRMED'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
+                    <label class="form-check-label" for="CONFIRMED">Confirmed</label>
                 </div>
             </div>
         </div>
@@ -54,7 +70,8 @@
                             <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
                             <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
                             <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>
-                            <td (click)="goToDetails(order)" class="cursor-pointer"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'PAID'" [class.badge-light]="order.payment_status == 'PENDING'">{{order.payment_status}}</span></td>
+                            <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span></td>
+                            <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span></td>
                         </tr>
                     </ng-container>
                 </tbody>

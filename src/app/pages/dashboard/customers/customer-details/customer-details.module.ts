@@ -6,13 +6,17 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { InformationComponent } from './information/information.component';
 import { NgbDropdownModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [OrdersComponent, ProductsComponent, InformationComponent],
+  declarations: [
+    OrdersComponent,
+    ProductsComponent,
+    InformationComponent
+  ],
   imports: [
     CommonModule,
     CustomerDetailsRoutingModule,
@@ -20,7 +24,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgbDropdownModule,
     ReactiveFormsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class CustomerDetailsModule { }

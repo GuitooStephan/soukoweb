@@ -1,0 +1,27 @@
+<div class="container-fluid p-5">
+    <a href="javascript:void(0)" class="float-left display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
+    <div class="row my-5 justify-content-between">
+        <div class="col-12 px-0 mb-5 col-lg-7 order-lg-1 mb-lg-0">
+            <div class="w-md-max-400 h-400 rounded-xl">
+                <img class="img-fit rounded-xl" [src]="product.compressed_product_picture_url" alt="profile picture">
+            </div>
+        </div>
+        <div class="col-12 px-0 col-lg-4 order-lg-0 mt-lg-4">
+            <p class="mb-2 font-size-16 text-primary font-weight-bold"><i class="uil uil-shopping-basket"> </i> {{product.num_of_orders | thousandSuffix}}</p>
+            <h2 class="mb-2 font-weight-bold">{{product.name}}</h2>
+            <h2 class="mb-2 text-primary font-weight-bold">{{product.selling_price | currency:currency:'symbol':'1.2-2'}}</h2>
+            <p class="mb-4">{{product.description}}</p>
+            <ng-container *ngIf="product.total_stock; else outOfStock;">
+                <ng-container *ngIf="!added; else alreadyAdded">
+                    <button (click)="addToCart()" class="btn btn-primary">Add to cart <i class="uil uil-plus ml-2"></i></button>
+                </ng-container>
+                <ng-template #alreadyAdded>
+                    <button (click)="removeFromCart()" class="btn btn-primary">Remove from cart <i class="uil uil-minus ml-2"></i></button>
+                </ng-template>
+            </ng-container>
+            <ng-template #outOfStock>
+                <span class="badge badge-lg badge-danger py-2 px-3">Out Of Stock</span>
+            </ng-template>
+        </div>
+    </div>
+</div>

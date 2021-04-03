@@ -1,10 +1,10 @@
-<div *ngIf="form" class="input-group mb-4" [formGroup]="form">
+<div class="input-group mb-4">
     <div class="input-group-prepend">
         <span class="input-group-text text-primary">
             <i [attr.data-feather]="'search'" appFeatherIcon></i>
         </span>
     </div>
-    <input type="text" class="form-control" formControlName="q" placeholder="Search for buyers">
+    <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchBuyers($event)" placeholder="Search for buyers">
 </div>
 <ng-container *ngIf="loading; else noloading">
     <div class="row">
@@ -25,9 +25,10 @@
                 <tbody>
                     <ng-container *ngFor="let buyer of buyers">
                         <tr class="border-2 mb-3">
-                            <td class="font-weight-bold">{{buyer.first_name + ' ' + buyer.last_name}}</td>
-                            <td><span class="font-weight-bold">Num. Orders:</span> {{buyer.num_of_orders}}</td>
-                            <td>{{buyer.city ? buyer.city : '' + ' ' + buyer.country}}</td>
+                            <td (click)="goToDetails(buyer)" class="cursor-pointer font-weight-bold">{{buyer.first_name + ' ' + buyer.last_name}}</td>
+                            <td (click)="goToDetails(buyer)" class="cursor-pointer font-weight-bold">{{buyer.email}}</td>
+                            <td (click)="goToDetails(buyer)"><span class="cursor-pointer font-weight-bold">Num. Orders:</span> {{buyer.num_of_orders}}</td>
+                            <td (click)="goToDetails(buyer)" class="cursor-pointer">{{buyer.city ? buyer.city : '' + ' ' + buyer.country}}</td>
                         </tr>
                     </ng-container>
                 </tbody>
