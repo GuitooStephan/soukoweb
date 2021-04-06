@@ -74,6 +74,7 @@
                                     <span class="font-weight-bold">Buyer:</span>
                                     {{order.customer.first_name + ' ' + order.customer.last_name}}
                                 </td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer font-weight-bold">#{{order.number}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>

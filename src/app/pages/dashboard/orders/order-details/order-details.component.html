@@ -22,7 +22,7 @@
                         <span class="badge badge-pill px-3 py-2 mr-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span>
                         <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span>
                     </div>
-                    <p class="mb-0">#{{order.id}}</p>
+                    <p class="mb-0">#{{order.number}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
                     <p class="mb-0">
                         <a class="mr-2" [routerLink]="['/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
