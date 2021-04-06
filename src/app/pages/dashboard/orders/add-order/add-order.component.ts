@@ -190,7 +190,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
   }
 
   displayProduct(o): string {
-    return o ? o.name + ' - ¢' + o.selling_price : '';
+    return o ? o.name : '';
   }
 
   productSelected(e, i) {
