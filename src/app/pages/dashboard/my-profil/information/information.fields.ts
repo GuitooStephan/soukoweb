@@ -5,7 +5,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const InformationFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name',
+        label: 'First Name *',
         inputType: 'text',
         wrapper_classes: 'col-sm-12 col-lg-6 mb-1',
         name: 'first_name',
@@ -20,7 +20,7 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name',
+        label: 'Last Name *',
         inputType: 'text',
         wrapper_classes: 'col-sm-12 col-lg-6 mb-1',
         name: 'last_name',
@@ -35,7 +35,7 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'date',
-        label: 'DOB',
+        label: 'DOB *',
         inputType: 'text',
         wrapper_classes: 'col-md-12 mb-1',
         name: 'dob',

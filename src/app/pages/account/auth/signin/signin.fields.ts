@@ -4,7 +4,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const SignInFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'Email',
+        label: 'Email *',
         inputType: 'text',
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'email',
@@ -18,7 +18,7 @@ export const SignInFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'Password',
+        label: 'Password *',
         type: 'password',
         inputType: 'password',
         wrapper_classes: 'col-md-12 px-0 mb-1',

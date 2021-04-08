@@ -4,7 +4,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const CreateUserFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name',
+        label: 'First Name *',
         inputType: 'text',
         wrapper_classes: 'col-sm-6 px-0 pr-sm-2 mb-1',
         name: 'first_name',
@@ -19,7 +19,7 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name',
+        label: 'Last Name *',
         inputType: 'text',
         wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
         name: 'last_name',
@@ -34,7 +34,7 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Email Address',
+        label: 'Email Address *',
         inputType: 'text',
         wrapper_classes: 'col-sm-6 px-0 pr-sm-2 mb-1',
         name: 'email',
@@ -63,7 +63,7 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'date',
-        label: 'DOB',
+        label: 'DOB *',
         inputType: 'text',
         wrapper_classes: 'col-md-12 px-0 mb-1',
         name: 'dob',
@@ -77,7 +77,7 @@ export const CreateUserFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'Password',
+        label: 'Password *',
         type: 'password',
         inputType: 'password',
         wrapper_classes: 'col-md-12 px-0 mb-1',
@@ -93,7 +93,7 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'password',
-        label: 'Re-Enter Password',
+        label: 'Re-Enter Password *',
         inputType: 'password',
         wrapper_classes: 'col-md-12 px-0 mb-1',
         placeholder: 'Confirm your password',
@@ -112,7 +112,7 @@ export const CreateUserFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'I accept Souko\'s Terms and Conditions',
+        label: 'I accept Souko\'s Terms and Conditions *',
         type: 'checkbox',
         wrapper_classes: 'col-md-12 px-0 mb-1',
         value: true,
