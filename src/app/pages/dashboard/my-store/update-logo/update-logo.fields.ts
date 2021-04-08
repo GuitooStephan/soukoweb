@@ -7,7 +7,7 @@ export const UpdateLogoFields: FieldConfig[] = [
         type: 'file',
         wrapper_classes: 'col-lg-12 px-0',
         name: 'logo_url',
-        label: 'Upload Store Logo',
+        label: 'Upload Store Logo *',
         placeholder: 'Upload store logo',
         validations: [
             {

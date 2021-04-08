@@ -5,7 +5,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const MyStoreFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'Name',
+        label: 'Name *',
         inputType: 'text',
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'name',
@@ -20,7 +20,7 @@ export const MyStoreFields: FieldConfig[] = [
     },
     {
         type: 'multiselect',
-        label: 'Categories',
+        label: 'Categories *',
         wrapper_classes: 'col-md-12 px-0',
         name: 'categories_ids',
         options: Categories,
@@ -35,7 +35,7 @@ export const MyStoreFields: FieldConfig[] = [
     },
     {
         type: 'phone_number',
-        label: 'Phone Number',
+        label: 'Phone Number *',
         inputType: 'text',
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'phone_number',
@@ -50,7 +50,7 @@ export const MyStoreFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'City',
+        label: 'City *',
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'city',
@@ -65,7 +65,7 @@ export const MyStoreFields: FieldConfig[] = [
     },
     {
         type: 'countries',
-        label: 'Country',
+        label: 'Country *',
         wrapper_classes: 'col-12 col-lg-6 px-0 pl-sm-2 mb-1',
         name: 'country',
         placeholder: 'Enter your country',
