@@ -7,9 +7,15 @@ export const CreateStoreFields: FieldConfig[] = [
         type: 'file',
         wrapper_classes: 'col-lg-12 px-0',
         name: 'logo_url',
-        label: 'Upload Store Logo',
+        label: 'Upload Store Logo *',
         placeholder: 'Upload store logo',
-        validations: []
+        validations: [
+            {
+                name: 'required',
+                validator: Validators.required,
+                message: 'Logo is required'
+            }
+        ]
     },
     {
         type: 'input',
