@@ -26,6 +26,7 @@ export class ConfirmOrderComponent implements OnInit {
   @Input() myStore;
   @Input() products = [];
   @Input() currency;
+  @Output() getOrderId: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -130,6 +131,7 @@ export class ConfirmOrderComponent implements OnInit {
             quantity: o.quantity
           } )
         );
+        this.getOrderId.emit( order.id );
         return combineLatest( [ ...calls ] );
       } )
     ).subscribe(

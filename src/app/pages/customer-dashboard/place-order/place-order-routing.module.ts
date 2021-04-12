@@ -14,7 +14,7 @@ const routes: Routes = [
     component: SelectProductsComponent
   },
   {
-    path: ':id/confirmation-prompt',
+    path: ':id/confirmation-prompt/:orderId',
     component: ConfirmationPromptComponent
   }
 ];
