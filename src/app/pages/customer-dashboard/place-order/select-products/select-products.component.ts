@@ -62,6 +62,9 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: member-ordering
   currency;
 
+  // tslint:disable-next-line: member-ordering
+  orderId;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -133,10 +136,13 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     componentInstance.componentInstance.currency = this.currency;
     componentInstance.componentInstance.myStore = this.myStore;
     componentInstance.componentInstance.products = this.selectedProducts;
+    componentInstance.componentInstance.getOrderId.subscribe( orderId => {
+      this.orderId = orderId;
+    } );
     componentInstance.result.then((result) => {
       if (result && result === 'success') {
         this.store.dispatch( CartActions.emptyCart() );
-        this.router.navigate( [ '/customer/place-order', this.myStore.id, 'confirmation-prompt' ] );
+        this.router.navigate( [ '/customer/place-order', this.myStore.id, 'confirmation-prompt', this.orderId ] );
       }
     }, (_) => { });
   }

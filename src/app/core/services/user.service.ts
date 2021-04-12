@@ -23,4 +23,8 @@ export class UserService {
         return this.apiService.post( `${ApiConstants.USERS_URL}me/change-password/`, payload );
     }
 
+    resendVerificationEmail( payload ): Observable<any> {
+        return this.apiService.post( `${ApiConstants.USERS_URL}resend-verification-code/`, payload );
+    }
+
 }
