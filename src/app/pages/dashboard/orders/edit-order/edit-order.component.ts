@@ -83,6 +83,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       customer_id: [ this.order.customer.id, Validators.required ],
       customer_name: [ this.order.customer, Validators.required ],
+      delivery_fee: [ +this.order.delivery_fee, [ Validators.required, Validators.pattern( /^\d*\.?\d{0,2}$/ ) ] ],
       order_items: new FormArray([])
     });
 
@@ -187,7 +188,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     this.getUpdatingCalls( this.o.value );
     this.getDeletingCalls( this.o.value );
     this.ordersService.updateOrder( this.order.id, {
-      customer_id: formValue.customer_id
+      customer_id: formValue.customer_id,
+      delivery_fee: formValue.delivery_fee
     } ).pipe(
       flatMap( order => {
         const calls = [

@@ -36,7 +36,7 @@ export class EditCustomerComponent implements OnInit, AfterViewInit {
     }
 
     const value = this.customerForm.value;
-    if ( ! ( typeof value.phone_number === 'string' )  ) {
+    if ( value.phone_number && ( ! ( typeof value.phone_number === 'string' ) )  ) {
       value.phone_number = value.phone_number.e164Number;
     }
 

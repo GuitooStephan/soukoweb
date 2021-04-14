@@ -4,7 +4,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const CustomerInfoFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name',
+        label: 'First Name *',
         inputType: 'text',
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'first_name',
@@ -19,7 +19,7 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name',
+        label: 'Last Name *',
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'last_name',
@@ -34,7 +34,7 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Email',
+        label: 'Email *',
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'email',
@@ -43,12 +43,12 @@ export const CustomerInfoFields: FieldConfig[] = [
             {
                 name: 'required',
                 validator: Validators.required,
-                message: 'Email format is required'
+                message: 'Email is required'
             },
             {
-                name: 'email',
+                name: 'patterns',
                 validator: Validators.email,
-                message: 'Email format is not valid'
+                message: 'Email not valid'
             }
         ]
     },
@@ -59,13 +59,7 @@ export const CustomerInfoFields: FieldConfig[] = [
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'phone_number',
         placeholder: 'Enter the phone number',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Phone Number is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'input',
@@ -74,13 +68,7 @@ export const CustomerInfoFields: FieldConfig[] = [
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'city',
         placeholder: 'Enter the city',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'City is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'countries',
@@ -88,12 +76,6 @@ export const CustomerInfoFields: FieldConfig[] = [
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'country',
         placeholder: 'Enter the country',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Country is required'
-            }
-        ]
+        validations: []
     }
 ];

@@ -22,48 +22,6 @@ declare var _;
   styleUrls: ['./select-products.component.css']
 })
 export class SelectProductsComponent implements OnInit, OnDestroy {
-  @ViewChild( 'storeInfoDiv' ) storeInfoDiv;
-  @ViewChild( 'topBarStoreInfoDiv' ) topBarStoreInfoDiv;
-  @ViewChild( 'navbarDiv' ) navbarDiv;
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event) {
-    // tslint:disable-next-line: max-line-length
-    const storeInfoDivHeight = ( this.storeInfoDiv.nativeElement.scrollHeight - Math.abs( this.storeInfoDiv.nativeElement.scrollTop ) ) + 30;
-    if ( storeInfoDivHeight <= window.pageYOffset ) {
-      this.navbarDiv.nativeElement.classList.remove( 'justify-content-end' );
-      this.topBarStoreInfoDiv.nativeElement.classList.add( 'd-flex' );
-    } else {
-      this.navbarDiv.nativeElement.classList.add( 'justify-content-end' );
-      this.topBarStoreInfoDiv.nativeElement.classList.remove( 'd-flex' );
-    }
-  }
-
-  // tslint:disable-next-line: member-ordering
-  myStore;
-
-  // tslint:disable-next-line: member-ordering
-  fetchData$;
-
-  // tslint:disable-next-line: member-ordering
-  page = 0;
-  // tslint:disable-next-line: member-ordering
-  count = 0;
-  // tslint:disable-next-line: member-ordering
-  loading = false;
-
-  // tslint:disable-next-line: member-ordering
-  products = [];
-  // tslint:disable-next-line: member-ordering
-  selectedProducts = [];
-
-  // tslint:disable-next-line: member-ordering
-  q = '';
-  // tslint:disable-next-line: member-ordering
-  currency;
-
-  // tslint:disable-next-line: member-ordering
-  orderId;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +37,40 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
       this.q = params.q ? params.q : '';
       this.fetchData( ( this.page - 1 ) * 10 );
     } );
+  }
+
+  @ViewChild( 'storeInfoDiv' ) storeInfoDiv;
+  @ViewChild( 'topBarStoreInfoDiv' ) topBarStoreInfoDiv;
+  @ViewChild( 'navbarDiv' ) navbarDiv;
+
+  myStore;
+
+  fetchData$;
+
+  page = 0;
+  count = 0;
+  loading = false;
+
+  products = [];
+  selectedProducts = [];
+
+  q = '';
+  currency;
+
+  orderId;
+  customerIsVerified;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event) {
+    // tslint:disable-next-line: max-line-length
+    const storeInfoDivHeight = ( this.storeInfoDiv.nativeElement.scrollHeight - Math.abs( this.storeInfoDiv.nativeElement.scrollTop ) ) + 30;
+    if ( storeInfoDivHeight <= window.pageYOffset ) {
+      this.navbarDiv.nativeElement.classList.remove( 'justify-content-end' );
+      this.topBarStoreInfoDiv.nativeElement.classList.add( 'd-flex' );
+    } else {
+      this.navbarDiv.nativeElement.classList.add( 'justify-content-end' );
+      this.topBarStoreInfoDiv.nativeElement.classList.remove( 'd-flex' );
+    }
   }
 
   ngOnInit(): void {
@@ -136,13 +128,18 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     componentInstance.componentInstance.currency = this.currency;
     componentInstance.componentInstance.myStore = this.myStore;
     componentInstance.componentInstance.products = this.selectedProducts;
-    componentInstance.componentInstance.getOrderId.subscribe( orderId => {
-      this.orderId = orderId;
+    componentInstance.componentInstance.getOrder.subscribe( result => {
+      this.orderId = result.order.id;
+      this.customerIsVerified = result.customer_is_verified;
     } );
     componentInstance.result.then((result) => {
       if (result && result === 'success') {
         this.store.dispatch( CartActions.emptyCart() );
-        this.router.navigate( [ '/customer/place-order', this.myStore.id, 'confirmation-prompt', this.orderId ] );
+        if ( this.customerIsVerified ) {
+          this.router.navigate( [ '/customer/confirm-order', this.myStore.id, 'success' ] );
+        } else {
+          this.router.navigate( [ '/customer/place-order', this.myStore.id, 'confirmation-prompt', this.orderId ] );
+        }
       }
     }, (_) => { });
   }

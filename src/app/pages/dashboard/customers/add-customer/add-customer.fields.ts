@@ -43,29 +43,23 @@ export const AddCustomerFields: FieldConfig[] = [
             {
                 name: 'required',
                 validator: Validators.required,
-                message: 'Email format is required'
+                message: 'Email is required'
             },
             {
-                name: 'email',
+                name: 'patterns',
                 validator: Validators.email,
-                message: 'Email format is not valid'
+                message: 'Email not valid'
             }
         ]
     },
     {
         type: 'phone_number',
-        label: 'Phone Number *',
+        label: 'Phone Number',
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'phone_number',
         placeholder: 'Enter the phone number',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Phone Number is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'date',
@@ -78,32 +72,20 @@ export const AddCustomerFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'City *',
+        label: 'City',
         inputType: 'text',
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'city',
         placeholder: 'Enter the city',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'City is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'countries',
-        label: 'Country *',
+        label: 'Country',
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'country',
         placeholder: 'Enter the country',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Country is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'input',

@@ -12,16 +12,16 @@
             <ng-container *ngFor="let p of products; let i = index;">
                 <div class="col-12 px-0 mb-3 d-block d-lg-flex align-items-center justify-content-between" [formGroup]="o.controls[i]">
                     <div class="d-flex align-items-center mr-3 mb-2 mb-lg-0">
-                        <div class="rounded-xl avatar-xl mr-4">
+                        <div class="rounded-xl avatar-lg mr-4">
                             <img class="img-fit rounded-xl" [src]="p.product.compressed_product_picture_url" alt="profile picture">
                         </div>
                         <div class="px-0">
-                            <h3 class="font-weight-bold mb-1">
+                            <h5 class="font-weight-bold mb-1">
                                 {{p.product.name}}
                                 <span class="text-danger cursor-pointer" (click)="removeFromCart(p.product)"><i class="uil uil-minus-circle"></i></span>
-                            </h3>
+                            </h5>
                             <p class="mb-1">{{p.product.description}}</p>
-                            <h3 class="font-weight-bold text-primary">{{p.product.selling_price | currency:currency:'symbol':'1.2-2'}}</h3>
+                            <h5 class="font-weight-bold text-primary">{{p.product.selling_price | currency:currency:'symbol':'1.2-2'}}</h5>
                         </div>
                     </div>
                     <div class="input-group mb-3 col-8 col-md-6 col-lg-3">
@@ -55,7 +55,8 @@
             <p class="mb-2 mb-lg-0 font-size-18 mb-0 font-weight-bold">Total</p>
             <h3 class="my-0 text-lg-center text-primary">{{ total | currency:currency:'symbol':'1.0-0' }}</h3>
         </div>
-        <h3 class="mb-4">Customer Information</h3>
+        <h3 class="mb-2">Customer Information</h3>
+        <p class="mb-4">If it's not your first time shopping with souko, kindly use the same email in order to avoid the confirmation process.</p>
         <div class="row mb-4">
             <div class="col-12 px-0">
                 <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
