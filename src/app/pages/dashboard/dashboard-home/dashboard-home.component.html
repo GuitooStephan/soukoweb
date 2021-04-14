@@ -3,20 +3,7 @@
         <div class="mb-3 mb-md-0">
             <h2>Welcome, <span class="text-primary">{{user.first_name}} {{user.last_name}}</span></h2>
         </div>
-        <div class="d-flex align-items-center">
-            <div ngbDropdown class="mr-4" display="dynamic" placement="bottom-right">
-                <button class="btn btn-outline-dark" id="homeMoreActions" ngbDropdownToggle>More Actions</button>
-                <div ngbDropdownMenu aria-labelledby="homeMoreActions" class="dropdown-menu">
-                    <a [routerLink]="['/orders/create']" ngbDropdownItem>
-                        Record Order
-                        <i [attr.data-feather]="'plus'" appFeatherIcon></i>
-                    </a>
-                    <a href="javascript:void(0)" (click)="addProduct()" ngbDropdownItem>
-                        Add Product
-                        <i [attr.data-feather]="'plus'" appFeatherIcon></i>
-                    </a>
-                </div>
-            </div>
+        <div class="d-flex align-items-start align-items-md-end">
             <div class="btn-group mr-2">
                 <div class="form-inline">
                     <span class="mr-2">Filter metrics by:</span>

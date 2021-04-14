@@ -78,6 +78,7 @@
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Balance:</span> {{order.balance | currency:currency:'symbol':'1.2-2'}}</td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span></td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span></td>
                                 <td ngbDropdown container="body" class="cursor-pointer">

@@ -26,7 +26,7 @@ export class ConfirmOrderComponent implements OnInit {
   @Input() myStore;
   @Input() products = [];
   @Input() currency;
-  @Output() getOrderId: EventEmitter<any> = new EventEmitter<any>();
+  @Output() getOrder: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -109,13 +109,12 @@ export class ConfirmOrderComponent implements OnInit {
 
     const customerPayload = this.customerInfo.value;
 
-    if ( ! ( typeof customerPayload.phone_number === 'string' )  ) {
+    if ( customerPayload.phone_number && ( ! ( typeof customerPayload.phone_number === 'string' ) )  ) {
       customerPayload.phone_number = customerPayload.phone_number.e164Number;
     }
 
     this.customersService.placeOrderAnonymous( this.myStore.id, {
       order : {
-        confirmed: false,
         store_id: this.myStore.id
       },
       customer : {
@@ -123,15 +122,15 @@ export class ConfirmOrderComponent implements OnInit {
         store_id: this.myStore.id
       }
     } ).pipe(
-      flatMap( order => {
+      flatMap( result => {
         const calls = this.o.value.map(
           o => this.ordersService.createOrderItem( {
-            order_id: order.id,
+            order_id: result.order.id,
             product_id: o.product.id,
             quantity: o.quantity
           } )
         );
-        this.getOrderId.emit( order.id );
+        this.getOrder.emit( result );
         return combineLatest( [ ...calls ] );
       } )
     ).subscribe(

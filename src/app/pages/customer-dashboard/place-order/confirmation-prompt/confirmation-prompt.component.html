@@ -45,9 +45,27 @@
                             <div class="w-md-max-400 px-4 px-lg-0 pt-150 pt-lg-0">
                                 <h2 class="mb-3">Congratulations</h2>
                                 <p class="mb-2">Thank you so much for placing your order.</p>
-                                <p class="mb-5">Now you would need to confirm the order by clicking on the link we sent you in your email.</p>
-                                <p>Kindly check your email</p>
-                                <p class="mt-5"><a href="javascript:void(0)" (click)="resendOrderConfirmationCode()">Resend email</a></p>
+                                <p class="mb-3">Now you would need to confirm the order by providing the code sent to your email.</p>
+                                <p class="mb-5">Kindly check your email</p>
+                                <p><a href="javascript:void(0)" (click)="resendOrderConfirmationCode()">Resend code</a></p>
+                                <div *ngIf="form" class="mt-2" [formGroup]="form">
+                                    <div class="mb-2">
+                                        <label class="form-control-label" for="code">Verification Code</label>
+                                        <input type="text" id="code" formControlName="code" class="form-control" placeholder="Enter code">
+                                        <ng-container *ngIf="form.get('code').invalid && (form.get('code').dirty || form.get('code').touched)">
+                                            <div *ngIf="form.get('code').hasError('required')" class="text-danger small mb-0 mt-2">
+                                                Code is required
+                                            </div>
+                                            <div *ngIf="form.get('code').hasError('pattern')" class="text-danger small mb-0 mt-2">
+                                                Code should be a number
+                                            </div>
+                                            <div *ngIf="form.get('code').hasError('maxlength')" class="text-danger small mb-0 mt-2">
+                                                Code should be longer than 6
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div><button (click)="confirmOrder()" class="btn btn-primary">Confirm Order</button></div>
+                                </div>
                             </div>
                         </div>
                     </div>

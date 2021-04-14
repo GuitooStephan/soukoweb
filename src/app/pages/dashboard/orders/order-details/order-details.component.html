@@ -83,6 +83,12 @@
                                 <p class="mb-0 font-size-16">Total</p>
                                 <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:currency:'symbol':'1.0-0' }}</p>
                             </div>
+                            <ng-container *ngIf="order.payment_status == 'Partially Paid'">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 font-size-16">Balance</p>
+                                    <p class="mb-0 font-size-16 text-right">{{ order.balance | currency:currency:'symbol':'1.0-0' }}</p>
+                                </div>
+                            </ng-container>
                         </ng-container>
                         <ng-template #nopayments>
                             <p class="mb-2 text-center">
@@ -118,6 +124,11 @@
                                     <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>
                                 </tr>
                             </ng-container>
+                            <tr>
+                                <td class="font-weight-bold">Other Expenses</td>
+                                <td></td>
+                                <td class="font-weight-bold">{{order.delivery_fee | currency:currency:'symbol':'1.2-2'}}</td>
+                            </tr>
                             <tr>
                                 <td class="font-weight-bold">Total Cost</td>
                                 <td></td>

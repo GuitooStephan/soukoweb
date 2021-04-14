@@ -71,6 +71,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       customer_id: [ '', Validators.required ],
       customer_name: [ '', Validators.required ],
+      delivery_fee: [ 0.00, [ Validators.required, Validators.pattern( /^\d*\.?\d{0,2}$/ ) ] ],
       paying_now: [ false ],
       order_items: new FormArray([])
     });
@@ -138,6 +139,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     const formValue = this.form.value;
     this.ordersService.createOrder( {
       customer_id: formValue.customer_id,
+      delivery_fee: formValue.delivery_fee,
       store_id: this.user.admin.store_id
     } ).pipe(
       flatMap( order => {

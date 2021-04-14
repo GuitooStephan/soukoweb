@@ -32,19 +32,13 @@ export const AddProductFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'Description *',
+        label: 'Description',
         type: 'textarea',
         inputType: 'text',
         wrapper_classes: 'col-lg-12 mb-4',
         name: 'description',
         placeholder: 'Enter the product description',
-        validations: [
-            {
-                name: 'required',
-                validator: Validators.required,
-                message: 'Description is required'
-            }
-        ]
+        validations: []
     },
     {
         type: 'input',

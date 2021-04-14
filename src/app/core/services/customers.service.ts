@@ -72,7 +72,11 @@ export class CustomersService {
     }
 
     resendOrderConfirmationCode( storeId, payload ): Observable<any> {
-        return this.apiService.post( `${ApiConstants.CUSTOMERS_URL}store/${storeId}/orders/resend-order-confirmation-code`, payload );
+        return this.apiService.post( `${ApiConstants.CUSTOMERS_URL}store/${storeId}/orders/resend-order-confirmation-code/`, payload );
+    }
+
+    confirmOrder( storeId, payload ): Observable<any> {
+        return this.apiService.post( `${ApiConstants.CUSTOMERS_URL}store/${storeId}/orders/confirm-order/`, payload );
     }
 
 }

@@ -52,7 +52,7 @@ export class AddCustomerComponent implements OnInit, OnDestroy {
     }
 
     const value = this.customerForm.value;
-    if ( ! ( typeof value.phone_number === 'string' )  ) {
+    if ( value.phone_number && ( ! ( typeof value.phone_number === 'string' ) )  ) {
       value.phone_number = value.phone_number.e164Number;
     }
 
@@ -61,6 +61,8 @@ export class AddCustomerComponent implements OnInit, OnDestroy {
       data => {
         this.loading = false;
         this.activeModal.close( 'success' );
+      }, error => {
+        this.loading = false;
       }
     );
   }
