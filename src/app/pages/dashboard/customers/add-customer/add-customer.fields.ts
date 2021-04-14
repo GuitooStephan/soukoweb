@@ -46,7 +46,7 @@ export const AddCustomerFields: FieldConfig[] = [
                 message: 'Email is required'
             },
             {
-                name: 'patterns',
+                name: 'email',
                 validator: Validators.email,
                 message: 'Email not valid'
             }
