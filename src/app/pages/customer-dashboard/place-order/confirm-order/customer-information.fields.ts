@@ -54,12 +54,18 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'phone_number',
-        label: 'Phone Number',
+        label: 'Phone Number *',
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'phone_number',
         placeholder: 'Enter the phone number',
-        validations: []
+        validations: [
+            {
+                name: 'required',
+                validator: Validators.required,
+                message: 'Phone Number is required'
+            }
+        ]
     },
     {
         type: 'input',
