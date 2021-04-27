@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.runAnimation();
+    this.runAnimation();
   }
 
   fetchPlans() {
@@ -69,13 +69,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   runAnimation() {
     let tl1 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl1.to( '.hero-cloud-one', 2, { x: 20, repeat: -1, yoyo: true } );
+    tl1.to( '.hero-cloud-one', 2.5, { left: '9%', repeat: -1, yoyo: true } );
 
     let tl2 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl2.to( '.hero-cloud-two', 2, { x: -20, repeat: -1, yoyo: true } );
+    tl2.to( '.hero-cloud-two', 2.5, { right: '9%', repeat: -1, yoyo: true } );
 
     let tl3 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl3.to( '.hero-birds', 1.5, { y: 10, repeat: -1, yoyo: true } );
+    tl3.to( '.hero-birds', 1.3, { top: '15%', repeat: -1, yoyo: true } );
   }
 
   scroll(el: HTMLElement) {
