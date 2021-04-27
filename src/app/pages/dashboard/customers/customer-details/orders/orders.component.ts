@@ -74,7 +74,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   goToDetails( order ) {
-    return this.router.navigate( [ '/orders', order.id ] );
+    return this.router.navigate( [ '/dashboard/orders', order.id ] );
   }
 
   fetchPage( newPage ) {

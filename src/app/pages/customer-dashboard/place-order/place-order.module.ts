@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { PlaceOrderRoutingModule } from './place-order-routing.module';
 import { SelectProductsComponent } from './select-products/select-products.component';
@@ -32,7 +33,8 @@ import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-
     NgbPaginationModule,
     NgbModalModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    InfiniteScrollModule
   ],
   providers: [
     ThousandSuffixePipe

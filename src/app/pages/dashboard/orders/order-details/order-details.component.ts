@@ -98,7 +98,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
         this.ordersService.deleteOrder( this.order.id ).subscribe(
           data => {
             this.notificationService.success( null, 'Order deleted successfully' );
-            this.router.navigate( [ '/orders/list' ] );
+            this.router.navigate( [ '/dashboard/orders/list' ] );
           }
         );
       }

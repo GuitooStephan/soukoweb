@@ -86,7 +86,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.productsService.deleteProduct( this.product.id ).subscribe(
           data => {
             this.notificationService.success( null, 'Product deleted successfully' );
-            this.router.navigate( ['/products/list'] );
+            this.router.navigate( ['/dashboard/products/list'] );
           }
         );
       }

@@ -1,0 +1,32 @@
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <ng-container *ngIf="myStore">
+            <div class="col-12 col-md-4 mb-3 text-center">
+                <div class="text-center mt-4 mt-md-5">
+                    <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
+                        <div class="avatar-xxl rounded-circle mx-auto">
+                            <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
+                        </div>
+                    </ng-container>
+                    <ng-template #noLogo>
+                        <div class="mx-auto">
+                            <ngx-avatar class="rounded-circle mx-auto" [round]="true" [cornerRadius]="4" [size]="120" name="{{ myStore.name }}"></ngx-avatar>
+                        </div>
+                    </ng-template>
+                </div>
+                <a class="d-block mt-3" (click)="updateLogo()" href="javascript:void(0)">Update Logo</a>
+            </div>
+        </ng-container>
+        <div class="col-12 col-md-8">
+            <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
+        </div>
+        <div class="col-12 d-block d-md-flex justify-content-end">
+            <div *ngIf="loading" class="spinner-border spinner-border-sm text-dark" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <button (click)="updateStore()" class="btn btn-primary ml-3">
+                Update Store
+            </button>
+        </div>
+    </div>
+</div>

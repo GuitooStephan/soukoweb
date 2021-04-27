@@ -13,6 +13,7 @@ import { selectError } from 'src/app/core/store/selectors/error.selectors';
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import { Categories } from 'src/app/core/common/options/categories.options';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
+import { StoreService } from 'src/app/core/services/store.service';
 
 declare var _: any;
 
@@ -33,11 +34,15 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
   selectUser$;
   selectLoading$;
 
+  plan = 'Free';
+  plans = [];
+
   constructor(
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private categoriesService: CategoriesService,
     private store: Store<AppState>,
+    private storeService: StoreService,
     private titleService: Title,
     private metaTagService: Meta
   ) {
@@ -70,6 +75,7 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchCategories();
+    this.fetchPlans();
   }
 
   ngOnDestroy(): void {
@@ -95,6 +101,12 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
         Categories.push( ..._.xorBy( _.filter(Categories, i => i.value !== ''), categories.map( i => ({ label: i.name, value: i.id }) ), 'value') );
       }
     );
+  }
+
+  fetchPlans() {
+    this.storeService.fetchSubscriptionPlans().subscribe( data => {
+      this.plans = data.results;
+    } );
   }
 
   createStore() {

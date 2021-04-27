@@ -43,4 +43,8 @@ export class StoreService {
         return this.apiService._put( `${ApiConstants.STORE_URL}${storeId}/`, payload );
     }
 
+    fetchSubscriptionPlans(): Observable<any> {
+        return this.apiService.get( `${ApiConstants.PLANS_URL}` );
+    }
+
 }

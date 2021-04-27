@@ -202,7 +202,7 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     ).subscribe(
       data => {
         this.notificationService.success( null, 'Order has been updated' );
-        this.router.navigate( [ '/orders/list' ] );
+        this.router.navigate( [ '/dashboard/orders/list' ] );
       }
     );
   }

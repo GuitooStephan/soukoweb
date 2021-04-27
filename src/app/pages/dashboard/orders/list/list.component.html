@@ -87,7 +87,7 @@
                                         <a (click)="goToDetails(order)" href="javascript:void(0)" ngbDropdownItem>
                                             View
                                         </a>
-                                        <a *ngIf="order.payment_status === 'Pending'" [routerLink]="['/orders/edit', order.id]" ngbDropdownItem>
+                                        <a *ngIf="order.payment_status === 'Pending'" [routerLink]="['/dashboard/orders/edit', order.id]" ngbDropdownItem>
                                             Edit
                                         </a>
                                         <a *ngIf="!order.confirmed" (click)="confirmOrder(order)" href="javascript:void(0)" ngbDropdownItem>Mark as confirmed</a>

@@ -1,4 +1,12 @@
 <div class="container-fluid mt-4">
+    <div class="mb-4">
+        <div class="alert alert-dark" role="alert">
+            <span class="mr-3">Click on this button to copy the link to your E-Shop</span>
+            <button *ngIf="myStore" class="btn btn-primary" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'">
+                <span><i class="uil uil-copy"></i></span>
+            </button>
+        </div>
+    </div>
     <div class="d-md-flex justify-content-md-between align-items-md-center mb-4">
         <div class="mb-3 mb-md-0">
             <h2>Welcome, <span class="text-primary">{{user.first_name}} {{user.last_name}}</span></h2>

@@ -3,8 +3,8 @@
         <i [attr.data-feather]="'menu'" appFeatherIcon></i>
     </button>
     <ng-container *ngIf="myStore">
-        <a class="d-none d-sm-block ml-auto ml-sm-0" [routerLink]="['/my-store']">
-            <div class="media w-max-200 ml-3 ml-lg-0 align-items-center">
+        <a class="d-none d-sm-block ml-auto ml-sm-0" [routerLink]="['/dashboard/my-store']">
+            <div class="media w-max-300 ml-3 ml-lg-0 align-items-center">
                 <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
                     <div class="avatar rounded-circle d-flex align-items-center justify-content-around text-center">
                         <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
@@ -22,31 +22,31 @@
     <div class="collapse navbar-collapse order-2 flex-grow-lg-0 flex-grow-1" id="navbarNav">
         <ul class="navbar-nav d-flex d-lg-none">
             <li class="nav-item">
-                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link font-size-18 font-weight-bold">
+                <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a [routerLink]="['/products']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
                     <span>Products</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a [routerLink]="['/orders']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
                     <span>Orders</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a [routerLink]="['/customers']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
+                <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
                     <span>Customers</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a [routerLink]="['/my-store']" routerLinkActive="active" href="javascript:void(0)" class="nav-link font-size-18 font-weight-bold">
+                <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" href="javascript:void(0)" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>My Store</span>
                 </a>
@@ -55,7 +55,7 @@
     </div>
     <ul class="ml-3 ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
         <li class="nav-item d-none d-md-block">
-            <a [routerLink]="['/orders/create']" class="btn btn-primary mr-3" href="javascript:void(0)"> 
+            <a [routerLink]="['/dashboard/orders/create']" class="btn btn-primary mr-3" href="javascript:void(0)"> 
                 Record Order
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </a>
@@ -73,15 +73,15 @@
             <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                 <p *ngIf="myStore" class="mb-0 cursor-pointer" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'" ngbDropdownItem>
                     <a href="javascript:void(0)" title="{{ 'https://souko.me/customer/place-order/' + myStore.id + '/select-products' }}" class="mr-2"><i class="uil uil-copy"></i></a>
-                    Copy customers' link
+                    Copy E-Shop Link
                 </p>
-                <a [routerLink]="['/orders/create']" ngbDropdownItem>
+                <a [routerLink]="['/dashboard/orders/create']" ngbDropdownItem>
                     Record Order
                 </a>
                 <a href="javascript:void(0)" (click)="addProduct()" ngbDropdownItem>
                     Add Product
                 </a>
-                <a [routerLink]="['/my-profile']" ngbDropdownItem>
+                <a [routerLink]="['/dashboard/my-profile']" ngbDropdownItem>
                     Profile
                 </a>
                 <a href="javascript:void(0)" (click)="logout()" ngbDropdownItem>

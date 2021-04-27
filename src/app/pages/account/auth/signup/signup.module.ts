@@ -8,6 +8,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { CreateStoreComponent } from './create-store/create-store.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     LayoutsModule,
     SignupRoutingModule,
     SharedModule,
