@@ -14,15 +14,51 @@ declare var moment;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  leftTime = 0;
-  countdownConfig = {
-    leftTime: 30,
-    format: 'HH:mm:ss',
-  };
-  launched = false;
+  CountdownTimeUnits: Array<[string, number]> = [
+    ['Y', 1000 * 60 * 60 * 24 * 365], // years
+    ['M', 1000 * 60 * 60 * 24 * 30], // months
+    ['D', 1000 * 60 * 60 * 24], // days
+    ['H', 1000 * 60 * 60], // hours
+    ['m', 1000 * 60], // minutes
+    ['s', 1000], // seconds
+    ['S', 1] // million seconds
+  ];
 
+  // tslint:disable-next-line: one-variable-per-declaration
+  formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
+    let duration = Number(date || 0);
+
+    return this.CountdownTimeUnits.reduce((current, [name, unit]) => {
+      if (current.indexOf(name) !== -1) {
+        const v = Math.floor(duration / unit);
+        duration -= v * unit;
+        return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
+          return v.toString().padStart(match.length, '0');
+        });
+      }
+      return current;
+    }, formatStr);
+  };
+
+  // tslint:disable-next-line: member-ordering
+  leftTime = 0;
+  // tslint:disable-next-line: member-ordering
+  end = moment('2021-5-3');
+  // tslint:disable-next-line: member-ordering
+  start = moment();
+  // tslint:disable-next-line: member-ordering
+  launched = this.end.isSameOrBefore( this.start, 'second' );
+  // tslint:disable-next-line: member-ordering
+  countdownConfig = {
+    leftTime: this.end.diff(this.start, 'seconds'),
+    format: 'HH:mm:ss',
+    formatDate: this.formatDate
+  };
+
+  // tslint:disable-next-line: member-ordering
   form: FormGroup;
 
+  // tslint:disable-next-line: member-ordering
   plans = [];
 
   constructor(
@@ -31,8 +67,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private notificationService: NotificationService
   ) {
-    this.setCountdown();
-
     this.form = this.fb.group({
       email: [ '', [ Validators.required, Validators.email ] ]
     });
@@ -57,47 +91,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.notificationService.success( null, 'Your email has been saved. We will notify you' );
       this.form.reset();
     } );
-  }
-
-  setCountdown() {
-    let end = moment('2021-5-3');
-    var start = moment();
-
-    this.launched = end.isSameOrBefore( start, 'second' );
-    // if ( !this.launched ) {
-    const CountdownTimeUnits: Array<[string, number]> = [
-      ['Y', 1000 * 60 * 60 * 24 * 365], // years
-      ['M', 1000 * 60 * 60 * 24 * 30], // months
-      ['D', 1000 * 60 * 60 * 24], // days
-      ['H', 1000 * 60 * 60], // hours
-      ['m', 1000 * 60], // minutes
-      ['s', 1000], // seconds
-      ['S', 1] // million seconds
-    ];
-
-    // tslint:disable-next-line: one-variable-per-declaration
-    const formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
-      let duration = Number(date || 0);
-
-      return CountdownTimeUnits.reduce((current, [name, unit]) => {
-        if (current.indexOf(name) !== -1) {
-          const v = Math.floor(duration / unit);
-          duration -= v * unit;
-          return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
-            return v.toString().padStart(match.length, '0');
-          });
-        }
-        return current;
-      }, formatStr);
-    };
-
-
-    // this.countdownConfig = {
-    //   leftTime: end.diff(start, 'seconds'),
-    //   format: 'HH:mm:ss',
-    //   formatDate
-    // };
-    // }
   }
 
   runAnimation() {
