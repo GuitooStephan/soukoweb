@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TimelineLite, Back } from 'gsap';
+import { gsap } from 'gsap';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { StoreService } from 'src/app/core/services/store.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -68,14 +68,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   runAnimation() {
-    let tl1 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl1.to( '#hero-cloud-one', 2.5, { left: '9%', repeat: -1, yoyo: true } );
-
-    let tl2 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl2.to( '#hero-cloud-two', 2.5, { right: '9%', repeat: -1, yoyo: true } );
-
-    let tl3 = new TimelineLite({ defaults: { duration: 1.5 } });
-    tl3.to( '#hero-birds', 1.3, { top: '15%', repeat: -1, yoyo: true } );
+    gsap.to( '#hero-cloud-one', { duration: 2.5, left: '9%', repeat: -1, yoyo: true } );
+    gsap.to( '#hero-cloud-two', { duration: 2.5, right: '9%', repeat: -1, yoyo: true } );
+    gsap.to( '#hero-birds', { duration: 1.3, top: '15%', repeat: -1, yoyo: true } );
   }
 
   scroll(el: HTMLElement) {
