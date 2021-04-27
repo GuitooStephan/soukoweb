@@ -41,18 +41,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   // tslint:disable-next-line: member-ordering
-  leftTime = 0;
-  // tslint:disable-next-line: member-ordering
   end = moment('2021-5-3');
   // tslint:disable-next-line: member-ordering
   start = moment();
   // tslint:disable-next-line: member-ordering
+  leftTime = this.end.diff(this.start, 'seconds');
+  // tslint:disable-next-line: member-ordering
   launched = this.end.isSameOrBefore( this.start, 'second' );
   // tslint:disable-next-line: member-ordering
   countdownConfig = {
-    leftTime: this.end.diff(this.start, 'seconds'),
-    format: 'HH:mm:ss',
-    formatDate: this.formatDate
+    leftTime: this.leftTime,
+    format: 'HH:mm:ss'
   };
 
   // tslint:disable-next-line: member-ordering
