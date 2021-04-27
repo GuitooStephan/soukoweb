@@ -28,13 +28,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private storeService: StoreService,
     private notificationService: NotificationService
   ) {
+    this.setCountdown();
+
     this.form = this.fb.group({
       email: [ '', [ Validators.required, Validators.email ] ]
     });
   }
 
   ngOnInit(): void {
-    this.setCountdown();
     this.fetchPlans();
   }
 
