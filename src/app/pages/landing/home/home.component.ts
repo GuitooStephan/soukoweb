@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.runAnimation();
+    // this.runAnimation();
   }
 
   fetchPlans() {
