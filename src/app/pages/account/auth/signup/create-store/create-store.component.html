@@ -30,6 +30,28 @@
                 <p class="mb-0">Kindly input your details</p>
             </div>
             <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
+            <ng-container *ngIf="plans.length">
+                <p class="font-size-14 mb-2">Plans</p>
+                <div class="row mb-5">
+                    <ng-container *ngFor="let p of plans">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <label class="w-100 mb-2 radio-button-wrapper">
+                                <input type="radio" name="plan" [(ngModel)]="plan" [value]="p.plan_type">
+                                <div class="d-flex justify-content-between p-4 rounded-lg">
+                                    <div>
+                                        <p class="font-size-15 mb-0 font-weight-bold text-primary text-left">{{p.plan_type}}</p>
+                                        <p class="small text-muted mb-0 font-weight-semibold text-left">
+                                            {{p.products_limit}} Products; 
+                                            {{p.orders_limit === -1 ? 'Unlimited' : p.orders_limit}} Orders; 
+                                            {{p.customers_limit === -1 ? 'Unlimited' : p.customers_limit}} Customers
+                                        </p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
             <div class="mt-4 d-flex align-items-center">
                 <button (click)="createStore()" class="btn btn-primary">
                     Create Store

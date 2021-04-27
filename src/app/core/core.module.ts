@@ -14,6 +14,7 @@ import { StoreEffects } from './store/effects/store.effects';
 import { AuthGuard } from './guards/auth.guard';
 import { ChildrenAuthGuard } from './guards/children-auth.guard';
 import { ThousandSuffixePipe } from './pipes/thousand-suffix.pipe';
+import { ChildrenUnauthGuard } from './guards/childen-unauth.guard';
 
 
 
@@ -39,6 +40,7 @@ import { ThousandSuffixePipe } from './pipes/thousand-suffix.pipe';
     httpInterceptorProviders,
     AuthGuard,
     ChildrenAuthGuard,
+    ChildrenUnauthGuard,
     ThousandSuffixePipe
   ],
   exports: [

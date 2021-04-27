@@ -76,7 +76,7 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.store.dispatch( AuthActions.signIn( { data: {  payload: this.signInForm.value, returnUrl: this.getReturnUrl() } } ) );
   }
 
-  getReturnUrl( defaultUrl= '/' ) {
+  getReturnUrl( defaultUrl= '/dashboard' ) {
     // tslint:disable-next-line: no-string-literal
     return this.route.snapshot.queryParams['returnUrl'] || defaultUrl;
   }

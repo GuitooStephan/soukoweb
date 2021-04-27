@@ -1,33 +1,33 @@
 <div class="position-fixed left-wrapper d-none d-lg-flex align-items-center justify-content-center">
-    <a [routerLink]="['/']"><img class="mb-0 position-absolute authentication-logo" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
+    <a [routerLink]="['/dashboard']"><img class="mb-0 position-absolute authentication-logo" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
     <div>
         <ul class="list-unstyled mt-4">
             <li class="mb-4">
-                <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-18">
+                <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-18">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="mb-4">
-                <a [routerLink]="['/products']" routerLinkActive="active" class="link-item font-size-18">
+                <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="link-item font-size-18">
                     <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
                     <span>Products</span>
                 </a>
             </li>
             <li class="mb-4">
-                <a [routerLink]="['/orders']" routerLinkActive="active" class="link-item font-size-18">
+                <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="link-item font-size-18">
                     <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
                     <span>Orders</span>
                 </a>
             </li>
             <li class="mb-4">
-                <a [routerLink]="['/customers']" routerLinkActive="active" class="link-item font-size-18">
+                <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="link-item font-size-18">
                     <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
                     <span>Customers</span>
                 </a>
             </li>
             <li class="mb-4">
-                <a [routerLink]="['/my-store']" routerLinkActive="active" class="link-item font-size-18">
+                <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" class="link-item font-size-18">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>My Store</span>
                 </a>

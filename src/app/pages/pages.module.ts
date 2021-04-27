@@ -8,12 +8,15 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutsModule } from '../shared/layouts/layouts.module';
 import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard.module';
+import { LandingModule } from './landing/landing.module';
+import { LandingComponent } from './landing/landing.component';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    LandingComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { CustomerDashboardModule } from './customer-dashboard/customer-dashboard
     AccountModule,
     DashboardModule,
     LayoutsModule,
-    CustomerDashboardModule
+    CustomerDashboardModule,
+    LandingModule
   ]
 })
 export class PagesModule { }

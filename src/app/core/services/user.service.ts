@@ -27,4 +27,8 @@ export class UserService {
         return this.apiService.post( `${ApiConstants.USERS_URL}resend-verification-code/`, payload );
     }
 
+    subscribeToLaunch( payload ): Observable<any> {
+        return this.apiService.post( 'subscribe/', payload );
+    }
+
 }

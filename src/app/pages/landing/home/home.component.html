@@ -1,0 +1,288 @@
+<div class="hero position-relative h-100-vh">
+    <nav class="navbar navbar-expand-lg align-items-center justify-content-lg-start position-absolute w-100 py-4 z-index-3">
+        <div class="container d-flex align-items-center justify-content-lg-start">
+            <a class="navbar-brand" [routerLink]="['/']"><img class="mb-0" width="100" height="auto" src="../../../../assets/images/logo-with-name-white.png" alt="logo"></a>
+            <ng-container *ngIf="launched">
+                <ul class="ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
+                    <li class="nav-item d-none d-md-block mr-4">
+                        <a [routerLink]="['/account/auth/sign-in']" class="text-white" href="javascript:void(0)"> 
+                            Log In
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a class="btn btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
+                            Create a store
+                        </a>
+                    </li>
+                    <li ngbDropdown placement="bottom-left" class="nav-item d-md-none" display="dynamic" autoClose="outside">
+                        <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn btn-primary no-dropdown-arrow">
+                            <i class="uil uil-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
+                            <a [routerLink]="['/account/auth/sign-in']" ngbDropdownItem>
+                                Sign In
+                            </a>
+                            <a [routerLink]="['/account/auth/sign-up']" ngbDropdownItem>
+                                Create a store
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </ng-container>
+        </div>
+    </nav>
+    <div class="container h-100">
+        <div class="d-flex justify-content-between h-100">
+            <ng-container *ngIf="launched">
+                <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400">
+                    <div>
+                        <h1 class="font-weight-bold text-light mb-2">Welcome to your electronic store register, Souko</h1>
+                        <p class="mb-4 font-size-18">We provide you with a dashboard to manage your inventory, sales, customers along with a private e-shop for your products only.</p>
+                        <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary width-md btn-lg">Create a store</a>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!launched">
+                <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400 position-relative">
+                    <div>
+                        <h1 class="font-weight-bold text-light mb-2">Launching in:</h1>
+                        <p class="display-4 mb-0"><countdown #cd [config]="countdownConfig"></countdown></p>
+                        <p class="small mb-4">
+                            <span class="mr-5 ml-2">Days</span>
+                            <span class="mr-5">Hours</span>
+                            <span class="mr-5">Minutes</span>
+                            <span>Seconds</span>
+                        </p>
+                        <button (click)="scroll(subscriptionForm)" class="btn btn-primary width-md btn-lg">Get notified !</button>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="position-relative hero-illustration d-none d-lg-flex align-items-end justify-content-center">
+                <img class="hero-cloud-one" src="../../../../assets/images/hero_cloud_one.svg" alt="cloud-one">
+                <img class="hero-birds" src="../../../../assets/images/hero_birds.svg" alt="birds">
+                <img class="hero-cloud-two" src="../../../../assets/images/hero_cloud_two.svg" alt="cloud-two">
+                <img class="hero-phone" src="../../../../assets/images/hero_phone.svg" alt="phone">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-100 text-center">
+    <h1>What Do We Offer</h1>
+    <div class="row mt-60 justify-content-around justify-content-md-between">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-sm-5 mb-lg-0 px-4">
+            <img class="avatar-sm mb-2" src="../../../../assets/images/store.svg" alt="store-icon">
+            <h3 class="mb-4 font-weight-bold">Store Management</h3>
+            <p>Easily manage your inventory, orders, customers all at one place.</p>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-sm-5 mb-lg-0 px-4">
+            <img class="avatar-sm mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
+            <h3 class="mb-4 font-weight-bold">Useful Metrics</h3>
+            <p>We provide your with metrics on the growth of your store. It includes orders, profits, products and etc.</p>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-lg-0 px-4">
+            <img class="avatar-sm mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
+            <h3 class="mb-4 font-weight-bold">Private E-Shop</h3>
+            <p>We provide your shop with a private page where your customers can order your products only.</p>
+        </div>
+    </div>
+</div>
+<div class="container mt-100 text-center">
+    <h1>How Does It Work</h1>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs border-0 mt-60 justify-content-center">
+        <li ngbNavItem>
+            <a ngbNavLink>Store Owner</a>
+            <ng-template ngbNavContent>
+                <div class="row mt-60 how-to">
+                    <div class="col-12 col-md-8 col-lg-7">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/store.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Create a store</h3>
+                                <p class="mb-3">Kindly click on the button below and create a store.</p>
+                                <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary">Create a store</a>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/product.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Register your products</h3>
+                                <p>Update your e-shop with the products you have in stock.</p>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-0 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/store.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Record your orders</h3>
+                                <p>When a customer contacts your directly for an order, you can record it yourself on the platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-5 d-none d-md-flex align-items-center justify-content-center">
+                        <img class="phone-illustration" src="../../../../assets/images/phone_souko.svg" alt="phone">
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+        <li ngbNavItem>
+            <a ngbNavLink>E-Shop</a>
+            <ng-template ngbNavContent>
+                <div class="row mt-60 how-to">
+                    <div class="col-12 col-md-8 col-lg-7">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/copy.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Copy the E-Shop link</h3>
+                                <p>First click on the dropdown in the far right of the nav bar. Click on the first option to copy the E-Shop link on your clipboard</p>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/sharing.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Share it with your customers.</h3>
+                                <p>Paste the link wherever you communicate with your customers. </p>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-0 px-4 px-md-2">
+                                <img class="avatar-sm mb-2" src="../../../../assets/images/bell.svg" alt="store-icon">
+                                <h3 class="mb-3 font-weight-bold">Get notified when a customer orders.</h3>
+                                <p>Get a notification whenever a customer places an order.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-5 d-none d-md-flex align-items-center justify-content-center">
+                        <img class="phone-illustration" src="../../../../assets/images/phone_souko.svg" alt="phone">
+                    </div>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+</div>
+<ng-container *ngIf="plans.length">
+    <div class="container mt-100 text-center pricing">
+        <h1>Pricing Plan</h1>
+        <div class="row mt-60 justify-content-center">
+            <ng-container *ngFor="let p of plans">
+                <div class="col-8 col-sm-8 col-md-6 col-lg-4">
+                    <div class="card free rounded-xl">
+                        <div class="card-body p-5 text-center text-white">
+                            <h2 class="mb-4 font-weight-bold text-white">{{p.plan_type}}</h2>
+                            <p class="mb-4"><span class="font-size-20">$</span><span class="display-1">0</span></p>
+                            <div class="text-left pl-2 pr-2 pl-md-5 pr-md-4">
+                                <p>
+                                    <span><i class="uil uil-check text-primary"></i></span> 
+                                    {{p.products_limit}} products
+                                </p>
+                                <p>
+                                    <span><i class="uil uil-check text-primary"></i></span> 
+                                    {{p.orders_limit === -1 ? 'Unlimited' : p.orders_limit}} orders
+                                </p>
+                                <p>
+                                    <span><i class="uil uil-check text-primary"></i></span> 
+                                    {{p.customers_limit === -1 ? 'Unlimited' : p.customers_limit}} customers
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+<span #subscriptionForm></span>
+<ng-container *ngIf="launched">
+    <div class="container mt-100 text-center">
+        <div class="bg-dark rounded-xl row justify-content-between align-items-center p-5 mx-2">
+            <div class="col-12 col-md-6 mb-2 text-md-left">
+                <h1 class="text-light">Start managing your store efficiently with Souko today</h1>
+            </div>
+            <div class="col-12 col-md-4 text-right">
+                <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary w-100 w-md-auto btn-lg">Create a store</a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="!launched">
+    <div class="container mt-100 text-center text-md-left">
+        <div *ngIf="form" class="bg-dark rounded-xl p-5" [formGroup]="form">
+            <h1 class="text-light mb-2">Get notified when we launch</h1>
+            <div class="form-group">
+                <input class="mb-4 form-control" type="text" formControlName="email" placeholder="Enter your email">
+                <ng-container *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+                    <div *ngIf="form.get('email').hasError('required')" class="text-danger small mb-0 mt-2">
+                        Email is required
+                    </div>
+                    <div *ngIf="form.get('email').hasError('email')" class="text-danger small mb-0 mt-2">
+                        Email format is wrong
+                    </div>
+                </ng-container>
+            </div>
+            <button [disabled]="!form.valid" (click)="subscribeToLaunch()" class="btn btn-primary w-100 w-md-auto btn-lg">Subscribe</button>
+        </div>
+    </div>
+</ng-container>
+<div class="bg-deep-gray mt-100 py-5">
+    <div class="container">
+        <img class="mb-5" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo">
+        <div class="mt-4 row justify-content-between">
+            <div class="col mb-5 mb-sm-0">
+                <h2 class="mb-3 text-dark">Connect with us</h2>
+                <p>
+                    <a class="text-dark" href="https://twitter.com/Souko71320589">
+                        <span><i class="uil uil-twitter"></i></span>
+                        Souko.me
+                    </a>
+                </p>
+                <p>
+                    <a class="text-dark" href="https://instagram/souko.me">
+                        <span><i class="uil uil-instagram"></i></span>
+                        Souko.me
+                    </a>
+                </p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="media mb-4">
+                    <div class="avatar-lg rounded-lg d-flex align-items-center justify-content-around text-center mr-4">
+                        <img class="img-fit rounded-lg" src="../../../../assets/images/stephane-photo.jpg" alt="photo">
+                    </div>
+                    <div class="media-body">
+                        <p class="font-weight-bold mb-1">Guy Stephane</p>
+                        <p class="mb-2">Developer</p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://www.linkedin.com/in/guy-stephane-tanoh-5256a6100">
+                                <span><i class="uil uil-linkedin"></i></span>
+                                Guy Stephane Tanoh
+                            </a>
+                        </p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://twitter.com/Guy_steph">
+                                <span><i class="uil uil-twitter"></i></span>
+                                Guitoo Stephane
+                            </a>
+                        </p>
+                        <p class="small mb-0">
+                            <a class="text-dark" href="https://instagram/stephaneGuit00">
+                                <span><i class="uil uil-instagram"></i></span>
+                                Guitoo Stephane
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="avatar-lg rounded-lg d-flex align-items-center justify-content-around text-center mr-4">
+                        <img class="img-fit rounded-lg" src="../../../../assets/images/jojo-photo.jpg" alt="photo">
+                    </div>
+                    <div class="media-body">
+                        <p class="font-weight-bold mb-1">Joel Kouame</p>
+                        <p class="mb-2">Marketer</p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://www.linkedin.com/in/joel-kouame-05aa5a119">
+                                <span><i class="uil uil-linkedin"></i></span>
+                                Joel Kouame
+                            </a>
+                        </p>
+                        <p class="small mb-0">
+                            <a class="text-dark" href="https://www.instagram.com/abissa_joe">
+                                <span><i class="uil uil-instagram"></i></span>
+                                Joel Kouame
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

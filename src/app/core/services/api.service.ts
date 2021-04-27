@@ -58,6 +58,13 @@ export class ApiService {
         );
     }
 
+    _jsonp(path: string, body): Observable<any> {
+        return this.httpWithoutInterceptor.jsonp(
+            `${path}`,
+            body
+        );
+    }
+
     _getCSV(path: string): Observable<any> {
         return this.httpWithoutInterceptor.get(
             `${environment.base_url}${path}`,

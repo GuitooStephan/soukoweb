@@ -12,7 +12,7 @@
         <div class="row justify-content-between mb-4 align-items-center">
             <div class="col-12 col-sm-5 px-0 d-flex mb-3 mb-md-0 align-item-start pt-3">
                 <div class="col-2 col-sm-3 col-md-1 col-md-2 px-0 d-flex align-items-start">
-                    <a [routerLink]="['/orders/list/']" class="mr-4 display-4 font-weight-light text-dark">
+                    <a [routerLink]="['/dashboard/orders/list/']" class="mr-4 display-4 font-weight-light text-dark">
                         <i class="uil uil-arrow-left"></i>
                     </a>
                 </div>
@@ -25,7 +25,7 @@
                     <p class="mb-0">#{{order.number}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
                     <p class="mb-0">
-                        <a class="mr-2" [routerLink]="['/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
+                        <a class="mr-2" [routerLink]="['/dashboard/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
                         <a (click)="promptForDeletingOrder()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a> 
                         <ng-container *ngIf="!order.confirmed">
                             |
@@ -40,7 +40,7 @@
                         <i class="uil uil-user font-size-28"></i>
                     </div>
                     <div class="media-body ml-2">
-                        <p class="font-size-18 font-weight-bold"><a [routerLink]="['/customers', order.customer.id]">{{order.customer.first_name + ' ' + order.customer.last_name}}</a></p>
+                        <p class="font-size-18 font-weight-bold"><a [routerLink]="['/dashboard/customers', order.customer.id]">{{order.customer.first_name + ' ' + order.customer.last_name}}</a></p>
                         <p class="mb-0">{{ order.customer.city ? order.customer.city : '' + ' ' + order.customer.country }}</p>
                         <p class="mb-0">{{ order.customer.phone_number ? order.customer.phone_number : '' }}</p>
                     </div>
@@ -118,7 +118,7 @@
                                 <tr class="border-2 mb-3">
                                     <td>
                                         <span class="font-weight-bold">Product:</span>
-                                        <a [routerLink]="['/products', item.product.id]">{{item.product.name}}</a>
+                                        <a [routerLink]="['/dashboard/products', item.product.id]">{{item.product.name}}</a>
                                     </td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>

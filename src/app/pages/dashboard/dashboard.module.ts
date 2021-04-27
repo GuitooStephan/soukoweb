@@ -17,7 +17,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MyProfilModule } from './my-profil/my-profil.module';
 import { MyProfilComponent } from './my-profil/my-profil.component';
 import { AvatarModule } from 'ngx-avatar';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { UpdateLogoComponent } from './my-store/update-logo/update-logo.component';
+import { MyStoreModule } from './my-store/my-store.module';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { UpdateLogoComponent } from './my-store/update-logo/update-logo.componen
     SharedModule,
     CoreModule,
     AvatarModule,
-    MyProfilModule
+    MyProfilModule,
+    ClipboardModule,
+    MyStoreModule
   ],
   entryComponents: [
     UpdateLogoComponent

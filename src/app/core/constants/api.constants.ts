@@ -2,6 +2,7 @@ export class ApiConstants {
     public static USERS_URL = 'users/';
     public static CATEGORIES_URL = 'categories/';
     public static STORE_URL = 'stores/';
+    public static PLANS_URL = 'plans/';
     public static ORDERS_URL = 'orders/';
     public static ORDER_ITEMS_URL = 'order-items/';
     public static PRODUCTS_URL = 'products/';

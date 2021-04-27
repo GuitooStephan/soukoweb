@@ -164,7 +164,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     ).subscribe(
       data => {
         this.notificationService.success( null, 'Order has been created' );
-        this.router.navigate( [ '/' ] );
+        this.router.navigate( [ '/dashboard' ] );
       }
     );
   }

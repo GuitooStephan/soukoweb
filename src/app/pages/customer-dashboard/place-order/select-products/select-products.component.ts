@@ -15,6 +15,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 
 declare var $;
 declare var _;
+declare var Colcade;
 
 @Component({
   selector: 'app-select-products',
@@ -33,9 +34,8 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal
   ) {
     this.route.queryParams.subscribe( params => {
-      this.page = params.page ? params.page : 1;
       this.q = params.q ? params.q : '';
-      this.fetchData( ( this.page - 1 ) * 10 );
+      this.fetchData();
     } );
   }
 
@@ -47,8 +47,9 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
 
   fetchData$;
 
-  page = 0;
+  offset = 0;
   count = 0;
+  limit = 2;
   loading = false;
 
   products = [];
@@ -59,6 +60,13 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
 
   orderId;
   customerIsVerified;
+
+  infiniteScrollLoading = false;
+  scrollDistance = 1;
+  scrollThrottle = 300;
+  scrollDisabled = false;
+
+  colc;
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event) {
@@ -80,26 +88,41 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     this.fetchData$.unsubscribe();
   }
 
-  fetchData( offset ) {
+  fetchData() {
+    this.offset = 0;
     this.loading = true;
     const q = this.q ? this.q : null;
     this.fetchData$ = combineLatest( [
       this.storeService.fetchStoreForCustomers( this.route.snapshot.params.id ),
-      this.productsService.fetchProductsForCustomers( this.route.snapshot.params.id, offset, q, 15 )
+      this.productsService.fetchProductsForCustomers( this.route.snapshot.params.id, this.offset, q, this.limit )
     ] ).subscribe( ( [ store, data ] ) => {
+      this.offset += this.limit;
+      this.count = data.count;
+
       this.myStore = store;
       this.currency = store ? ICC.getAllInfoByISO( store.country ).symbol : null;
-      this.count = data.count;
       this.products = data.results.map( d => ({ data: { ...d }, selected: _.some( this.selectedProducts, p => p.product.id === d.id ) }) );
       this.loading = false;
       this.selectCart();
-      setTimeout( () => {
-        this.initializeColcade();
-      }, 500 );
     }, error => {
       this.notificationService.error( null, 'Store does not exist, kindly contact the store manager.' );
       this.router.navigate( ['/'] );
     } );
+  }
+
+  loadMoreProducts() {
+    if ( this.products.length < this.count ) {
+      this.infiniteScrollLoading = true;
+      const q = this.q ? this.q : null;
+      this.productsService.fetchProductsForCustomers( this.route.snapshot.params.id, this.offset, q, this.limit ).subscribe(
+        data => {
+          this.offset += this.limit;
+          // tslint:disable-next-line: max-line-length
+          this.products.push( ...data.results.map( d => ({ data: { ...d }, selected: _.some( this.selectedProducts, p => p.product.id === d.id ) }) ) );
+          this.infiniteScrollLoading = false;
+        }
+      );
+    }
   }
 
   selectCart() {
@@ -109,18 +132,6 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
         this.products[i].selected = _.some( this.selectedProducts, p => p.product.id === this.products[i].data.id );
       });
     } );
-  }
-
-  fetchPage( newPage ) {
-    newPage = newPage === 1 ? null : newPage;
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: { page: newPage },
-        queryParamsHandling: 'merge'
-      }
-    );
   }
 
   placeOrder() {
@@ -193,13 +204,6 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     if ( !this.products[ i ].selected ) {
       this.store.dispatch( CartActions.removeProduct( { data: { id: this.products[ i ].data.id } } ) );
     }
-  }
-
-  initializeColcade() {
-    $('.grid').colcade({
-      columns: '.grid-col',
-      items: '.grid-item'
-    });
   }
 
 }

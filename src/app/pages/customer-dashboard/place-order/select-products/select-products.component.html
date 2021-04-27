@@ -91,16 +91,14 @@
                 </ng-container>
                 <ng-template #noloading>
                     <ng-container *ngIf="products.length; else noProducts;">
-                        <div class="grid px-3 mb-5 d-flex products">
-                            <!-- columns -->
-                            <div class="grid-col grid-col--1"></div>
-                            <div class="grid-col grid-col--2"></div>
-                            <div class="grid-col grid-col--3"></div>
-                            <div class="grid-col grid-col--4"></div>
-                            <!-- items -->
+                        <div class="row px-3 mb-5 products" infinite-scroll
+                            [infiniteScrollUpDistance]="scrollDistance"
+                            [infiniteScrollThrottle]="scrollThrottle"
+                            [infiniteScrollDisabled]="scrollDisabled"
+                            (scrolled)="loadMoreProducts()">
                             <ng-container *ngFor="let p of products; let i = index;">
-                                <div class="grid-item product">
-                                    <div class="card rounded-xl h-300 shadow-sm text-white" [class.selected]="p.selected" [class.bg-primary]="!p.data.compressed_product_picture_url">
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 px-2 product">
+                                    <div class="card rounded-xl h-300 shadow-sm mb-3 text-white" [class.selected]="p.selected" [class.bg-primary]="!p.data.compressed_product_picture_url">
                                         <ng-container *ngIf="p.data.compressed_product_picture_url">
                                             <img class="img-fit rounded-xl" [src]="p.data.compressed_product_picture_url" alt="Profile Picture">
                                         </ng-container>
@@ -126,18 +124,13 @@
                                 </div>
                             </ng-container>
                         </div>
-                        <ng-container *ngIf="count > 10">
-                            <div class="mb-5 d-flex justify-content-center align-items-center">
-                                <ngb-pagination [maxSize]="5" [rotate]="true" size="sm" class="d-flex justify-content-end" (pageChange)="fetchPage($event)" [collectionSize]="count" [(page)]="page" aria-label="Custom pagination">
-                                    <ng-template ngbPaginationPrevious>
-                                        <span><i [attr.data-feather]="'arrow-left'" appFeatherIcon></i></span>
-                                    </ng-template>
-                                    <ng-template ngbPaginationNext>
-                                        <span><i [attr.data-feather]="'arrow-right'" appFeatherIcon></i></span>
-                                    </ng-template>
-                                </ngb-pagination>
+                        <div class="row" *ngIf="infiniteScrollLoading">
+                            <div class="mx-auto mb-5 mt-0">
+                                <div class="spinner-border text-primary m-2" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
-                        </ng-container>
+                        </div>
                     </ng-container>
                     <ng-template #noProducts>
                         <div class="text-center py-5 px-3">

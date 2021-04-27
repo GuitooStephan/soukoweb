@@ -7,7 +7,7 @@ import { MyStoreComponent } from './my-store/my-store.component';
 
 const routes: Routes = [
   { path: '', component: DashboardHomeComponent },
-  { path: 'my-store', component: MyStoreComponent },
+  { path: 'my-store', component: MyStoreComponent, loadChildren: () => import('./my-store/my-store.module').then(m => m.MyStoreModule) },
   { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
