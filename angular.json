@@ -57,7 +57,8 @@
               "src/assets/js/colcade.js",
               "src/assets/js/moment-duration-format.min.js",
               "src/assets/js/jquery.magnific-popup.min.js",
-              "node_modules/country-select-js/build/js/countrySelect.js"
+              "node_modules/country-select-js/build/js/countrySelect.js",
+              "node_modules/gsap/dist/gsap.min.js"
             ]
           },
           "configurations": {
