@@ -15,7 +15,10 @@ declare var moment;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   leftTime = 0;
-  countdownConfig;
+  countdownConfig = {
+    leftTime: 30,
+    format: 'HH:mm:ss',
+  };
   launched = false;
 
   form: FormGroup;
@@ -89,11 +92,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     };
 
 
-    this.countdownConfig = {
-      leftTime: end.diff(start, 'seconds'),
-      format: 'HH:mm:ss',
-      formatDate
-    };
+    // this.countdownConfig = {
+    //   leftTime: end.diff(start, 'seconds'),
+    //   format: 'HH:mm:ss',
+    //   formatDate
+    // };
     // }
   }
 
