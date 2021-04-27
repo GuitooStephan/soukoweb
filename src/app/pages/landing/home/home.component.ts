@@ -5,8 +5,7 @@ import { CountdownFormatFn } from 'ngx-countdown';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { StoreService } from 'src/app/core/services/store.service';
 import { UserService } from 'src/app/core/services/user.service';
-
-declare var moment;
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -45,13 +44,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: member-ordering
   start = moment();
   // tslint:disable-next-line: member-ordering
-  leftTime = this.end.diff(this.start, 'seconds');
-  // tslint:disable-next-line: member-ordering
   launched = this.end.isSameOrBefore( this.start, 'second' );
   // tslint:disable-next-line: member-ordering
   countdownConfig = {
-    leftTime: this.leftTime,
-    format: 'HH:mm:ss'
+    leftTime: this.end.diff(this.start, 'seconds'),
+    format: 'HH:mm:ss',
+    formatDate: this.formatDate
   };
 
   // tslint:disable-next-line: member-ordering
