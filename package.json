@@ -44,7 +44,7 @@
     "flatpickr": "^4.6.9",
     "font-awesome": "^4.7.0",
     "google-libphonenumber": "^3.2.17",
-    "gsap": "^3.6.0",
+    "gsap": "^3.6.1",
     "html2canvas": "^1.0.0-rc.7",
     "intl-tel-input": "^17.0.3",
     "iso-country-currency": "^0.5.3",
