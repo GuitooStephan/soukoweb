@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { gsap } from 'gsap';
-import { CountdownFormatFn } from 'ngx-countdown';
+import { CountdownComponent, CountdownFormatFn } from 'ngx-countdown';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { StoreService } from 'src/app/core/services/store.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -13,50 +13,20 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  CountdownTimeUnits: Array<[string, number]> = [
-    ['Y', 1000 * 60 * 60 * 24 * 365], // years
-    ['M', 1000 * 60 * 60 * 24 * 30], // months
-    ['D', 1000 * 60 * 60 * 24], // days
-    ['H', 1000 * 60 * 60], // hours
-    ['m', 1000 * 60], // minutes
-    ['s', 1000], // seconds
-    ['S', 1] // million seconds
-  ];
+  @ViewChild('cd') counter: CountdownComponent;
 
-  // tslint:disable-next-line: one-variable-per-declaration
-  formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
-    let duration = Number(date || 0);
+  launched = false;
 
-    return this.CountdownTimeUnits.reduce((current, [name, unit]) => {
-      if (current.indexOf(name) !== -1) {
-        const v = Math.floor(duration / unit);
-        duration -= v * unit;
-        return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
-          return v.toString().padStart(match.length, '0');
-        });
-      }
-      return current;
-    }, formatStr);
-  };
-
-  // tslint:disable-next-line: member-ordering
-  end = moment('2021-5-3');
-  // tslint:disable-next-line: member-ordering
-  start = moment();
-  // tslint:disable-next-line: member-ordering
-  launched = this.end.isSameOrBefore( this.start, 'second' );
-  // tslint:disable-next-line: member-ordering
-  countdownConfig = {
-    leftTime: this.end.diff(this.start, 'seconds'),
-    format: 'HH:mm:ss',
-    formatDate: this.formatDate
-  };
-
-  // tslint:disable-next-line: member-ordering
   form: FormGroup;
 
-  // tslint:disable-next-line: member-ordering
   plans = [];
+
+  countdownConfig = {
+    leftTime: moment('2021-5-3').diff(moment(), 'seconds'),
+    notify: 0,
+    format: 'HH:mm:ss',
+    demand: true,
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -74,6 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.setCountdown();
     this.runAnimation();
   }
 
@@ -88,6 +59,42 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.notificationService.success( null, 'Your email has been saved. We will notify you' );
       this.form.reset();
     } );
+  }
+
+  setCountdown() {
+    const CountdownTimeUnits: Array<[string, number]> = [
+      ['Y', 1000 * 60 * 60 * 24 * 365], // years
+      ['M', 1000 * 60 * 60 * 24 * 30], // months
+      ['D', 1000 * 60 * 60 * 24], // days
+      ['H', 1000 * 60 * 60], // hours
+      ['m', 1000 * 60], // minutes
+      ['s', 1000], // seconds
+      ['S', 1] // million seconds
+    ];
+
+    // tslint:disable-next-line: one-variable-per-declaration
+    let formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
+      let duration = Number(date || 0);
+
+      return CountdownTimeUnits.reduce((current, [name, unit]) => {
+        if (current.indexOf(name) !== -1) {
+          const v = Math.floor(duration / unit);
+          duration -= v * unit;
+          return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
+            return v.toString().padStart(match.length, '0');
+          });
+        }
+        return current;
+      }, formatStr);
+    };
+
+    const end = moment('2021-5-3');
+    const start = moment();
+
+    this.launched = end.isSameOrBefore( start, 'second' );
+
+    this.counter.config.formatDate = formatDate;
+    this.counter.begin();
   }
 
   runAnimation() {
