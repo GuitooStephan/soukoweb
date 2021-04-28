@@ -33,7 +33,7 @@
     </nav>
     <div class="container h-100">
         <div class="d-flex justify-content-between h-100">
-            <!-- <ng-container *ngIf="launched">
+            <ng-container *ngIf="launched">
                 <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400">
                     <div>
                         <h1 class="font-weight-bold text-light mb-2">Welcome to your electronic store register, Souko</h1>
@@ -41,8 +41,8 @@
                         <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary width-md btn-lg">Create a store</a>
                     </div>
                 </div>
-            </ng-container> -->
-            <!-- <ng-container *ngIf="!launched"> -->
+            </ng-container>
+            <ng-container *ngIf="!launched">
                 <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400 position-relative">
                     <div>
                         <h1 class="font-weight-bold text-light mb-2">Launching in:</h1>
@@ -50,7 +50,7 @@
                         <button (click)="scroll(subscriptionForm)" class="btn btn-primary width-md btn-lg">Get notified !</button>
                     </div>
                 </div>
-            <!-- </ng-container> -->
+            </ng-container>
             <div class="position-relative hero-illustration d-none d-lg-flex align-items-end justify-content-center">
                 <img class="hero-cloud-one" id="hero-cloud-one" src="../../../../assets/images/hero_cloud_one.svg" alt="cloud-one">
                 <img class="hero-birds" id="hero-birds" src="../../../../assets/images/hero_birds.svg" alt="birds">

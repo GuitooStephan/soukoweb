@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     var end = new Date('05/03/2021');
     var start = new Date();
     var dif = ( end.getTime() - start.getTime() ) / 1000;
+
     this.config = {
       leftTime: dif,
       notify: 0,
@@ -93,7 +94,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       formatDate
     };
 
-    // this.launched = end.isSameOrBefore( start, 'second' );
+    this.launched = end < start;
   }
 
   runAnimation() {
