@@ -46,7 +46,7 @@
                 <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400 position-relative">
                     <div>
                         <h1 class="font-weight-bold text-light mb-2">Launching in:</h1>
-                        <p class="display-4 mb-4"><countdown #cd [config]="countdownConfig"></countdown></p>
+                        <app-countdown *ngIf="config" [config]="config"></app-countdown>
                         <button (click)="scroll(subscriptionForm)" class="btn btn-primary width-md btn-lg">Get notified !</button>
                     </div>
                 </div>

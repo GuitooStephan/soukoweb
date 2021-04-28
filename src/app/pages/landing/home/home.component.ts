@@ -21,12 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   plans = [];
 
-  countdownConfig = {
-    leftTime: moment('2021-5-3').diff(moment(), 'seconds'),
-    notify: 0,
-    format: 'HH:mm:ss',
-    demand: true,
-  };
+  config;
 
   constructor(
     private fb: FormBuilder,
@@ -88,13 +83,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }, formatStr);
     };
 
+    this.config = {
+      leftTime: moment('2021-5-3').diff(moment(), 'seconds'),
+      notify: 0,
+      format: 'HH:mm:ss',
+      formatDate
+    };
+
     const end = moment('2021-5-3');
     const start = moment();
 
     this.launched = end.isSameOrBefore( start, 'second' );
-
-    this.counter.config.formatDate = formatDate;
-    this.counter.begin();
   }
 
   runAnimation() {
