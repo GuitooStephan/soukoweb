@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { gsap } from 'gsap';
-import { CountdownComponent, CountdownFormatFn } from 'ngx-countdown';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { StoreService } from 'src/app/core/services/store.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -13,15 +12,13 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild('cd') counter: CountdownComponent;
-
   launched = false;
 
   form: FormGroup;
 
   plans = [];
 
-  config;
+  launchTime = moment( '2020-5-3' );
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +36,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.setCountdown();
     this.runAnimation();
   }
 
@@ -54,46 +50,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.notificationService.success( null, 'Your email has been saved. We will notify you' );
       this.form.reset();
     } );
-  }
-
-  setCountdown() {
-    const CountdownTimeUnits: Array<[string, number]> = [
-      ['Y', 1000 * 60 * 60 * 24 * 365], // years
-      ['M', 1000 * 60 * 60 * 24 * 30], // months
-      ['D', 1000 * 60 * 60 * 24], // days
-      ['H', 1000 * 60 * 60], // hours
-      ['m', 1000 * 60], // minutes
-      ['s', 1000], // seconds
-      ['S', 1] // million seconds
-    ];
-
-    // tslint:disable-next-line: one-variable-per-declaration
-    let formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
-      let duration = Number(date || 0);
-
-      return CountdownTimeUnits.reduce((current, [name, unit]) => {
-        if (current.indexOf(name) !== -1) {
-          const v = Math.floor(duration / unit);
-          duration -= v * unit;
-          return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
-            return v.toString().padStart(match.length, '0');
-          });
-        }
-        return current;
-      }, formatStr);
-    };
-
-    this.config = {
-      leftTime: moment('2021-5-3').diff(moment(), 'seconds'),
-      notify: 0,
-      format: 'HH:mm:ss',
-      formatDate
-    };
-
-    const end = moment('2021-5-3');
-    const start = moment();
-
-    this.launched = end.isSameOrBefore( start, 'second' );
   }
 
   runAnimation() {

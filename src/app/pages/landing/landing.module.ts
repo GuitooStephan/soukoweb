@@ -6,11 +6,10 @@ import { HomeComponent } from './home/home.component';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CountdownComponent } from './countdown/countdown.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, CountdownComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     FormsModule,
