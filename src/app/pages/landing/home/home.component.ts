@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.setCountdown();
-    // this.runAnimation();
+    this.runAnimation();
   }
 
   fetchPlans() {
