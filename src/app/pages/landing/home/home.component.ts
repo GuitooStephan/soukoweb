@@ -12,13 +12,12 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  launched = false;
-
   form: FormGroup;
 
   plans = [];
 
-  launchTime = moment( '2020-5-3' );
+  launchTime = moment( '2021-5-3' );
+  launched = moment( '2021-5-3' ).isBefore( moment(), 'second' );
 
   constructor(
     private fb: FormBuilder,
