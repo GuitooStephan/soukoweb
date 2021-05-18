@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { HomeComponent } from './home/home.component';
-import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CountdownComponent } from './countdown/countdown.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    CountdownComponent
+    FaqsComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +21,8 @@ import { CountdownComponent } from './countdown/countdown.component';
     LandingRoutingModule,
     NgbDropdownModule,
     NgbNavModule,
+    NgbNavModule,
+    NgbAccordionModule,
     CountdownModule
   ]
 })

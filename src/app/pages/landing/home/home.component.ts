@@ -13,33 +13,20 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  @ViewChild('cd') counter: CountdownComponent;
-
-  launched = false;
-
-  form: FormGroup;
-
   plans = [];
-
-  config;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private storeService: StoreService,
     private notificationService: NotificationService
-  ) {
-    this.form = this.fb.group({
-      email: [ '', [ Validators.required, Validators.email ] ]
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.fetchPlans();
   }
 
   ngAfterViewInit(): void {
-    this.setCountdown();
     this.runAnimation();
   }
 
@@ -47,54 +34,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.storeService.fetchSubscriptionPlans().subscribe( data => {
       this.plans = data.results;
     } );
-  }
-
-  subscribeToLaunch() {
-    this.userService.subscribeToLaunch( this.form.value ).subscribe( data => {
-      this.notificationService.success( null, 'Your email has been saved. We will notify you' );
-      this.form.reset();
-    } );
-  }
-
-  setCountdown() {
-    const CountdownTimeUnits: Array<[string, number]> = [
-      ['Y', 1000 * 60 * 60 * 24 * 365], // years
-      ['M', 1000 * 60 * 60 * 24 * 30], // months
-      ['D', 1000 * 60 * 60 * 24], // days
-      ['H', 1000 * 60 * 60], // hours
-      ['m', 1000 * 60], // minutes
-      ['s', 1000], // seconds
-      ['S', 1] // million seconds
-    ];
-
-    // tslint:disable-next-line: one-variable-per-declaration
-    let formatDate: CountdownFormatFn = ({ date, formatStr, timezone }) => {
-      let duration = Number(date || 0);
-
-      return CountdownTimeUnits.reduce((current, [name, unit]) => {
-        if (current.indexOf(name) !== -1) {
-          const v = Math.floor(duration / unit);
-          duration -= v * unit;
-          return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
-            return v.toString().padStart(match.length, '0');
-          });
-        }
-        return current;
-      }, formatStr);
-    };
-
-    var end = new Date('05/03/2021');
-    var start = new Date();
-    var dif = ( end.getTime() - start.getTime() ) / 1000;
-
-    this.config = {
-      leftTime: dif,
-      notify: 0,
-      format: 'HH:mm:ss',
-      formatDate
-    };
-
-    this.launched = end < start;
   }
 
   runAnimation() {

@@ -3022,6 +3022,15 @@ div.dt-button-info h2 {
   background: linear-gradient(180deg, rgba(255,186,10,1) 0%, rgba(239,52,30,1) 90%);
 }
 
+/* FAQS */
+.faqs .replies li {
+  margin-bottom: 14px;
+}
+
+.faqs .btn-link {
+  color: var( --colorPrimary ) !important;
+}
+
 /*!
 * metismenujs - v1.1.0
 * A menu plugin
@@ -3698,6 +3707,10 @@ body.authentication-bg {
   top: 20%;
 }
 
+.btn-link {
+  border: none !important;
+}
+
 .btn-primary {
   background-color: var(--colorPrimary);
   border-color: var(--colorPrimary);
@@ -3811,7 +3824,7 @@ a:hover {
 }
 
 .bg-light-primary {
-  background-color: rgba(75, 146, 211, 0.2) !important;
+  background-color: rgba(255, 186, 10, .2) !important;
 }
 
 .bg-secondary {
@@ -4035,77 +4048,6 @@ a.nav-link:focus {
 
 .dropzone .dz-preview:hover .dz-remove {
   opacity: 1;
-}
-
-/* Campaign Details Influencers */
-.campaign-influencers .nav-tabs .nav-link.active {
-  background-color: transparent;
-  color: #4B92D3;
-}
-
-.campaign-influencers .nav-tabs {
-  border-bottom: none;
-}
-
-.influencer-container:hover .influencer-overlay {
-  opacity: 0.3;
-  /* opacity: 1; */
-}
-
-.influencer-container:hover .influencer-overlay {
-  opacity: 1;
-}
-
-/* .influencer-item {
-    opacity: 1;
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: .5s ease;
-    backface-visibility: hidden;
-} */
-
-.influencer-overlay {
-  background: rgba(38, 59, 87, 0.8);
-  z-index: 9;
-  opacity: 0;
-  border-radius: 0.25rem;
-  -webkit-transition: opacity .2s ease, -webkit-transform .2s ease;
-  transition: opacity .2s ease, -webkit-transform .2s ease;
-  -o-transition: transform .2s ease, opacity .2s ease;
-  transition: transform .2s ease, opacity .2s ease;
-  transition: transform .2s ease, opacity .2s ease, -webkit-transform .2s ease;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-}
-
-.influencer-overlay .checker input {
-  width: 20px;
-  height: 20px;
-}
-
-.influencer-overlay .bottom-section {
-  bottom: 30px;
-  left: 0;
-  right: 0;
-}
-
-.influencer-overlay .dropdown-menu {
-  height: auto;
-  max-height: 100px;
-  overflow-x: hidden;
-}
-
-.influencer-overlay .middle-section {
-  top: 35%;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 /* Rating */
