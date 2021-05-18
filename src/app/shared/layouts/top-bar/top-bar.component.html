@@ -73,7 +73,7 @@
             <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                 <p *ngIf="myStore" class="mb-0 cursor-pointer" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'" ngbDropdownItem>
                     <a href="javascript:void(0)" title="{{ 'https://souko.me/customer/place-order/' + myStore.id + '/select-products' }}" class="mr-2"><i class="uil uil-copy"></i></a>
-                    Copy E-Shop Link
+                    Copy E-Commerce Link
                 </p>
                 <a [routerLink]="['/dashboard/orders/create']" ngbDropdownItem>
                     Record Order

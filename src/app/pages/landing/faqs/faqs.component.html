@@ -1,0 +1,472 @@
+<nav class="navbar navbar-expand-lg align-items-center justify-content-lg-start py-4">
+    <div class="container d-flex align-items-center justify-content-lg-start">
+        <a class="navbar-brand" [routerLink]="['/']"><img class="mb-0" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
+        <ul class="ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
+            <li class="nav-item d-none d-md-block mr-4">
+                <a [routerLink]="['/faqs']" class="font-size-16">
+                    Faqs
+                </a>
+            </li>
+            <li class="nav-item d-none d-md-block mr-4">
+                <a [routerLink]="['/account/auth/sign-in']" class="font-size-16"> 
+                    Log In
+                </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+                <a class="btn btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
+                    Create a store
+                </a>
+            </li>
+            <li ngbDropdown placement="bottom-left" class="nav-item d-md-none" display="dynamic" autoClose="outside">
+                <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn btn-primary no-dropdown-arrow">
+                    <i class="uil uil-ellipsis-v"></i>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
+                    <a [routerLink]="['/faqs']" ngbDropdownItem>
+                        Faqs
+                    </a>
+                    <a [routerLink]="['/account/auth/sign-in']" ngbDropdownItem>
+                        Sign In
+                    </a>
+                    <a [routerLink]="['/account/auth/sign-up']" ngbDropdownItem>
+                        Create a store
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1 class="mb-2 mb-md-0">Frequently Asked Questions</h1>
+</div>
+<div class="container mt-5 faqs">
+    <div class="d-flex justify-content-between">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs border-0 col-12 col-md-4 col-lg-2" orientation="vertical">
+            <li ngbNavItem="store">
+                <a class="font-size-16" ngbNavLink>Store</a>
+                <ng-template ngbNavContent>
+                    <ngb-accordion #store="ngbAccordion">
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to create a store</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Click on the button labelled <span class="font-weight-bold">"Create store"</span> located in your top navigation bar
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Fill the <span class="font-weight-bold">"Create account"</span> form by filling the required fields. Click on the button <span class="font-weight-bold">"Create account"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Fill the <span class="font-weight-bold">"Create your store"</span> form by filling the required fields. Click on the button <span class="font-weight-bold">"Create store"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        A link will be sent to your email.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">5</div>
+                                        Kindly click on the link sent to your email to activate your account. You will be redirected to the login page where you can login with your credentials.
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">Where can you get the insights</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        The insights should be on your dashboard
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </ng-template>
+            </li>
+            <li ngbNavItem="products">
+                <a class="font-size-16" ngbNavLink>Products</a>
+                <ng-template ngbNavContent>
+                    <ngb-accordion #products="ngbAccordion">
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to create a product</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Click on the button labelled <span class="font-weight-bold">"Add Product"</span> located in your top navigation bar.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Fill the <span class="font-weight-bold">"Add product"</span> form by filling the required fields. Click on the button <span class="font-weight-bold">"Add product"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        The product should appear in your products ( Accessible by clicking on the link <span class="font-weight-bold">"Products"</span> in your side navigation bar ).
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to remove a product</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Click on the link <span class="font-weight-bold">"Products"</span> located in your side navigation bar to view your products.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Click on the vertical three points to view the actions. And click on the option <span class="font-weight-bold">"Delete"</span> to delete the product.
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </ng-template>
+            </li>
+            <li ngbNavItem="customers">
+                <a class="font-size-16" ngbNavLink>Customers</a>
+                <ng-template ngbNavContent>
+                    <ngb-accordion #customers="ngbAccordion">
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to add a customer</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Click on the link <span class="font-weight-bold">"Customers"</span> located in your side navigation bar to view your customers.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Click on the button labelled <span class="font-weight-bold">"Add Customer"</span> located next the title <span class="font-weight-bold">"Customers"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        Fill the <span class="font-weight-bold">"Create customer"</span> form by filling the required fields. Click on the button <span class="font-weight-bold">"Create customer"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">5</div>
+                                        The customer should appear in your customers list.
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </ng-template>
+            </li>
+            <li ngbNavItem="orders">
+                <a class="font-size-16" ngbNavLink>Orders</a>
+                <ng-template ngbNavContent>
+                    <ngb-accordion #orders="ngbAccordion">
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to record an order</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Click on the button <span class="font-weight-bold">"Record order"</span> located in your top navigation bar.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Kindly ensure that the customer placing the order is registered in the platform. If not you could click on the link <span class="font-weight-bold">"Quickly add a new customer"</span> to register the customer and continue the process.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        Fill the remaining required fields of the form. Click on the button <span class="font-weight-bold">"Record order"</span>.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">5</div>
+                                        The order should appear in your orders ( Accessible by clicking on the link <span class="font-weight-bold">"Orders"</span> in your side navigation bar ).
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </ng-template>
+            </li>
+            <li ngbNavItem="others">
+                <a class="font-size-16" ngbNavLink>E-shop</a>
+                <ng-template ngbNavContent>
+                    <ngb-accordion #eshop="ngbAccordion">
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How to get your personalized e-commerce link ?</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Login your account
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Click on the vertical three dots (...) button located in your top navigation bar.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Click on the option <span class="font-weight-bold">"Copy E-Commerce Link"</span> to copy the link on your clipboard.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        Now you can <span class="font-weight-bold">paste</span> the link anywhere you would like ( by right-clicking on your mouse and selecting the option <span class="font-weight-bold">"Paste"</span> )
+                                    </li>
+                                    <li class="font-weight-bold">Anyone with this link should be able to access your e-commerce page.</li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                        <ngb-panel>
+                            <ng-template ngbPanelHeader let-opened="opened">
+                                <div class="d-flex align-items-center justify-content-between cursor-pointer">
+                                    <div>
+                                        <p class="font-size-16">How does the personalized e-commerce work ?</p>
+                                    </div>
+                                    <button class="btn-link stretched-link" ngbPanelToggle>
+                                        <ng-container *ngIf="opened; else down;">
+                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                        </ng-container>
+                                        <ng-template #down>
+                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                        </ng-template>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <ul class="list-unstyled replies">
+                                    <li>
+                                        The personalized E-commerce page allows you to easily sell your products to your customers. <br>
+                                        Let's say you have a customer that is interested by your products and would like to purchase them.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">1</div>
+                                        Copy the E-commerce link to your clipboard. ( Check the question above for more details ).
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">2</div>
+                                        Forward the link to the customer.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">3</div>
+                                        Once he clicks on the link, he will access your e-commerce page. He will be able to select the products he wants and place his order.
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">4</div>
+                                        He will be asked for some personal information before placing the order. If it is his/her first time placing an order, the platform will required a confirmation of the email address before validating the order. <br>
+                                        ( A link will be sent to his email. He will have to click on it for his order to be confirmed ).
+                                    </li>
+                                    <li>
+                                        <div class="avatar-xs bg-light-primary text-primary rounded-circle mr-2 d-inline-block font-size-18 text-center">5</div>
+                                        When the order is confirmed, the admin of the store should receive an email with the order id. <br>
+                                        He/She can login, check the order and contact the customer for delivery
+                                    </li>
+                                    <li>
+                                        <span class="font-weight-bold">Unfortunately, we don't yet accept payments on the platform. We are currently working on it.</span>
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="col-12 mt-4 mt-md-0 pt-0 col-md-7 col-lg-9"></div>
+    </div>
+</div>
+<div class="bg-deep-gray mt-100 py-5">
+    <div class="container">
+        <img class="mb-5" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo">
+        <div class="mt-4 row justify-content-between">
+            <div class="col mb-5 mb-sm-0">
+                <h2 class="mb-3 text-dark">Connect with us</h2>
+                <p>
+                    <a class="text-dark" href="mailto:souko.limited@gmail.com">
+                        <span><i class="uil uil-envelope"></i></span>
+                        Souko
+                    </a>
+                </p>
+                <p>
+                    <a class="text-dark" href="https://twitter.com/Souko71320589">
+                        <span><i class="uil uil-twitter"></i></span>
+                        Souko.me
+                    </a>
+                </p>
+                <p>
+                    <a class="text-dark" href="https://instagram/souko.me">
+                        <span><i class="uil uil-instagram"></i></span>
+                        Souko.me
+                    </a>
+                </p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="media mb-4">
+                    <div class="avatar-lg rounded-lg d-flex align-items-center justify-content-around text-center mr-4">
+                        <img class="img-fit rounded-lg" src="../../../../assets/images/stephane-photo.jpg" alt="photo">
+                    </div>
+                    <div class="media-body">
+                        <p class="font-weight-bold mb-1">Guy Stephane</p>
+                        <p class="mb-2">Developer</p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://www.linkedin.com/in/guy-stephane-tanoh-5256a6100">
+                                <span><i class="uil uil-linkedin"></i></span>
+                                Guy Stephane Tanoh
+                            </a>
+                        </p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://twitter.com/Guy_steph">
+                                <span><i class="uil uil-twitter"></i></span>
+                                Guitoo Stephane
+                            </a>
+                        </p>
+                        <p class="small mb-0">
+                            <a class="text-dark" href="https://instagram.com/stephanGuit00">
+                                <span><i class="uil uil-instagram"></i></span>
+                                Guitoo Stephane
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="avatar-lg rounded-lg d-flex align-items-center justify-content-around text-center mr-4">
+                        <img class="img-fit rounded-lg" src="../../../../assets/images/jojo-photo.jpg" alt="photo">
+                    </div>
+                    <div class="media-body">
+                        <p class="font-weight-bold mb-1">Joel Kouame</p>
+                        <p class="mb-2">Marketer</p>
+                        <p class="small mb-1">
+                            <a class="text-dark" href="https://www.linkedin.com/in/joel-kouame-05aa5a119">
+                                <span><i class="uil uil-linkedin"></i></span>
+                                Joel Kouame
+                            </a>
+                        </p>
+                        <p class="small mb-0">
+                            <a class="text-dark" href="https://www.instagram.com/abissa_joe">
+                                <span><i class="uil uil-instagram"></i></span>
+                                Joel Kouame
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

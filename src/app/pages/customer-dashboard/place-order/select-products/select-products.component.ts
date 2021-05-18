@@ -49,7 +49,7 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
 
   offset = 0;
   count = 0;
-  limit = 2;
+  limit = 10;
   loading = false;
 
   products = [];
