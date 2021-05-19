@@ -13,27 +13,13 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  plans = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private storeService: StoreService,
-    private notificationService: NotificationService
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.fetchPlans();
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.runAnimation();
-  }
-
-  fetchPlans() {
-    this.storeService.fetchSubscriptionPlans().subscribe( data => {
-      this.plans = data.results;
-    } );
   }
 
   runAnimation() {
