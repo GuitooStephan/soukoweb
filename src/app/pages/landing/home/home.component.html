@@ -115,37 +115,6 @@
         </div>
     </div>
 </div>
-<ng-container *ngIf="plans.length">
-    <div class="container mt-100 text-center pricing">
-        <h1>Pricing Plan</h1>
-        <div class="row mt-60 justify-content-center">
-            <ng-container *ngFor="let p of plans">
-                <div class="col-8 col-sm-8 col-md-6 col-lg-4">
-                    <div class="card free rounded-xl">
-                        <div class="card-body p-5 text-center text-white">
-                            <h2 class="mb-4 font-weight-bold text-white">{{p.plan_type}}</h2>
-                            <p class="mb-4"><span class="font-size-20">$</span><span class="display-1">0</span></p>
-                            <div class="text-left pl-2 pr-2 pl-md-5 pr-md-4">
-                                <p>
-                                    <span><i class="uil uil-check text-primary"></i></span> 
-                                    {{p.products_limit}} products
-                                </p>
-                                <p>
-                                    <span><i class="uil uil-check text-primary"></i></span> 
-                                    {{p.orders_limit === -1 ? 'Unlimited' : p.orders_limit}} orders
-                                </p>
-                                <p>
-                                    <span><i class="uil uil-check text-primary"></i></span> 
-                                    {{p.customers_limit === -1 ? 'Unlimited' : p.customers_limit}} customers
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
-    </div>
-</ng-container>
 <span #subscriptionForm></span>
 <div class="container mt-100 text-center">
     <div class="bg-dark rounded-xl row justify-content-between align-items-center p-5 mx-2">
