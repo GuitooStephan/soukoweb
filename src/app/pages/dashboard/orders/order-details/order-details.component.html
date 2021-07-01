@@ -10,10 +10,10 @@
     </ng-container>
     <ng-template #noloading>
         <div class="row justify-content-between mb-4 align-items-center">
-            <div class="col-12 col-sm-5 px-0 d-flex mb-3 mb-md-0 align-item-start pt-3">
-                <div class="col-2 col-sm-3 col-md-1 col-md-2 px-0 d-flex align-items-start">
-                    <a [routerLink]="['/dashboard/orders/list/']" class="mr-4 display-4 font-weight-light text-dark">
-                        <i class="uil uil-arrow-left"></i>
+            <div class="col-12 col-sm-5 px-0 d-flex mb-3 mb-md-0 align-items-center pt-3">
+                <div class="col-1 px-0 d-flex align-items-center">
+                    <a [routerLink]="['/dashboard/orders/list/']" class="display-4 font-weight-light text-dark">
+                        <i [attr.data-feather]="'arrow-left'" appFeatherIcon></i>
                     </a>
                 </div>
                 <div class="col-9 col-sm pr-0">
@@ -25,33 +25,37 @@
                     <p class="mb-0">#{{order.number}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
                     <p class="mb-0">
-                        <a class="mr-2" [routerLink]="['/dashboard/orders/edit', order.id]">Edit <i class="uil uil-pen"></i></a> |
-                        <a (click)="promptForDeletingOrder()" class="ml-2 text-danger" href="javascript:void(0)">Delete <i class="uil uil-trash"></i></a> 
                         <ng-container *ngIf="!order.confirmed">
-                            |
-                            <a href="javascript:void(0)" (click)="confirmOrder()">Mark as confirmed <i class="uil uil-check-circle"></i></a>
+                            <a href="javascript:void(0)" (click)="confirmOrder()">Mark as confirmed <i class="fa fa-check-circle"></i></a>
                         </ng-container>
                     </p>
                 </div>
             </div>
-            <div class="col-12 col-sm-6 d-flex align-items-center justify-content-start justify-content-sm-end">
-                <div class="media">
-                    <div class="avatar avatar-md rounded-circle d-flex align-items-center justify-content-around bg-soft-primary text-center text-primary">
-                        <i class="uil uil-user font-size-28"></i>
-                    </div>
-                    <div class="media-body ml-2">
-                        <p class="font-size-18 font-weight-bold"><a [routerLink]="['/dashboard/customers', order.customer.id]">{{order.customer.first_name + ' ' + order.customer.last_name}}</a></p>
-                        <p class="mb-0">{{ order.customer.city ? order.customer.city : '' + ' ' + order.customer.country }}</p>
-                        <p class="mb-0">{{ order.customer.phone_number ? order.customer.phone_number : '' }}</p>
-                    </div>
-                </div>
+            <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center justify-content-sm-end">
+                <button class="mr-3 btn btn-neu-light" [routerLink]="['/dashboard/orders/edit', order.id]">Edit <i class="fa fa-pencil"></i></button>
+                <button (click)="promptForDeletingOrder()" class="btn btn-danger" href="javascript:void(0)">Delete <i class="fa fa-trash"></i></button>
             </div>
         </div>
         <div class="row mb-5">
-            <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1">
-                <div class="card">
+            <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1 mt-4">
+                <div class="card rounded-xl neu-out">
+                    <div class="card-body bg-primary rounded-xl">
+                        <h5 class="mb-3">Customer</h5>
+                        <div class="media align-items-center">
+                            <div class="avatar avatar-md rounded-circle d-flex align-items-center justify-content-around bg-soft-primary text-center">
+                                <i class="fa fa-2x fa-user"></i>
+                            </div>
+                            <div class="media-body ml-2">
+                                <p class="font-size-18 mb-0"><a class="text-normal" [routerLink]="['/dashboard/customers', order.customer.id]">{{order.customer.first_name + ' ' + order.customer.last_name}}</a></p>
+                                <p class="mb-0">{{ order.customer.city ? order.customer.city : '' + ' ' + order.customer.country }}</p>
+                                <p class="mb-0">{{ order.customer.phone_number ? order.customer.phone_number : '' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rounded-xl">
                     <div class="card-body">
-                        <h4 class="mb-4">Payments</h4>
+                        <h5 class="mb-4">Payments</h5>
                         <ng-container *ngIf="order.payments.length; else nopayments;">
                             <div class="d-flex justify-content-center mb-3">
                                 <div class="col-10">
@@ -67,7 +71,7 @@
                                 <p class="font-size-13">Details</p>
                                 <p *ngIf="order.payment_status !== 'Paid'" class="text-center font-size-13">
                                     <a (click)="recordPayment()" href="javascript:void(0)">
-                                        <i class="uil uil-plus"></i>
+                                        <i class="fa fa-plus"></i>
                                         Record Payment
                                     </a>
                                 </p>
@@ -93,7 +97,7 @@
                         <ng-template #nopayments>
                             <p class="mb-2 text-center">
                                 <a (click)="recordPayment()" href="javascript:void(0)">
-                                    <i class="uil uil-plus"></i>
+                                    <i class="fa fa-plus"></i>
                                     Record Payment (Partial Payment)
                                 </a>
                             </p>
@@ -117,7 +121,7 @@
                             <ng-container *ngFor="let item of order.order_items">
                                 <tr class="border-2 mb-3">
                                     <td>
-                                        <span class="font-weight-bold">Product:</span>
+                                        <span class="font-weight-bold mr-2">Product:</span>
                                         <a [routerLink]="['/dashboard/products', item.product.id]">{{item.product.name}}</a>
                                     </td>
                                     <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>

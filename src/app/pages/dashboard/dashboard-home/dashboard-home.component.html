@@ -1,20 +1,12 @@
 <div class="container-fluid mt-4">
-    <div class="mb-4">
-        <div class="alert alert-dark" role="alert">
-            <span class="mr-3">Click on this button to copy the link to your E-Shop</span>
-            <button *ngIf="myStore" class="btn btn-primary" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'">
-                <span><i class="uil uil-copy"></i></span>
-            </button>
-        </div>
-    </div>
-    <div class="d-md-flex justify-content-md-between align-items-md-center mb-4">
+    <div class="d-md-flex justify-content-md-between align-items-md-center mb-4 mt-4">
         <div class="mb-3 mb-md-0">
-            <h2>Welcome, <span class="text-primary">{{user.first_name}} {{user.last_name}}</span></h2>
+            <h1>Dashboard</h1>
+            <p class="mb-0 text-muted">Welcome, <span class="font-weight-bold text-primary">{{user.first_name}} {{user.last_name}}</span></p>
         </div>
         <div class="d-flex align-items-start align-items-md-end">
             <div class="btn-group mr-2">
                 <div class="form-inline">
-                    <span class="mr-2">Filter metrics by:</span>
                     <select class="custom-select" [(ngModel)]="metricsFilter" (change)="fetchMetrics()">
                         <option selected value="0">This Week</option>
                         <option value="1">This Month</option>
@@ -25,58 +17,11 @@
             </div>
         </div>
     </div>
-    <div class="row mb-4">
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card bg-gradient-red-yellow rounded-xl">
+    <div *ngIf="metrics" class="row mb-3">
+        <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
+            <div class="card rounded-xl mb-4 bg-gradient-primary">
                 <div class="card-body">
-                    <div class="media">
-                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
-                            <i [attr.data-feather]="'credit-card'" appFeatherIcon></i>
-                        </div>
-                        <div class="media-body ml-4">
-                            <p class="font-size-16 mb-2 text-light font-weight-bold">Profit</p>
-                            <h4 *ngIf="metrics" class="text-light my-0 text-break">{{ metrics.profitReport.profit | currency:currency:'symbol':'1.0-0' }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card bg-gradient-orange-yellow rounded-xl">
-                <div class="card-body">
-                    <div class="media">
-                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
-                            <i [attr.data-feather]="'hash'" appFeatherIcon></i>
-                        </div>
-                        <div class="media-body ml-4">
-                            <p class="font-size-16 mb-2 text-light font-weight-bold">Num. of Orders</p>
-                            <h4 *ngIf="metrics" class="text-light my-0 text-break">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-12 col-lg-4">
-            <div class="card bg-gradient-purple-yellow rounded-xl">
-                <div class="card-body">
-                    <div class="media">
-                        <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-light text-center text-dark">
-                            <i [attr.data-feather]="'star'" appFeatherIcon></i>
-                        </div>
-                        <div class="media-body ml-4">
-                            <p class="font-size-16 mb-2 text-light font-weight-bold">Best Selling</p>
-                            <h4 *ngIf="metrics" class="text-light my-0 text-break">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="metrics" class="row">
-        <div class="col-12 col-md-6 col-lg-8">
-            <div class="card rounded-xl mb-4">
-                <div class="card-body">
-                    <h4 class="mb-3">Profit Per day</h4>
+                    <h5 class="mb-4">Profit Per day</h5>
                     <ng-container *ngIf="metrics.profitReport.profit_report.length; else noProfitRecord;">
                         <ng-container *ngIf="profitMetricsGraph">
                             <apx-chart
@@ -103,9 +48,83 @@
                     </ng-template>
                 </div>
             </div>
-            <div class="card rounded-xl">
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1">
+            <div class="card rounded-xl neu-out">
+                <div class="card-body bg-primary rounded-xl">
+                    <h5 class="mb-2">Your E-commerce Link</h5>
+                    <a *ngIf="myStore" href="javascript:void(0)" class="btn btn-light" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'">
+                        Copy to Clipboard <span><i class="fa fa-copy"></i></span>
+                    </a>
+                </div>
+            </div>
+            <div class="card rounded-xl mb-4 neu-out">
                 <div class="card-body">
-                    <h4 class="mb-3">Orders Per day</h4>
+                    <h5 class="mb-4">Insights</h5>
+                    <div class="media mb-4 align-items-center">
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-around bg-light-primary text-center text-primary">
+                            <i [attr.data-feather]="'credit-card'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <h3 class="my-0 text-break">{{ metrics.profitReport.profit | currency:currency:'symbol':'1.0-0' }}</h3>
+                            <p class="font-size-14 mb-0 text-muted">Profit</p>
+                        </div>
+                    </div>
+                    <div class="media mb-4 align-items-center">
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-around bg-light-primary text-center text-primary">
+                            <i [attr.data-feather]="'hash'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <h3 class=" my-0 text-break">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h3>
+                            <p class="font-size-14 mb-0 text-muted">Num. of Orders</p>
+                        </div>
+                    </div>
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-around bg-light-primary text-center text-primary">
+                            <i [attr.data-feather]="'star'" appFeatherIcon></i>
+                        </div>
+                        <div class="media-body ml-4">
+                            <h3 class=" my-0 text-break">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h3>
+                            <p class="font-size-14 mb-0 text-muted">Best Selling</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="metrics" class="row mb-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card rounded-xl neu-out">
+                <div class="card-body">
+                    <h5 class="mb-3">Low Stock Products</h5>
+                    <ng-container *ngIf="metrics.stockReport.low_products.length; else noLowProducts">
+                        <ng-container *ngFor="let product of metrics.stockReport.low_products">
+                            <div class="media mb-4">
+                                <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-primary text-center text-white">
+                                    <i [attr.data-feather]="'arrow-down'" appFeatherIcon></i>
+                                </div>
+                                <div class="media-body ml-4">
+                                    <p class="font-size-16 mb-2 font-weight-bold">{{ product.name }}</p>
+                                    <p *ngIf="metrics" class="my-0">
+                                        <span class="font-weight-bold">{{product.total_stock}}</span>
+                                        products left
+                                    </p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #noLowProducts>
+                        <div class="p-4 text-center">
+                            <h6>No products available</h6>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="card rounded-xl bg-primary">
+                <div class="card-body">
+                    <h5 class="mb-3">Orders Per day</h5>
                     <ng-container *ngIf="metrics.ordersReport.orders_record.length; else noOrdersRecord;">
                         <ng-container *ngIf="ordersMetricsGraph">
                             <apx-chart
@@ -128,34 +147,6 @@
                     <ng-template #noOrdersRecord>
                         <div class="p-4 text-center">
                             <h5>No orders record available</h5>
-                        </div>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card rounded-xl">
-                <div class="card-body">
-                    <h4 class="mb-3">Low Stock Products</h4>
-                    <ng-container *ngIf="metrics.stockReport.low_products.length; else noLowProducts">
-                        <ng-container *ngFor="let product of metrics.stockReport.low_products">
-                            <div class="media mb-4">
-                                <div class="avatar avatar-lg rounded-xl d-flex align-items-center justify-content-around bg-primary text-center text-white">
-                                    <i [attr.data-feather]="'arrow-down'" appFeatherIcon></i>
-                                </div>
-                                <div class="media-body ml-4">
-                                    <p class="font-size-16 mb-2 font-weight-bold">{{ product.name }}</p>
-                                    <p *ngIf="metrics" class="my-0">
-                                        <span class="font-weight-bold">{{product.total_stock}}</span>
-                                        products left
-                                    </p>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </ng-container>
-                    <ng-template #noLowProducts>
-                        <div class="p-4 text-center">
-                            <h5>No products available</h5>
                         </div>
                     </ng-template>
                 </div>

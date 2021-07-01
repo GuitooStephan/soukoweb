@@ -2,24 +2,25 @@
     <div class="row h-100-vh">
         <div class="col-lg-3 d-none d-lg-block bg-dark px-5 pb-5 pt-4 position-relative">
             <a href="javascript:void(0)"><img width="100" height="auto" src="../../../../../assets/images/logo-with-name.png" alt="logo"></a>
-            <div class="mt-5">
+            <div class="mt-5 ml-4">
+                <h4 class="text-light font-weight-bold mb-5">Welcome, Kindly select the items you would like to purchase...</h4>
                 <ul class="list-unstyled mt-4">
                     <li class="mb-4">
-                        <span class="mr-3 text-primary"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
+                        <span class="mr-3 text-primary"><i class="fa fa-shopping-basket"></i></span>
                         <span class="text-uppercase text-primary">PLACE ORDER</span>
                     </li>
                     <li class="mb-4">
-                        <span class="mr-3"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase">CONFIRM ORDER</span>
+                        <span class="mr-3 text-light"><i class="fa fa-check-circle"></i></span>
+                        <span class="text-uppercase text-light">CONFIRM ORDER</span>
                     </li>
                 </ul>
             </div>
-            <app-dev-info></app-dev-info>
+            <app-dev-info [background]="'dark'"></app-dev-info>
         </div>
-        <div class="col-12 col-lg-9 bg-gray">
+        <div class="col-12 col-lg-9">
             <ng-container *ngIf="myStore">
-                <nav class="navbar fixed-top bg-light pt-3 px-4 ml-lg-25-p ml-0  justify-content-end" #navbarDiv>
-                    <div class="media w-max-200 ml-3 ml-lg-0 align-items-center d-none" #topBarStoreInfoDiv>
+                <nav class="navbar fixed-top bg-normal pt-3 px-4 ml-lg-25-p ml-0 justify-content-end" #navbarDiv>
+                    <div class="media ml-3 ml-lg-0 align-items-center d-none" #topBarStoreInfoDiv>
                         <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
                             <div class="avatar rounded-circle d-flex align-items-center justify-content-around text-center">
                                 <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
@@ -30,114 +31,120 @@
                         </ng-template>
                         <div class="d-none d-sm-block media-body ml-3 white-space-nowrap text-overflow-ellipsis overflow-hidden">
                             <h5 class="text-dark my-0">{{myStore.name}}</h5>
-                            <p class="mb-0">{{myStore.phone_number}}</p>
+                            <p class="mb-0">{{ myStore.city }}, {{ myStore.country }} &bull; {{myStore.phone_number}}</p>
                         </div>
                     </div>
-                    <button [disabled]="!selectedProducts.length" (click)="placeOrder()" class="ml-atuo btn btn-primary">
+                    <button [disabled]="!selectedProducts.length" (click)="placeOrder()" class="ml-atuo btn btn-primary btn-neu-light">
                         Place Order
-                        <i class="uil uil-cart"></i>
+                        <i class="fa fa-cart"></i>
                         <ng-container *ngIf="selectedProducts.length">
                             <span class="badge badge-pill badge-light ml-1">{{selectedProducts.length}}</span>
                         </ng-container>
                     </button>
                 </nav>
-                <div class="media mt-100 px-3 d-block text-center d-sm-flex text-sm-left" #storeInfoDiv>
-                    <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
-                        <div class="avatar-xxxl mx-auto mx-sm-0 rounded-circle">
-                            <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
-                        </div>
-                    </ng-container>
-                    <ng-template #noLogo>
-                        <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="160" name="{{ myStore.name }}"></ngx-avatar>
-                    </ng-template>
-                    <div class="media-body ml-sm-5 mx-auto mr-sm-0">
-                        <h2 class="mb-1 font-weight-bold text-dark">{{ myStore.name }}</h2>
-                        <p class="mb-2">{{ myStore.city }}, {{ myStore.country }}</p>
-                        <p class="mb-1 text-dark">
-                            <i class="uil uil-phone mr-2"></i>
-                            {{ myStore.phone_number }}
-                        </p>
-                        <ng-container *ngIf="myStore.instagram_handle">
-                            <p class="mb-1 text-dark">
-                                <i class="uil uil-instagram mr-2"></i>
-                                {{ myStore.instagram_handle }}
-                            </p>
-                        </ng-container>
-                        <ng-container *ngIf="myStore.facebook_handle">
-                            <p class="mb-1 text-dark">
-                                <i class="uil uil-facebook mr-2"></i>
-                                {{ myStore.facebook_handle }}
-                            </p>
-                        </ng-container>
-                    </div>
-                </div>
-                <hr class="px-3">
-                <div class="input-group mb-4 mt-4 px-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text text-primary">
-                            <i class="uil uil-search"></i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products...">
-                </div>
-                <ng-container *ngIf="loading; else noloading;">
-                    <div class="row" *ngIf="loading">
-                        <div class="mx-auto my-5">
-                            <div class="spinner-border text-primary m-2" role="status">
-                                <span class="sr-only">Loading...</span>
+                <div class="py-2 mt-100 ml-2 ml-md-4 d-flex align-items-center">
+                    <div class="media align-items-center" #storeInfoDiv>
+                        <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
+                            <div class="avatar-xl mx-auto rounded-circle">
+                                <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
                             </div>
+                        </ng-container>
+                        <ng-template #noLogo>
+                            <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="72" name="{{ myStore.name }}"></ngx-avatar>
+                        </ng-template>
+                        <div class="media-body ml-sm-4 mx-auto mr-sm-0">
+                            <h4 class="mb-1 font-weight-bold text-dark">{{ myStore.name }}</h4>
+                            <p class="mb-0">{{ myStore.city }}, {{ myStore.country }}</p>
+                            <p class="mb-0 text-dark">
+                                <i class="fa fa-phone mr-1"></i>
+                                {{ myStore.phone_number }}
+                            </p>
+                            <ng-container *ngIf="myStore.instagram_handle">
+                                <p class="mb-1 text-dark">
+                                    <i class="fa fa-instagram mr-1"></i>
+                                    {{ myStore.instagram_handle }}
+                                </p>
+                            </ng-container>
+                            <ng-container *ngIf="myStore.facebook_handle">
+                                <p class="mb-1 text-dark">
+                                    <i class="fa fa-facebook mr-1"></i>
+                                    {{ myStore.facebook_handle }}
+                                </p>
+                            </ng-container>
                         </div>
                     </div>
-                </ng-container>
-                <ng-template #noloading>
-                    <ng-container *ngIf="products.length; else noProducts;">
-                        <div class="row px-3 mb-5 products" infinite-scroll
-                            [infiniteScrollUpDistance]="scrollDistance"
-                            [infiniteScrollThrottle]="scrollThrottle"
-                            [infiniteScrollDisabled]="scrollDisabled"
-                            (scrolled)="loadMoreProducts()">
-                            <ng-container *ngFor="let p of products; let i = index;">
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 px-2 product">
-                                    <div class="card rounded-xl h-300 shadow-sm mb-3 text-white" [class.selected]="p.selected" [class.bg-primary]="!p.data.compressed_product_picture_url">
-                                        <ng-container *ngIf="p.data.compressed_product_picture_url">
-                                            <img class="img-fit rounded-xl" [src]="p.data.compressed_product_picture_url" alt="Profile Picture">
-                                        </ng-container>
-                                        <div class="card-img-overlay rounded-xl d-flex flex-column-reverse">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="w-70">
-                                                    <h5 class="font-weight-bold mt-0 mb-1 text-light">{{p.data.selling_price | currency:currency:'symbol':'1.2-2'}}</h5>
-                                                    <p class="mb-0 font-size-12">{{p.data.name}}</p>
-                                                </div>
-                                                <ng-container *ngIf="p.data.total_stock; else outOfStock;">
-                                                    <div class="text-center z-index-3">
-                                                        <a (click)="selectProduct( p )" [class.text-light]="!p.selected" [class.text-primary]="p.selected" href="javascript:void(0)"><i class="fa fa-heart font-size-22"></i></a>
-                                                        <p class="small text-primary mb-0"><i class="uil uil-cart"></i> {{p.data.num_of_orders | thousandSuffix}}</p>
-                                                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h1 class="mb-4 px-3">All Products</h1>
+                        <div class="input-group mb-5 mt-4 px-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search fa-2x"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products...">
+                        </div>
+                        <ng-container *ngIf="loading; else noloading;">
+                            <div class="row" *ngIf="loading">
+                                <div class="mx-auto my-5">
+                                    <div class="spinner-border text-primary m-2" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #noloading>
+                            <ng-container *ngIf="products.length; else noProducts;">
+                                <div class="row px-3 mb-5 products" infinite-scroll
+                                    [infiniteScrollUpDistance]="scrollDistance"
+                                    [infiniteScrollThrottle]="scrollThrottle"
+                                    [infiniteScrollDisabled]="scrollDisabled"
+                                    (scrolled)="loadMoreProducts()">
+                                    <ng-container *ngFor="let p of products; let i = index;">
+                                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 px-2 product">
+                                            <div class="card rounded-xl h-300 neu-out mb-3 text-white neu-out" [class.selected]="p.selected" [class.bg-primary]="!p.data.compressed_product_picture_url">
+                                                <ng-container *ngIf="p.data.compressed_product_picture_url">
+                                                    <img class="img-fit rounded-xl" [src]="p.data.compressed_product_picture_url" alt="Profile Picture">
                                                 </ng-container>
-                                                <ng-template #outOfStock>
-                                                    <span class="badge badge-danger white-space-normal w-30 lh-15">Out Of Stock</span>
-                                                </ng-template>
+                                                <div class="card-img-overlay rounded-xl d-flex flex-column-reverse">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="w-70">
+                                                            <h5 class="font-weight-bold mt-0 mb-1 text-light">{{p.data.selling_price | currency:currency:'symbol':'1.2-2'}}</h5>
+                                                            <p class="mb-0 font-size-12">{{p.data.name}}</p>
+                                                        </div>
+                                                        <ng-container *ngIf="p.data.total_stock; else outOfStock;">
+                                                            <div class="text-center z-index-3">
+                                                                <a (click)="selectProduct( p )" [class.text-light]="!p.selected" [class.text-primary]="p.selected" href="javascript:void(0)"><i class="fa fa-heart font-size-22"></i></a>
+                                                                <p class="small text-primary mb-0"><i class="fa fa-shopping-bag"></i> {{p.data.num_of_orders | thousandSuffix}}</p>
+                                                            </div>
+                                                        </ng-container>
+                                                        <ng-template #outOfStock>
+                                                            <span class="badge badge-danger white-space-normal w-30 lh-15">Out Of Stock</span>
+                                                        </ng-template>
+                                                    </div>
+                                                    <a class="stretched-link" href="javascript:void(0)" (click)="viewProduct(p)"></a>
+                                                </div>
                                             </div>
-                                            <a class="stretched-link" href="javascript:void(0)" (click)="viewProduct(p)"></a>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="row" *ngIf="infiniteScrollLoading">
+                                    <div class="mx-auto mb-5 mt-0">
+                                        <div class="spinner-border text-primary m-2" role="status">
+                                            <span class="sr-only">Loading...</span>
                                         </div>
                                     </div>
                                 </div>
                             </ng-container>
-                        </div>
-                        <div class="row" *ngIf="infiniteScrollLoading">
-                            <div class="mx-auto mb-5 mt-0">
-                                <div class="spinner-border text-primary m-2" role="status">
-                                    <span class="sr-only">Loading...</span>
+                            <ng-template #noProducts>
+                                <div class="text-center py-5 px-3">
+                                    <p class="font-weight-normal font-size-15">No products available</p>
                                 </div>
-                            </div>
-                        </div>
-                    </ng-container>
-                    <ng-template #noProducts>
-                        <div class="text-center py-5 px-3">
-                            <p class="font-weight-normal font-size-15">No products available</p>
-                        </div>
-                    </ng-template>
-                </ng-template>
+                            </ng-template>
+                        </ng-template>
+                    </div>
+                </div>
             </ng-container>
         </div>
     </div>

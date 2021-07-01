@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dev-info',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dev-info.component.css']
 })
 export class DevInfoComponent implements OnInit {
+  @Input() background = 'light';
 
   constructor() { }
 

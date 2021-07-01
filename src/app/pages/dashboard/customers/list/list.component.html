@@ -4,7 +4,7 @@
             <h1 class="my-0">Customers</h1>
         </div>
         <div>
-            <button (click)="createCustomer()" class="btn btn-primary">
+            <button (click)="createCustomer()" class="btn btn-primary btn-neu-light">
                 Add Customer
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </button>
@@ -12,8 +12,8 @@
     </div>
     <div class="input-group mb-4">
         <div class="input-group-prepend">
-            <span class="input-group-text text-primary">
-                <i [attr.data-feather]="'search'" appFeatherIcon></i>
+            <span class="input-group-text">
+                <i class="fa fa-2x fa-search"></i>
             </span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchCustomers($event)" placeholder="Search for customers">

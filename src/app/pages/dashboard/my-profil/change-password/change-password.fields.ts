@@ -8,7 +8,7 @@ export const ChangePasswordFields: FieldConfig[] = [
         inputType: 'password',
         wrapper_classes: 'col-12 px-0 mr-lg-1',
         name: 'old_password',
-        placeholder: '',
+        placeholder: 'Enter your old password',
         validations: [
             {
                 name: 'required',

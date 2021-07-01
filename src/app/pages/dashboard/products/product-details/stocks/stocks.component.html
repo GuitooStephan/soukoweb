@@ -8,18 +8,18 @@
     </div>
 </ng-container>
 <ng-template #noLoading>
-    <div class="mb-4">
-        <a (click)="createStock()" class="font-weight-bold" href="javascript:void(0)">
+    <div class="mb-4 text-left text-sm-right">
+        <button (click)="createStock()" class="btn btn-primary btn-neu-light" href="javascript:void(0)">
             Add Stock
-            <i class="uil uil-plus"></i>
-        </a>
+            <i class="fa fa-plus"></i>
+        </button>
     </div>
     <div class="row mb-4">
         <ng-container *ngFor="let stock of stocks; let i=index;">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="media">
                     <div class="avatar avatar-lg rounded d-flex align-items-center justify-content-around bg-soft-primary text-center text-primary">
-                        <i class="uil uil-box font-size-34"></i>
+                        <i class="fa fa-archive fa-2x"></i>
                     </div>
                     <div class="media-body ml-3">
                         <p class="font-size-16 mb-0 text-dark">Stock {{i + 1}}</p>

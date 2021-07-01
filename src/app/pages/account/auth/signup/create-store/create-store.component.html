@@ -1,40 +1,42 @@
 <div class="container-fluid">
     <div class="row h-100-vh">
-        <div class="col-lg-4 d-none d-lg-block bg-dark p-5 position-relative">
+        <div class="col-md-6 col-lg-8 d-none d-md-block bg-dark p-5 position-relative">
             <a href="javascript:void(0)" (click)="signOut()"><img width="100" height="auto" src="../../../../../../assets/images/logo-with-name.png" alt="logo"></a>
-            <div class="mt-5">
-                <ul class="list-unstyled mt-4">
-                    <li class="mb-4">
-                        <span class="mr-3 text-success"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase">USER DETAILS</span>
-                    </li>
-                    <li class="mb-4">
-                        <span class="mr-3 text-primary"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
-                        <span class="text-primary text-uppercase">STORE DETAILS</span>
-                    </li>
-                    <li class="mb-4">
-                        <span class="mr-3"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase">COMPLETE</span>
-                    </li>
-                </ul>
+            <div class="h-70-vh d-flex flex-column justify-content-end px-5 mt-5">
+                <div class="mt-5">
+                    <h1 class="text-light font-weight-bold mb-5">You are almost done. Let's create your store...</h1>
+                    <ul class="list-unstyled mt-4 ml-4">
+                        <li class="mb-4 mr-4 font-size-18">
+                            <span class="mr-3 text-success"><i [attr.data-feather]="'user'" appFeatherIcon></i></span>
+                            <span class="text-uppercase text-success">USER DETAILS</span>
+                        </li>
+                        <li class="mb-4 mr-4 font-size-18">
+                            <span class="mr-3 text-primary"><i [attr.data-feather]="'shopping-bag'" appFeatherIcon></i></span>
+                            <span class="text-primary text-uppercase">STORE DETAILS</span>
+                        </li>
+                        <li class="mb-4 font-size-18">
+                            <span class="mr-3 text-light"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
+                            <span class="text-uppercase text-light">COMPLETE</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <app-dev-info></app-dev-info>
+            <app-dev-info [background]="'dark'"></app-dev-info>
         </div>
-        <div class="col-12 col-lg-8 bg-gray p-5">
-            <p class="text-lg-right">
-                Would you like to continue later ?
-                <a href="javascript:void(0)" (click)="signOut()">Sign Out</a>
-            </p>
+        <div class="col-12 col-md-6 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-0 font-weight-bold">Create Your Store</h1>
-                <p class="mb-0">Kindly input your details</p>
+                <h1 class="mb-4 font-weight-bold">Create Your Store</h1>
+                <p class="mb-0">
+                    Would you like to continue later ?
+                    <a href="javascript:void(0)" (click)="signOut()">Sign Out</a>
+                </p>
             </div>
             <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
             <ng-container *ngIf="plans.length">
                 <p class="font-size-14 mb-2">Plans</p>
                 <div class="row mb-5">
                     <ng-container *ngFor="let p of plans">
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-md-6 col-lg-12">
                             <label class="w-100 mb-2 radio-button-wrapper">
                                 <input type="radio" name="plan" [(ngModel)]="plan" [value]="p.plan_type">
                                 <div class="d-flex justify-content-between p-4 rounded-lg">
@@ -53,13 +55,17 @@
                 </div>
             </ng-container>
             <div class="mt-4 d-flex align-items-center">
-                <button (click)="createStore()" class="btn btn-primary">
+                <button (click)="createStore()" class="btn btn-primary btn-neu-light">
                     Create Store
-                    <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                    <ng-container *ngIf="loading; else noloading">
+                        <div class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </ng-container>
+                    <ng-template #noloading>
+                        <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                    </ng-template>
                 </button>
-                <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
             </div>
         </div>
     </div>

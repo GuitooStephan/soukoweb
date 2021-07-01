@@ -1,6 +1,6 @@
 <div class="row" [formGroup]="group">
     <div class="col-12">
-        <div class="form-group clearfix d-grid">
+        <div class="form-group clearfix d-grid form-date">
             <label class="control-label form-label" [for]="field.name">{{field.label}}</label>
             <div class="position-relative">
                 <input class="form-control d-inline-block" matInput [matDatepicker]="picker" (click)="picker.open()" [class]="field.classes" [placeholder]="field.placeholder" [formControlName]="field.name" [attr.id]="field.name">

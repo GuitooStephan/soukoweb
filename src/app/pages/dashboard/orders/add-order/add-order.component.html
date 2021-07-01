@@ -98,7 +98,7 @@
                 <hr class="d-block d-lg-none">
             </ng-container>
             <div class="my-3">
-                <button class="btn btn-primary" (click)="addOrderItem()">
+                <button class="btn btn-primary btn-neu-light" (click)="addOrderItem()">
                     Add new order item
                     <i [attr.data-feather]="'plus'" appFeatherIcon></i>
                 </button>
@@ -138,7 +138,7 @@
         <h4 class="my-0">{{ total | currency:currency:'symbol':'1.0-0' }}</h4>
     </div>
     <div class="mb-5">
-        <button (click)="createOrder()" class="btn btn-primary">
+        <button (click)="createOrder()" class="btn btn-primary btn-neu-light">
             Record Order
             <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
         </button>
