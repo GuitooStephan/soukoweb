@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProductDetailsModule } from './product-details/product-details.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AvatarModule } from 'ngx-avatar';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AvatarModule } from 'ngx-avatar';
   ],
   imports: [
     CommonModule,
+    CoreModule,
     ProductsRoutingModule,
     SharedModule,
     LayoutsModule,

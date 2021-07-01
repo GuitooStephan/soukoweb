@@ -4,7 +4,7 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const AddProductFields: FieldConfig[] = [
     {
         type: 'file',
-        wrapper_classes: 'col-lg-12 px-0',
+        wrapper_classes: 'col-lg-12',
         name: 'product_picture_url',
         label: 'Upload Product Picture *',
         placeholder: 'Upload product picture',

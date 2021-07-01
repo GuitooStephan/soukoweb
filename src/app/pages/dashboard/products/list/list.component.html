@@ -4,7 +4,7 @@
             <h1 class="mb-2 mb-md-0">Products</h1>
         </div>
         <div>
-            <button (click)="addProduct()" class="btn btn-primary">
+            <button (click)="addProduct()" class="btn btn-primary btn-neu-light">
                 Add product
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </button>
@@ -12,8 +12,8 @@
     </div>
     <div class="input-group mb-4">
         <div class="input-group-prepend">
-            <span class="input-group-text text-primary">
-                <i class="uil uil-search"></i>
+            <span class="input-group-text">
+                <i class="fa fa-search fa-2x"></i>
             </span>
         </div>
         <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products">

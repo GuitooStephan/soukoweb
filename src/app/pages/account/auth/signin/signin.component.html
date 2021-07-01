@@ -1,34 +1,37 @@
 <div class="container-fluid">
     <div class="row h-100-vh">
-        <div class="col-lg-4 d-none d-lg-flex position-relative bg-dark p-5 align-items-center">
+        <div class="col-md-6 col-lg-8 d-none d-md-flex position-relative bg-dark p-5 align-items-center">
             <a [routerLink]="['/']"><img width="100" height="auto" class="position-absolute authentication-logo" src="../../../../../assets/images/logo-with-name.png" alt="logo"></a>
-            <div class="">
-                <h1 class="text-primary mb-2 font-weight-bold">
+            <div class="w-max-400">
+                <p class="text-primary display-3 mb-2 font-weight-bold">
                     Welcome to Souko
-                </h1>
-                <p class="mb-0 font-size-18">The best shop management platform for small businesses.</p>
+                </p>
+                <p class="mb-0 font-size-18 text-light">The best shop management platform for small businesses.</p>
             </div>
-            <app-dev-info></app-dev-info>
+            <app-dev-info [background]="'dark'"></app-dev-info>
         </div>
-        <div class="col-12 col-lg-8 bg-gray p-5">
-            <p class="text-lg-right">
-                Don't have an account ?
-                <a [routerLink]="['/account/auth/sign-up']">Create Account</a>
-            </p>
+        <div class="col-12 col-md-6 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-0 font-weight-bold">Sign In</h1>
-                <p class="mb-0">Kindly input your details</p>
+                <h1 class="mb-4 font-weight-bold">Sign In</h1>
+                <p class="mt-0">
+                    New User ?
+                    <a [routerLink]="['/account/auth/sign-up']">Create Account</a>
+                </p>
             </div>
             <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
-            <a [routerLink]="['/account/auth/forgot-password']">Forgot password?</a>
-            <div class="mt-5 d-flex align-items-center">
-                <button (click)="signIn()" class="btn btn-primary">
+            <p class="mb-0"><a class="text-normal" [routerLink]="['/account/auth/forgot-password']">Forgot password?</a></p>
+            <div class="mt-4 d-flex align-items-center">
+                <button (click)="signIn()" class="btn btn-primary btn-neu-light btn-block">
                     Sign In
-                    <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                    <ng-container *ngIf="loading; else noloading">
+                        <div class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </ng-container>
+                    <ng-template #noloading>
+                        <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
+                    </ng-template>
                 </button>
-                <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
             </div>
         </div>
     </div>

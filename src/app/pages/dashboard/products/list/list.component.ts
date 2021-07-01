@@ -161,7 +161,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   goToDetails( product ) {
-    this.router.navigate( [ 'products', product.id ] );
+    this.router.navigate( [ '/dashboard/products', product.id ] );
   }
 
   setupLightBox() {

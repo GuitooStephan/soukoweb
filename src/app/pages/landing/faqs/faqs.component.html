@@ -3,23 +3,23 @@
         <a class="navbar-brand" [routerLink]="['/']"><img class="mb-0" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
         <ul class="ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
             <li class="nav-item d-none d-md-block mr-4">
-                <a [routerLink]="['/faqs']" class="font-size-16">
+                <a [routerLink]="['/faqs']" class="text-normal font-size-16">
                     Faqs
                 </a>
             </li>
             <li class="nav-item d-none d-md-block mr-4">
-                <a [routerLink]="['/account/auth/sign-in']" class="font-size-16"> 
+                <a [routerLink]="['/account/auth/sign-in']" class="text-normal font-size-16"> 
                     Log In
                 </a>
             </li>
             <li class="nav-item d-none d-md-block">
-                <a class="btn btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
+                <a class="btn btn-primary btn-neu-light mr-4" [routerLink]="['/account/auth/sign-up']"> 
                     Create a store
                 </a>
             </li>
             <li ngbDropdown placement="bottom-left" class="nav-item d-md-none" display="dynamic" autoClose="outside">
-                <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn btn-primary no-dropdown-arrow">
-                    <i class="uil uil-ellipsis-v"></i>
+                <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn br-3 btn-primary no-dropdown-arrow">
+                    <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                     <a [routerLink]="['/faqs']" ngbDropdownItem>
@@ -54,10 +54,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -95,10 +95,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -131,10 +131,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -168,10 +168,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -208,10 +208,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -256,10 +256,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -304,10 +304,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -342,10 +342,10 @@
                                     </div>
                                     <button class="btn-link stretched-link" ngbPanelToggle>
                                         <ng-container *ngIf="opened; else down;">
-                                            <i class="uil font-size-20 uil-minus-circle"></i>
+                                            <i class="fa font-size-20 fa-minus-circle"></i>
                                         </ng-container>
                                         <ng-template #down>
-                                            <i class="uil font-size-20 uil-plus-circle"></i>
+                                            <i class="fa font-size-20 fa-plus-circle"></i>
                                         </ng-template>
                                     </button>
                                 </div>
@@ -400,13 +400,13 @@
                 <h2 class="mb-3 text-dark">Connect with us</h2>
                 <p class="mb-1">
                     <a class="text-dark" href="mailto:souko.limited@gmail.com" target="_blank">
-                        <span><i class="uil uil-envelope"></i></span>
+                        <span><i class="fa fa-envelope"></i></span>
                         Souko
                     </a>
                 </p>
                 <p class="mb-1">
                     <a class="text-dark" href="https://instagram.com/souko_me" target="_blank">
-                        <span><i class="uil uil-instagram"></i></span>
+                        <span><i class="fa fa-instagram"></i></span>
                         Souko.me
                     </a>
                 </p>
@@ -421,19 +421,19 @@
                         <p class="mb-2">Developer</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/guy-stephane-tanoh-5256a6100" target="_blank">
-                                <span><i class="uil uil-linkedin"></i></span>
+                                <span><i class="fa fa-linkedin"></i></span>
                                 Guy Stephane Tanoh
                             </a>
                         </p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://twitter.com/Guy_steph" target="_blank">
-                                <span><i class="uil uil-twitter"></i></span>
+                                <span><i class="fa fa-twitter"></i></span>
                                 Guitoo Stephane
                             </a>
                         </p>
                         <p class="small mb-0">
                             <a class="text-dark" href="https://instagram.com/stephan_guit00" target="_blank">
-                                <span><i class="uil uil-instagram"></i></span>
+                                <span><i class="fa fa-instagram"></i></span>
                                 Guitoo Stephane
                             </a>
                         </p>
@@ -448,13 +448,13 @@
                         <p class="mb-2">Marketer</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/joel-kouame-05aa5a119" target="_blank">
-                                <span><i class="uil uil-linkedin"></i></span>
+                                <span><i class="fa fa-linkedin"></i></span>
                                 Joel Kouame
                             </a>
                         </p>
                         <p class="small mb-0">
                             <a class="text-dark" href="https://www.instagram.com/abissa_joe" target="_blank">
-                                <span><i class="uil uil-instagram"></i></span>
+                                <span><i class="fa fa-instagram"></i></span>
                                 Joel Kouame
                             </a>
                         </p>

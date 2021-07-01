@@ -132,7 +132,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   goToDetails( customer ) {
-    this.router.navigate( [ 'customers', customer.id ] );
+    this.router.navigate( [ '/dashboard/customers', customer.id ] );
   }
 
 }

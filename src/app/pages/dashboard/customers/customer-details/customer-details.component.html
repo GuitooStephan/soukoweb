@@ -9,18 +9,20 @@
         </div>
     </ng-container>
     <ng-template #noloading>
-        <div class="row justify-content-between mb-4">
-            <div class="col-2 col-sm-1 px-0 d-flex align-items-start">
-                <a href="javascript:void(0)" (click)="goBack()" class="mr-4 display-4 font-weight-light text-dark">
-                    <i class="uil uil-arrow-left"></i>
-                </a>
+        <div class="row justify-content-between mb-4 align-items-center">
+            <div class="col-12 col-sm-5 px-0 d-flex mb-3 mb-md-0 align-items-center pt-3">
+                <div class="col-1 px-0 d-flex align-items-center">
+                    <a href="javascript:void(0)" (click)="goBack()" class="display-4 font-weight-light text-dark">
+                        <i [attr.data-feather]="'arrow-left'" appFeatherIcon></i>
+                    </a>
+                </div>
+                <div class="col-10 col-sm text-sm-center text-md-left pr-0">
+                    <h1 class="my-0">{{customer.first_name + ' ' + customer.last_name}}</h1>
+                    <p class="mb-0">{{customer.email}}</p>
+                </div>
             </div>
-            <div class="col-10 col-sm text-sm-center text-md-left pr-0">
-                <h1 class="my-0">{{customer.first_name + ' ' + customer.last_name}}</h1>
-                <p class="mb-0">{{customer.email}}</p>
-                <p class="mb-0">
-                    <a (click)="editCustomer()" class="mr-2" href="javascript:void(0)">Edit <i class="uil uil-pen"></i></a>
-                </p>
+            <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center justify-content-sm-end">
+                <button (click)="editCustomer()" class="btn btn-neu-light">Edit <i class="fa fa-pencil"></i></button>
             </div>
         </div>
         <div class="row mb-4">

@@ -1,26 +1,26 @@
 <div class="hero position-relative h-100-vh">
     <nav class="navbar navbar-expand-lg align-items-center justify-content-lg-start position-absolute w-100 py-4 z-index-3">
         <div class="container d-flex align-items-center justify-content-lg-start">
-            <a class="navbar-brand" [routerLink]="['/']"><img class="mb-0" width="100" height="auto" src="../../../../assets/images/logo-with-name-white.png" alt="logo"></a>
+            <a class="navbar-brand" [routerLink]="['/']"><img class="mb-0" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <ul class="ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
                 <li class="nav-item d-none d-md-block mr-4">
-                    <a [routerLink]="['/faqs']" class="text-white font-size-16">
+                    <a [routerLink]="['/faqs']" class="text-normal font-size-16">
                         Faqs
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block mr-4">
-                    <a [routerLink]="['/account/auth/sign-in']" class="text-white font-size-16">
+                    <a [routerLink]="['/account/auth/sign-in']" class="text-normal font-size-16">
                         Log In
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block">
-                    <a class="btn btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
+                    <a class="btn btn-neu-light btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
                         Create a store
                     </a>
                 </li>
                 <li ngbDropdown placement="bottom-left" class="nav-item d-md-none" display="dynamic" autoClose="outside">
-                    <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn btn-primary no-dropdown-arrow">
-                        <i class="uil uil-ellipsis-v"></i>
+                    <a ngbDropdownToggle id="profileDropdown" href="javascript:void(0)" class="btn btn-primary br-3 no-dropdown-arrow">
+                        <i class="fa fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                         <a [routerLink]="['/faqs']" ngbDropdownItem>
@@ -39,11 +39,11 @@
     </nav>
     <div class="container h-100">
         <div class="d-flex justify-content-between h-100">
-            <div class="text-white d-flex flex-column justify-content-end h-100 hero-content w-max-400">
+            <div class="d-flex flex-column justify-content-end h-100 hero-content w-max-400">
                 <div>
-                    <h1 class="font-weight-bold text-light mb-2">Grow with SOUKO,<br>your stock management platform</h1>
+                    <h1 class="font-weight-bold mb-2">Grow with SOUKO,<br>your stock management platform</h1>
                     <p class="mb-4 font-size-18">We provide you with a dashboard to manage your inventory, sales, customers along with a personalized e-commerce for your products only.</p>
-                    <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary width-md btn-lg">Create a store</a>
+                    <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary width-md btn-lg">Create a store</a>
                 </div>
             </div>
             <div class="position-relative hero-illustration d-none d-lg-flex align-items-end justify-content-center">
@@ -55,22 +55,22 @@
         </div>
     </div>
 </div>
-<div class="container mt-100 text-center">
+<div class="container mt-100 text-center px-4 px-sm-0">
     <h1>Features</h1>
-    <div class="row mt-60 justify-content-around justify-content-md-between">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-sm-5 mb-lg-0 px-4">
+    <div class="row mt-60 justify-content-around justify-content-lg-between">
+        <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-sm-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/store.svg" alt="store-icon">
             <h3 class="mb-4 font-weight-bold">Real Time Insight</h3>
             <p class="font-weight-bold mb-1">Make decisions that grow your business.</p>
             <p class="mb-0">Souko provides you with insightful metrics on your sales, revenues, profits, expenses over a period of time.</p>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-sm-5 mb-lg-0 px-4">
+        <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-sm-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
             <h3 class="mb-4 font-weight-bold">Stock Management</h3>
             <p class="font-weight-bold mb-1">Have full control over your business at one place.</p>
             <p class="mb-0">Record order, add new products, save your customers' contacts all at one place.</p>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-left mb-4 mb-lg-0 px-4">
+        <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
             <h3 class="mb-4 font-weight-bold">Personalized E-commerce</h3>
             <p class="font-weight-bold mb-1">Get more sales, sell anywhere to anyone</p>
@@ -78,75 +78,72 @@
         </div>
     </div>
 </div>
-<div class="container mt-100 text-center">
-    <h1>Why SOUKO</h1>
-    <div class="row mt-60 how-to">
-        <div class="col-12 col-md-8 col-lg-7">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
-                    <img class="avatar-sm mb-2" src="../../../../assets/images/click.svg" alt="store-icon">
+<div class="bg-light py-100 mt-100">
+    <div class="container text-center">
+        <h1 class="text-primary">Why SOUKO</h1>
+        <div class="row mt-60 how-to">
+            <div class="col-12 mb-5 col-md-4">
+                <div class="mb-5 px-4 px-md-2 text-center">
+                    <img class="avatar-md mb-2" src="../../../../assets/images/click.svg" alt="store-icon">
                     <h3 class="mb-3 font-weight-bold">Easy and flexible</h3>
                     <p class="mb-3">Souko is user friendly and can be used on any device anywhere</p>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-5 px-4 px-md-2">
-                    <img class="avatar-sm mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
+                <div class="px-4 px-md-2 text-center">
+                    <img class="avatar-md mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
                     <h3 class="mb-3 font-weight-bold">Real time insights</h3>
                     <p class="mb-3">Anytime, anywhere have a look at how your business performs in real time.</p>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-0 px-4 px-md-2">
-                    <img class="avatar-sm mb-2" src="../../../../assets/images/free.svg" alt="store-icon">
+            </div>
+            <div class="col-md-4 d-none d-md-flex align-items-center justify-content-center">
+                <img class="phone-illustration" src="../../../../assets/images/phone_souko.svg" alt="phone">
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="mb-5 px-4 px-md-2">
+                    <img class="avatar-md mb-2" src="../../../../assets/images/free.svg" alt="store-icon">
                     <h3 class="mb-3 font-weight-bold">Free</h3>
                     <p class="mb-3">Just create an account and start enjoying Souko. No charges or payments required.</p>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-0 px-4 px-md-2">
-                    <img class="avatar-sm mb-2" src="../../../../assets/images/box.svg" alt="store-icon">
-                    <h3 class="mb-3 font-weight-bold">All in one</h3>
-                    <p class="mb-3">Manage all aspects of your business at one place. From your customers base, stocks, orders, to your finances</p>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 text-left mb-4 mb-md-0 px-4 px-md-2">
-                    <img class="avatar-sm mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
+                <div class="px-4 px-md-2">
+                    <img class="avatar-md mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
                     <h3 class="mb-3 font-weight-bold">Integrated E-commerce</h3>
                     <p class="mb-3">Allow your customers to order your products directly on SOUKO</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 d-none d-md-flex align-items-center justify-content-center">
-            <img class="phone-illustration" src="../../../../assets/images/phone_souko.svg" alt="phone">
-        </div>
     </div>
 </div>
 <span #subscriptionForm></span>
-<div class="container mt-100 text-center">
-    <div class="bg-dark rounded-xl row justify-content-between align-items-center p-5 mx-2">
+<div class="container mt-100 text-center neu-out">
+    <div class="rounded-xl row justify-content-between align-items-center p-5 mx-2">
         <div class="col-12 col-md-6 mb-2 text-md-left">
-            <h1 class="text-light">Start managing your store efficiently with Souko today</h1>
+            <h1>Start managing your store efficiently with Souko today</h1>
         </div>
         <div class="col-12 col-md-4 text-right">
-            <a [routerLink]="['/account/auth/sign-up']" class="btn btn-primary w-100 w-md-auto btn-lg">Create a store</a>
+            <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary w-100 w-md-auto btn-lg">Create a store</a>
         </div>
     </div>
 </div>
 <div class="bg-deep-gray mt-100 py-5">
     <div class="container">
         <img class="mb-5" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo">
-        <div class="mt-4 row justify-content-between">
-            <div class="col mb-5 mb-sm-0">
+        <div class="mt-4 row justify-content-between align-items-start">
+            <div class="col-12 col-md-3 col-lg-4 mb-5 mb-md-0">
                 <h2 class="mb-3 text-dark">Connect with us</h2>
                 <p class="mb-1">
                     <a class="text-dark" href="mailto:souko.limited@gmail.com" target="_blank">
-                        <span><i class="uil uil-envelope"></i></span>
+                        <span><i class="fa fa-envelope"></i></span>
                         Souko
                     </a>
                 </p>
                 <p class="mb-1">
                     <a class="text-dark" href="https://instagram.com/souko_me" target="_blank">
-                        <span><i class="uil uil-instagram"></i></span>
+                        <span><i class="fa fa-instagram"></i></span>
                         Souko.me
                     </a>
                 </p>
             </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="media mb-4">
+            <div class="col-12 col-md-8 col-lg-8 d-block d-sm-flex align-items-start justify-content-between">
+                <div class="media mb-5">
                     <div class="avatar-lg rounded-lg d-flex align-items-center justify-content-around text-center mr-4">
                         <img class="img-fit rounded-lg" src="../../../../assets/images/stephane-photo.jpg" alt="photo">
                     </div>
@@ -155,19 +152,19 @@
                         <p class="mb-2">Developer</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/guy-stephane-tanoh-5256a6100" target="_blank">
-                                <span><i class="uil uil-linkedin"></i></span>
+                                <span><i class="fa fa-linkedin"></i></span>
                                 Guy Stephane Tanoh
                             </a>
                         </p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://twitter.com/Guy_steph" target="_blank">
-                                <span><i class="uil uil-twitter"></i></span>
+                                <span><i class="fa fa-twitter"></i></span>
                                 Guitoo Stephane
                             </a>
                         </p>
                         <p class="small mb-0">
                             <a class="text-dark" href="https://instagram.com/stephan_guit00" target="_blank">
-                                <span><i class="uil uil-instagram"></i></span>
+                                <span><i class="fa fa-instagram"></i></span>
                                 Guitoo Stephane
                             </a>
                         </p>
@@ -182,13 +179,13 @@
                         <p class="mb-2">Marketer</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/joel-kouame-05aa5a119" target="_blank">
-                                <span><i class="uil uil-linkedin"></i></span>
+                                <span><i class="fa fa-linkedin"></i></span>
                                 Joel Kouame
                             </a>
                         </p>
                         <p class="small mb-0">
                             <a class="text-dark" href="https://www.instagram.com/abissa_joe" target="_blank">
-                                <span><i class="uil uil-instagram"></i></span>
+                                <span><i class="fa fa-instagram"></i></span>
                                 Joel Kouame
                             </a>
                         </p>

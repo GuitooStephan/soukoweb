@@ -1,42 +1,44 @@
 <div class="container-fluid">
     <div class="row h-100-vh">
-        <div class="col-lg-4 d-none d-lg-block bg-dark p-5 position-relative">
+        <div class="col-lg-8 d-none d-lg-block bg-dark p-5 position-relative">
             <a href="javascript:void(0)" (click)="getStarted()"><img width="100" height="auto" src="../../../../../../assets/images/logo-with-name.png" alt="logo"></a>
-            <div class="mt-5">
-                <ul class="list-unstyled mt-4">
-                    <li class="mb-4">
-                        <span class="mr-3 text-success"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase">USER DETAILS</span>
-                    </li>
-                    <li class="mb-4">
-                        <span class="mr-3 text-success"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase">STORE DETAILS</span>
-                    </li>
-                    <li class="mb-4">
-                        <span class="mr-3 text-primary"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
-                        <span class="text-primary text-uppercase">COMPLETE</span>
-                    </li>
-                </ul>
+            <div class="h-70-vh d-flex align-items-center px-5 mt-5">
+                <div class="mt-5">
+                    <h1 class="text-light font-weight-bold mb-5">Wonderful! You are at the end of the process...</h1>
+                    <ul class="list-unstyled mt-4 ml-4">
+                        <li class="mb-4 font-size-18">
+                            <span class="mr-3 text-success"><i [attr.data-feather]="'user'" appFeatherIcon></i></span>
+                            <span class="text-uppercase text-success">USER DETAILS</span>
+                        </li>
+                        <li class="mb-4 font-size-18">
+                            <span class="mr-3 text-success"><i [attr.data-feather]="'shopping-bag'" appFeatherIcon></i></span>
+                            <span class="text-uppercase text-success">STORE DETAILS</span>
+                        </li>
+                        <li class="mb-4 font-size-18">
+                            <span class="mr-3 text-primary"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
+                            <span class="text-primary text-uppercase">COMPLETE</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <app-dev-info></app-dev-info>
+            <app-dev-info [background]="'dark'"></app-dev-info>
         </div>
-        <div class="col-12 col-lg-8 bg-gray p-5">
-            <p class="text-lg-right">
-                <a href="javascript:void(0)" (click)="getStarted()">Sign In</a>
-            </p>
+        <div class="col-12 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-0 font-weight-bold">Congratulations</h1>
-                <p class="mb-0">You are at the end of your onboarding</p>
+                <h1 class="mb-4 font-weight-bold">Congratulations</h1>
+                <p class="mb-0">
+                    <a href="javascript:void(0)" (click)="getStarted()">Sign In</a>
+                </p>
             </div>
             <div class="mt-4 mb-5">
                 <p>Kindly login to your email and activate your account</p>
-                <h2>
+                <h5 class="text-break">
                     <span class="text-black">{{ user.email }}</span>
-                </h2>
-                <p class="mt-5"><a href="javascript:void(0)" (click)="resendConfirmationCode()">Resend verification email</a></p>
+                </h5>
             </div>
+            <p class="mt-0"><a href="javascript:void(0)" (click)="resendConfirmationCode()">Resend verification email</a></p>
             <div class="mt-4">
-                <a href="javascript:void(0)" (click)="getStarted()" class="btn btn-primary">
+                <a href="javascript:void(0)" (click)="getStarted()" class="btn btn-primary btn-neu-light btn-block">
                     Get started
                     <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
                 </a>

@@ -1,38 +1,54 @@
-<div class="position-fixed left-wrapper d-none d-lg-flex align-items-center justify-content-center">
-    <a [routerLink]="['/dashboard']"><img class="mb-0 position-absolute authentication-logo" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
-    <div>
+<div class="position-fixed left-wrapper d-none d-lg-block text-center">
+    <a [routerLink]="['/dashboard']"><img class="mb-0 mt-4 authentication-logo" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo"></a>
+    <ng-container *ngIf="myStore">
+        <a [routerLink]="['/dashboard/my-store']">
+            <div class="mx-4 mt-5 text-center">
+                <ng-container *ngIf="myStore.compressed_logo_url; else noLogo;">
+                    <div class="avatar-lg rounded-circle d-flex align-items-center justify-content-center mx-auto text-center">
+                        <img class="img-fit rounded-circle" [src]="myStore.compressed_logo_url" alt="logo">
+                    </div>
+                </ng-container>
+                <ng-template #noLogo>
+                    <ngx-avatar class="rounded-circle" [round]="true" [cornerRadius]="4" [size]="72" name="{{ myStore.name }}"></ngx-avatar>
+                </ng-template>
+                <div class="mt-2">
+                    <h5 class="text-light my-0 text-break">{{myStore.name}}</h5>
+                </div>
+            </div>
+        </a>
+    </ng-container>
+    <div class="mt-5 ml-4 mr-1 text-left">
         <ul class="list-unstyled mt-4">
-            <li class="mb-4">
-                <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-18">
+            <li class="mb-5">
+                <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="mb-4">
-                <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="link-item font-size-18">
+            <li class="mb-5">
+                <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
                     <span>Products</span>
                 </a>
             </li>
-            <li class="mb-4">
-                <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="link-item font-size-18">
+            <li class="mb-5">
+                <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
                     <span>Orders</span>
                 </a>
             </li>
-            <li class="mb-4">
-                <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="link-item font-size-18">
+            <li class="mb-5">
+                <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
                     <span>Customers</span>
                 </a>
             </li>
-            <li class="mb-4">
-                <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" class="link-item font-size-18">
+            <li class="mb-0">
+                <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
                     <span>My Store</span>
                 </a>
             </li>
         </ul>
     </div>
-    <app-dev-info></app-dev-info>
 </div>

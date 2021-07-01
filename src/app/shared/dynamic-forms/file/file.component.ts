@@ -45,8 +45,8 @@ export class FileComponent implements OnInit, AfterViewInit {
         <div class="dz-error-message"><span data-dz-errormessage></span></div>\
       </div>\
       <div class="dz-details">\
-        <div class="dz-filename w-75 mx-auto text-center text-primary"><span data-dz-name></span></div>\
-        <div class="dz-size text-center text-primary"><span data-dz-size></span></div>\
+        <div class="dz-filename w-75 mx-auto text-center"><span data-dz-name></span></div>\
+        <div class="dz-size text-center"><span data-dz-size></span></div>\
       </div>\
     </div>'
   };

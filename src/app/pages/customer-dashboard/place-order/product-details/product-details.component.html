@@ -7,16 +7,16 @@
             </div>
         </div>
         <div class="col-12 px-0 col-lg-4 order-lg-0 mt-lg-4">
-            <p class="mb-2 font-size-16 text-primary font-weight-bold"><i class="uil uil-shopping-basket"> </i> {{product.num_of_orders | thousandSuffix}}</p>
+            <p class="mb-2 font-size-16 text-primary font-weight-bold"><i class="fa fa-shopping-basket"> </i> {{product.num_of_orders | thousandSuffix}}</p>
             <h4 class="mb-2 font-weight-bold">{{product.name}}</h4>
             <h4 class="mb-2 text-primary font-weight-bold">{{product.selling_price | currency:currency:'symbol':'1.2-2'}}</h4>
             <p class="mb-4">{{product.description}}</p>
             <ng-container *ngIf="product.total_stock; else outOfStock;">
                 <ng-container *ngIf="!added; else alreadyAdded">
-                    <button (click)="addToCart()" class="btn btn-primary">Add to cart <i class="uil uil-plus ml-2"></i></button>
+                    <button (click)="addToCart()" class="btn btn-primary">Add to cart <i class="fa fa-plus ml-2"></i></button>
                 </ng-container>
                 <ng-template #alreadyAdded>
-                    <button (click)="removeFromCart()" class="btn btn-primary">Remove from cart <i class="uil uil-minus ml-2"></i></button>
+                    <button (click)="removeFromCart()" class="btn btn-primary">Remove from cart <i class="fa fa-minus ml-2"></i></button>
                 </ng-template>
             </ng-container>
             <ng-template #outOfStock>

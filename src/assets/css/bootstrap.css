@@ -39,7 +39,7 @@ File: Custom Bootstrap Css File
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Circular Std", sans-serif;
+  --font-family-sans-serif: "Poppins", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -72,13 +72,13 @@ section {
 
 body {
   margin: 0;
-  font-family: "Circular Std", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #6c757d;
+  color: #0a0a0a;
   text-align: left;
-  background-color: #f3f4f7;
+  background-color: #e2e2e2;
 }
 
 [tabindex="-1"]:focus {
@@ -2273,16 +2273,16 @@ pre code {
 .form-control {
   display: block;
   width: 100%;
-  height: calc(1.5em + 1rem + 2px);
-  padding: 0.5rem 0.75rem;
+  height: calc(1.5em + 1rem + 15px);
+  padding: 0.5rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #4B4B5A;
-  background-color: #fff;
+  color: #0a0a0a;
+  background-color: #cccccc;
   background-clip: padding-box;
-  border: 1px solid #e2e7f1;
-  border-radius: 0.3rem;
+  border: none;
+  border-radius: 0.8rem;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2302,48 +2302,48 @@ pre code {
 }
 
 .form-control:focus {
-  color: #4B4B5A;
-  background-color: #fff;
-  border-color: #ffbf1f;
+  color: #0a0a0a;
+  background-color: #cccccc;
+  border-color: #FFBA0A;
   outline: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #6c757d;
+  color: #686868;
   opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: #686868;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
+  color: #686868;
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: #6c757d;
+  color: #686868;
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: #686868;
   opacity: 1;
 }
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #fff;
+  background-color: #cccccc;
   opacity: .6;
 }
 
 select.form-control:focus::-ms-value {
   color: #4B4B5A;
-  background-color: #fff;
+  background-color: #cccccc;
 }
 
 .form-control-file,
@@ -2876,7 +2876,7 @@ textarea.form-control.is-invalid {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #6c757d;
+  color: #0a0a0a;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -2884,11 +2884,11 @@ textarea.form-control.is-invalid {
   -ms-user-select: none;
   user-select: none;
   background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.5rem 0.75rem;
+  border: none;
+  padding: 0.75rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: 0.3rem;
+  border-radius: 0.8rem;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -2938,8 +2938,8 @@ fieldset:disabled a.btn {
 
 .btn-primary:focus,
 .btn-primary.focus {
-  -webkit-box-shadow: 0 0 0 0.15rem rgba(109, 128, 249, 0.5);
-  box-shadow: 0 0 0 0.15rem rgba(109, 128, 249, 0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .btn-primary.disabled,
@@ -2960,8 +2960,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-  -webkit-box-shadow: 0 0 0 0.15rem rgba(109, 128, 249, 0.5);
-  box-shadow: 0 0 0 0.15rem rgba(109, 128, 249, 0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .btn-secondary {
@@ -3126,42 +3126,42 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #ff5c75;
-  border-color: #ff5c75;
+  background-color: #ff5c75 !important;
+  border-color: #ff5c75 !important;
 }
 
 .btn-danger:hover {
   color: #fff;
-  background-color: #ff3655;
-  border-color: #ff294a;
+  background-color: #ff3655 !important;
+  border-color: #ff294a !important;
 }
 
 .btn-danger:focus,
 .btn-danger.focus {
-  -webkit-box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5);
-  box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5);
+  -webkit-box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5) !important;
+  box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5) !important;
 }
 
 .btn-danger.disabled,
 .btn-danger:disabled {
   color: #fff;
-  background-color: #ff5c75;
-  border-color: #ff5c75;
+  background-color: #ff5c75 !important;
+  border-color: #ff5c75 !important;
 }
 
 .btn-danger:not(:disabled):not(.disabled):active,
 .btn-danger:not(:disabled):not(.disabled).active,
 .show>.btn-danger.dropdown-toggle {
   color: #fff;
-  background-color: #ff294a;
-  border-color: #ff1c3f;
+  background-color: #ff294a !important;
+  border-color: #ff1c3f !important;
 }
 
 .btn-danger:not(:disabled):not(.disabled):active:focus,
 .btn-danger:not(:disabled):not(.disabled).active:focus,
 .show>.btn-danger.dropdown-toggle:focus {
-  -webkit-box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5);
-  box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5);
+  -webkit-box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5) !important;
+  box-shadow: 0 0 0 0.15rem rgba(255, 116, 138, 0.5) !important;
 }
 
 .btn-light {
@@ -4091,17 +4091,17 @@ input[type="button"].btn-block {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
   margin-bottom: 0;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #4B4B5A;
   text-align: center;
   white-space: nowrap;
-  background-color: #f6f6f7;
-  border: 1px solid #e2e7f1;
-  border-radius: 0.3rem;
+  color: #0a0a0a !important;
+  background-color: #cccccc;
+  border: none;
+  border-radius: 0.8rem;
 }
 
 .input-group-text input[type="radio"],
@@ -4328,17 +4328,17 @@ input[type="button"].btn-block {
 .custom-select {
   display: inline-block;
   width: 100%;
-  height: calc(1.5em + 1rem + 2px);
-  padding: 0.5rem 1.75rem 0.5rem 0.75rem;
+  height: calc(1.5em + 1rem + 15px);
+  padding: 0.5rem 2rem 0.5rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #4B4B5A;
   vertical-align: middle;
   background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 10px;
-  background-color: #fff;
-  border: 1px solid #e2e7f1;
-  border-radius: 0.3rem;
+  color: #0a0a0a;
+  background-color: #cccccc;
+  border: none;
+  border-radius: 0.8rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -6772,7 +6772,6 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Circular Std", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6897,7 +6896,6 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Circular Std", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -7451,7 +7449,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #f2f2f2 !important;
 }
 
 a.bg-light:hover,
@@ -12980,7 +12978,6 @@ h4,
 h5,
 h6 {
   margin: 10px 0;
-  font-family: "Circular Std", sans-serif;
   color: #4B4B5A;
   font-weight: 600;
 }

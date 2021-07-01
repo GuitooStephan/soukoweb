@@ -11,7 +11,7 @@ const linewithDataChart: ChartType = {
             show: false
         }
     },
-    colors: ['#FFBA0A'],
+    colors: ['#FFFFFF'],
     dataLabels: {
         enabled: false,
     },

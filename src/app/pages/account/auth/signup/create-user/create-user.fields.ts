@@ -6,7 +6,7 @@ export const CreateUserFields: FieldConfig[] = [
         type: 'input',
         label: 'First Name *',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pr-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pr-sm-2 mb-1',
         name: 'first_name',
         placeholder: 'Enter your first name',
         validations: [
@@ -21,7 +21,7 @@ export const CreateUserFields: FieldConfig[] = [
         type: 'input',
         label: 'Last Name *',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pl-sm-2 mb-1',
         name: 'last_name',
         placeholder: 'Enter your last name',
         validations: [
@@ -36,7 +36,7 @@ export const CreateUserFields: FieldConfig[] = [
         type: 'input',
         label: 'Email Address *',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pr-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pr-sm-2 mb-1',
         name: 'email',
         placeholder: 'Enter your email',
         validations: [
@@ -56,7 +56,7 @@ export const CreateUserFields: FieldConfig[] = [
         type: 'input',
         label: 'Username',
         inputType: 'text',
-        wrapper_classes: 'col-sm-6 px-0 pl-sm-2 mb-1',
+        wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pl-sm-2 mb-1',
         name: 'username',
         placeholder: 'Enter your username',
         validations: []
