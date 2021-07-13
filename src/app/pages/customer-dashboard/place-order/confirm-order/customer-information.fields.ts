@@ -4,7 +4,8 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const CustomerInfoFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name *',
+        label: 'First Name',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'first_name',
@@ -19,7 +20,8 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name *',
+        label: 'Last Name',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'last_name',
@@ -34,8 +36,9 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Email *',
+        label: 'Email',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'email',
         placeholder: 'Enter the email',
@@ -54,7 +57,8 @@ export const CustomerInfoFields: FieldConfig[] = [
     },
     {
         type: 'phone_number',
-        label: 'Phone Number *',
+        label: 'Phone Number',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'phone_number',

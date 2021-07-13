@@ -4,8 +4,9 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const CreateUserFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name *',
+        label: 'First Name',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pr-sm-2 mb-1',
         name: 'first_name',
         placeholder: 'Enter your first name',
@@ -19,8 +20,9 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name *',
+        label: 'Last Name',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pl-sm-2 mb-1',
         name: 'last_name',
         placeholder: 'Enter your last name',
@@ -34,10 +36,11 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Email Address *',
+        label: 'Email Address',
         inputType: 'text',
         wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pr-sm-2 mb-1',
         name: 'email',
+        required: true,
         placeholder: 'Enter your email',
         validations: [
             {
@@ -63,8 +66,9 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'date',
-        label: 'DOB *',
+        label: 'DOB',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-md-12 px-0 mb-1',
         name: 'dob',
         placeholder: 'Enter your date of birth',
@@ -77,8 +81,9 @@ export const CreateUserFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'Password *',
+        label: 'Password',
         type: 'password',
+        required: true,
         inputType: 'password',
         wrapper_classes: 'col-md-12 px-0 mb-1',
         name: 'password',
@@ -93,8 +98,9 @@ export const CreateUserFields: FieldConfig[] = [
     },
     {
         type: 'password',
-        label: 'Re-Enter Password *',
+        label: 'Re-Enter Password',
         inputType: 'password',
+        required: true,
         wrapper_classes: 'col-md-12 px-0 mb-1',
         placeholder: 'Confirm your password',
         name: 'confirm_password',
@@ -112,8 +118,9 @@ export const CreateUserFields: FieldConfig[] = [
         ]
     },
     {
-        label: 'I accept Souko\'s Terms and Conditions *',
+        label: 'I accept Souko\'s Terms and Conditions',
         type: 'checkbox',
+        required: true,
         wrapper_classes: 'col-md-12 px-0 mb-1',
         value: true,
         name: 'accept_terms',

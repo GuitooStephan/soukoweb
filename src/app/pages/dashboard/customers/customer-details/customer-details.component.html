@@ -1,9 +1,9 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 min-vh-100">
     <ng-container *ngIf="loading; else noloading;">
         <div class="row">
             <div class="mx-auto my-5">
                 <div class="spinner-border text-primary m-2" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{ 'loading' | translate }}...</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center justify-content-sm-end">
-                <button (click)="editCustomer()" class="btn btn-neu-light">Edit <i class="fa fa-pencil"></i></button>
+                <button (click)="editCustomer()" class="btn btn-neu-light">{{ 'actions.Edit' | translate }} <i class="fa fa-pencil"></i></button>
             </div>
         </div>
         <div class="row mb-4">
@@ -30,15 +30,15 @@
                 <ul class="nav nav-tabs border-0 justify-content-start">
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" routerLink="orders"
-                            routerLinkActive="active">Orders</a>
+                            routerLinkActive="active">{{'orders' | translate}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" routerLink="products"
-                            routerLinkActive="active">Products Ordered</a>
+                            routerLinkActive="active">{{'customersContent.productsOrdered' | translate}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" routerLink="information"
-                            routerLinkActive="active">Information</a>
+                            routerLinkActive="active">{{'customersContent.information' | translate}}</a>
                     </li>
                 </ul>
             </div>

@@ -21,6 +21,7 @@ import { MultipleSelectComponent } from './multiple-select/multiple-select.compo
 import { IntPhoneNumberComponent } from './int-phone-number/int-phone-number.component';
 import { FileComponent } from './file/file.component';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
     CommonModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    TranslateModule,
     MatFormFieldModule,
     MatInputModule,
     DropzoneModule,

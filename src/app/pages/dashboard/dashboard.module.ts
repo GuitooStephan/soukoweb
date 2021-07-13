@@ -20,6 +20,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { UpdateLogoComponent } from './my-store/update-logo/update-logo.component';
 import { MyStoreModule } from './my-store/my-store.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { MyStoreModule } from './my-store/my-store.module';
     FormsModule,
     NgApexchartsModule,
     ProductsModule,
+    TranslateModule,
     LayoutsModule,
     NgbModalModule,
     OrdersModule,

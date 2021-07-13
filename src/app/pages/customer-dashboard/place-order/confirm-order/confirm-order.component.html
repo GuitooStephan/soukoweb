@@ -4,7 +4,7 @@
             <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
         </div>
         <div>
-            <h1 class="my-0">Place Your Order</h1>
+            <h1 class="my-0">{{'customerDashboard.selectProductsRight1' | translate}}</h1>
         </div>
     </div>
     <ng-container *ngIf="products.length">
@@ -34,16 +34,16 @@
                         </div>
                         <ng-container *ngIf="o.controls[i].get('quantity').invalid">
                             <div *ngIf="o.controls[i].get('quantity').hasError('max')" class="text-danger small mb-0 mt-2">
-                                Quantity must not exceed {{p.product.total_stock}}
+                                {{'customerDashboard.confirmOrderQuantityValidation1' | translate}} {{p.product.total_stock}}
                             </div>
                             <div *ngIf="o.controls[i].get('quantity').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                                Quantity must be a number
+                                {{'customerDashboard.confirmOrderQuantityValidation2' | translate}}
                             </div>
                             <div *ngIf="o.controls[i].get('quantity').hasError('min')" class="text-danger small mb-0 mt-2">
-                                Quantity must be at least one
+                                {{'customerDashboard.confirmOrderQuantityValidation3' | translate}}
                             </div>
                             <div *ngIf="o.controls[i].get('quantity').hasError('required')" class="text-danger small mb-0 mt-2">
-                                Quantity is required
+                                {{'customerDashboard.confirmOrderQuantityValidation4' | translate}}
                             </div>
                         </ng-container>
                     </div>
@@ -52,11 +52,11 @@
         </div>
         <hr>
         <div class="mt-4 mb-5 d-block d-lg-flex justify-content-between align-items-center">
-            <p class="mb-2 mb-lg-0 font-size-18 mb-0 font-weight-bold">Total</p>
+            <p class="mb-2 mb-lg-0 font-size-18 mb-0 font-weight-bold">{{'customerDashboard.total' | translate}}</p>
             <h3 class="my-0 text-lg-center text-primary">{{ total | currency:currency:'symbol':'1.0-0' }}</h3>
         </div>
-        <h3 class="mb-2">Customer Information</h3>
-        <p class="mb-4">If it's not your first time shopping with souko, kindly use the same email in order to avoid the confirmation process.</p>
+        <h3 class="mb-2">{{'customerDashboard.customerInformation' | translate}}</h3>
+        <p class="mb-4">{{'customerDashboard.customerInformationDescription' | translate}}</p>
         <div class="row mb-4">
             <div class="col-12 px-0">
                 <dynamic-form [formClasses]="''" [fields]="fields"></dynamic-form>
@@ -64,11 +64,11 @@
         </div>
         <div class="d-flex align-items-center">
             <button (click)="placeOrder()" class="btn btn-primary btn-neu-light">
-                Place your order 
+                {{'customerDashboard.placeYourOrder' | translate}} 
                 <i class="fa fa-plus"></i>
             </button>
             <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </ng-container>

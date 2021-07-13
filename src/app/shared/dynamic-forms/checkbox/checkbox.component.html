@@ -2,5 +2,5 @@
     <input type="checkbox" class="form-check-input" [formControlName]="field.name" 
         [attr.id]="field.name" aria-required="true" aria-invalid="false" [attr.checked]="field.value"
     >
-    <label class="form-check-label" [for]="field.name">{{field.label}}</label>
+    <label class="form-check-label" [for]="field.name">{{field.name | translate}} {{field.required ? '*' : ''}}</label>
 </div>

@@ -7,6 +7,7 @@ import { NgbAccordionModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstr
 import { CountdownModule } from 'ngx-countdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaqsComponent } from './faqs/faqs.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { FaqsComponent } from './faqs/faqs.component';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     ReactiveFormsModule,
     LandingRoutingModule,
     NgbDropdownModule,

@@ -4,6 +4,7 @@ import { DynamicFormsModule } from './dynamic-forms/dynamic-forms.module';
 import { DynamicFormComponent } from './dynamic-forms/dynamic-form/dynamic-form.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { PromptsModule } from './prompts/prompts.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -13,7 +14,8 @@ import { PromptsModule } from './prompts/prompts.module';
     CommonModule,
     DynamicFormsModule,
     LayoutsModule,
-    PromptsModule
+    PromptsModule,
+    TranslateModule
   ],
   exports: [
     DynamicFormComponent,

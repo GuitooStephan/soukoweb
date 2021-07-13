@@ -1,31 +1,31 @@
 <div class="container-fluid">
-    <div class="row h-100-vh">
+    <div class="row min-vh-100">
         <div class="col-md-6 col-lg-8 d-none d-md-flex position-relative bg-dark p-5 align-items-center">
             <a [routerLink]="['/']"><img width="100" height="auto" class="position-absolute authentication-logo" src="../../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <div class="w-max-400">
                 <p class="text-primary display-3 mb-2 font-weight-bold">
-                    Welcome to Souko
+                    {{'welcomeToSouko' | translate}}
                 </p>
-                <p class="mb-0 font-size-18 text-light">The best shop management platform for small businesses.</p>
+                <p class="mb-0 font-size-18 text-light">{{'loginLeft1' | translate}}</p>
             </div>
             <app-dev-info [background]="'dark'"></app-dev-info>
         </div>
         <div class="col-12 col-md-6 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-4 font-weight-bold">Sign In</h1>
+                <h1 class="mb-4 font-weight-bold">{{'login' | translate}}</h1>
                 <p class="mt-0">
-                    New User ?
-                    <a [routerLink]="['/account/auth/sign-up']">Create Account</a>
+                    {{'newUser' | translate}} ?
+                    <a [routerLink]="['/account/auth/sign-up']">{{'createAccount' | translate}}</a>
                 </p>
             </div>
             <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
-            <p class="mb-0"><a class="text-normal" [routerLink]="['/account/auth/forgot-password']">Forgot password?</a></p>
+            <p class="mb-0"><a [routerLink]="['/account/auth/forgot-password']">{{'forgotPassword' | translate}}?</a></p>
             <div class="mt-4 d-flex align-items-center">
                 <button (click)="signIn()" class="btn btn-primary btn-neu-light btn-block">
-                    Sign In
+                    {{'login' | translate}}
                     <ng-container *ngIf="loading; else noloading">
                         <div class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                            <span class="sr-only">Loading...</span>
+                            <span class="sr-only">{{'loading' | translate}}...</span>
                         </div>
                     </ng-container>
                     <ng-template #noloading>

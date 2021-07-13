@@ -3,7 +3,7 @@
         <ng-container *ngIf="user">
             <div class="row">
                 <div class="col-12 form-group">
-                    <label class="form-control-label" for="email">Email</label>
+                    <label class="form-control-label" for="email">{{'email' | translate}}</label>
                     <input type="text" disabled class="form-control" id="email" [value]="user.email">
                 </div>
             </div>
@@ -12,10 +12,10 @@
     </div>
     <div class="col-12 mb-4 mt-4">
         <button (click)="updateInformation()" class="btn btn-neu-light btn-primary">
-            Update Information
+            {{'myProfileContent.updateInformation' | translate}}
         </button>
         <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">{{'loading' | translate}}...</span>
         </div>
     </div>
 </div>

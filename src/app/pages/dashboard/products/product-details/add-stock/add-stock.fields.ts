@@ -4,8 +4,9 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const AddStockFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'Quantity *',
+        label: 'Quantity',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 mb-4',
         name: 'quantity',
         placeholder: 'Enter the quantity',

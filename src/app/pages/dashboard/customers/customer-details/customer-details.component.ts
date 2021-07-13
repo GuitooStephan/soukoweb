@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { CustomersService } from 'src/app/core/services/customers.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
@@ -20,6 +21,7 @@ export class CustomerDetailsComponent implements OnInit {
     private customerService: CustomersService,
     private route: ActivatedRoute,
     private router: Router,
+    private translateService: TranslateService,
     private location: Location,
     private notificationService: NotificationService,
     private modal: NgbModal
@@ -45,8 +47,10 @@ export class CustomerDetailsComponent implements OnInit {
     modalRef.componentInstance.customer = this.customer;
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Customer edited successfully!');
-        this.fetchCustomer();
+        this.translateService.get('notificationMessages.customerEditedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.fetchCustomer();
+        } );
       }
     }, (_) => { });
   }

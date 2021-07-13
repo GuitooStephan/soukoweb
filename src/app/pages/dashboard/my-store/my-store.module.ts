@@ -8,6 +8,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AvatarModule } from 'ngx-avatar';
 import { UpdateLogoComponent } from './update-logo/update-logo.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { UpdateLogoComponent } from './update-logo/update-logo.component';
     CoreModule,
     SharedModule,
     AvatarModule,
+    TranslateModule,
     MyStoreRoutingModule
   ],
   entryComponents: [

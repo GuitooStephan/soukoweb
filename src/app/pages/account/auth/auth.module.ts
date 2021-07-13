@@ -10,6 +10,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    TranslateModule,
     SignupModule,
     LayoutsModule,
     SharedModule,

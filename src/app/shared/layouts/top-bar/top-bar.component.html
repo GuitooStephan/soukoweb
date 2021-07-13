@@ -7,31 +7,31 @@
             <li class="nav-item">
                 <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
-                    <span>Dashboard</span>
+                    <span>{{'dashboard' | translate}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
-                    <span>Products</span>
+                    <span>{{'products' | translate}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
-                    <span>Orders</span>
+                    <span>{{'orders' | translate}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
-                    <span>Customers</span>
+                    <span>{{'customers' | translate}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" href="javascript:void(0)" class="nav-link font-size-18 font-weight-bold">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
-                    <span>My Store</span>
+                    <span>{{'myStore' | translate}}</span>
                 </a>
             </li>
         </ul>
@@ -39,13 +39,13 @@
     <ul class="ml-3 ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
         <li class="nav-item d-none d-md-block">
             <a [routerLink]="['/dashboard/orders/create']" class="btn btn-primary mr-3 btn-neu-light" href="javascript:void(0)"> 
-                Record Order
+                {{'recordOrder' | translate}}
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </a>
         </li>
         <li class="nav-item d-none d-md-block">
             <a class="btn btn-primary mr-4 btn-neu-light" (click)="addProduct()" href="javascript:void(0)"> 
-                Add Product
+                {{'addProduct' | translate}}
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </a>
         </li>
@@ -56,19 +56,19 @@
             <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                 <p *ngIf="myStore" class="mb-0 cursor-pointer" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'" ngbDropdownItem>
                     <a href="javascript:void(0)" title="{{ 'https://souko.me/customer/place-order/' + myStore.id + '/select-products' }}" class="mr-2"><i class="fa fa-copy"></i></a>
-                    Copy E-Commerce Link
+                    {{'copyEcommerceLink' | translate}}
                 </p>
                 <a [routerLink]="['/dashboard/orders/create']" ngbDropdownItem>
-                    Record Order
+                    {{'recordOrder' | translate}}
                 </a>
                 <a href="javascript:void(0)" (click)="addProduct()" ngbDropdownItem>
-                    Add Product
+                    {{'addProduct' | translate}}
                 </a>
                 <a [routerLink]="['/dashboard/my-profile']" ngbDropdownItem>
-                    Profile
+                    {{'profile' | translate}}
                 </a>
                 <a href="javascript:void(0)" (click)="logout()" ngbDropdownItem>
-                    Logout
+                    {{'logout' | translate}}
                 </a>
             </div>
         </li>

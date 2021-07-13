@@ -1,17 +1,17 @@
 <div class="container-fluid">
-    <div class="row h-100-vh">
+    <div class="row min-vh-100">
         <div class="col-lg-3 d-none d-lg-block bg-dark px-5 pb-5 pt-4 position-relative">
             <a href="javascript:void(0)"><img width="100" height="auto" src="../../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <div class="mt-5 ml-4">
-                <h4 class="text-light font-weight-bold mb-5">Welcome, Kindly select the items you would like to purchase...</h4>
+                <h4 class="text-light font-weight-bold mb-5">{{'customerDashboard.selectProductsLeft1' | translate}}</h4>
                 <ul class="list-unstyled mt-4">
                     <li class="mb-4">
                         <span class="mr-3 text-primary"><i class="fa fa-shopping-basket"></i></span>
-                        <span class="text-uppercase text-primary">PLACE ORDER</span>
+                        <span class="text-uppercase text-primary">{{'customerDashboard.selectProductsStep1' | translate}}</span>
                     </li>
                     <li class="mb-4">
                         <span class="mr-3 text-light"><i class="fa fa-check-circle"></i></span>
-                        <span class="text-uppercase text-light">CONFIRM ORDER</span>
+                        <span class="text-uppercase text-light">{{'customerDashboard.selectProductsStep2' | translate}}</span>
                     </li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <button [disabled]="!selectedProducts.length" (click)="placeOrder()" class="ml-atuo btn btn-primary btn-neu-light">
-                        Place Order
+                        {{'customerDashboard.selectProductsRight1' | translate}}
                         <i class="fa fa-cart"></i>
                         <ng-container *ngIf="selectedProducts.length">
                             <span class="badge badge-pill badge-light ml-1">{{selectedProducts.length}}</span>
@@ -76,20 +76,20 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <h1 class="mb-4 px-3">All Products</h1>
+                        <h1 class="mb-4 px-3">{{'customerDashboard.selectProductsRight2' | translate}}</h1>
                         <div class="input-group mb-5 mt-4 px-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="fa fa-search fa-2x"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products...">
+                            <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="{{'customerDashboard.searchProductsPlaceholder' | translate}}">
                         </div>
                         <ng-container *ngIf="loading; else noloading;">
                             <div class="row" *ngIf="loading">
                                 <div class="mx-auto my-5">
                                     <div class="spinner-border text-primary m-2" role="status">
-                                        <span class="sr-only">Loading...</span>
+                                        <span class="sr-only">{{'loading' | translate}}...</span>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                                             </div>
                                                         </ng-container>
                                                         <ng-template #outOfStock>
-                                                            <span class="badge badge-danger white-space-normal w-30 lh-15">Out Of Stock</span>
+                                                            <span class="badge badge-danger white-space-normal w-30 lh-15">{{'customerDashboard.outOfStock' | translate}}</span>
                                                         </ng-template>
                                                     </div>
                                                     <a class="stretched-link" href="javascript:void(0)" (click)="viewProduct(p)"></a>
@@ -132,14 +132,14 @@
                                 <div class="row" *ngIf="infiniteScrollLoading">
                                     <div class="mx-auto mb-5 mt-0">
                                         <div class="spinner-border text-primary m-2" role="status">
-                                            <span class="sr-only">Loading...</span>
+                                            <span class="sr-only">{{'loading' | translate}}...</span>
                                         </div>
                                     </div>
                                 </div>
                             </ng-container>
                             <ng-template #noProducts>
                                 <div class="text-center py-5 px-3">
-                                    <p class="font-weight-normal font-size-15">No products available</p>
+                                    <p class="font-weight-normal font-size-15">{{'customerDashboard.noProductsAvailable' | translate}}</p>
                                 </div>
                             </ng-template>
                         </ng-template>

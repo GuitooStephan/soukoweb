@@ -12,6 +12,10 @@ export class BaseUrlInterceptor implements HttpInterceptor {
      * Base Url Interceptor
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if ( req.url.includes('assets') ) {
+            console.log('dont touch');
+            return next.handle(req);
+        }
         const apiReq = req.clone({ url: `${environment.base_url}${req.url}` });
         return next.handle(apiReq);
     }

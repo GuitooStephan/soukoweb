@@ -4,41 +4,41 @@
             <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
         </div>
         <div>
-            <h1 class="my-0">Record Payment</h1>
-            <p class="mb-0">Make sure to fill all required fields</p>
+            <h1 class="my-0">{{'ordersContent.recordPayment' | translate}}</h1>
+            <p class="mb-0">{{'ordersContent.fillTheRequiredFields' | translate}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-12 px-0">
-            <p class="text-warning mb-1">The remaining amount is {{ remainingAmount | currency:currency:'symbol':'1.0-0' }}</p>
+            <p class="text-warning mb-1">{{'ordersContent.theRemainingAmountIs' | translate}} {{ remainingAmount | currency:currency:'symbol':'1.0-0' }}</p>
             <input class="custom-checkbox mr-2" formControlName="full_payment" type="checkbox" value="" id="paying_now">
             <label class="form-check-label mb-4" for="paying_now">
-                Making a full payment
+                {{'ordersContent.makingFullPayment' | translate}}
             </label>
         </div>
         <div class="col-12 px-0 mb-4">
             <div>
-                <label for="amount">Amount</label>
+                <label for="amount">{{'ordersContent.amount' | translate}}</label>
                 <input type="text" class="form-control" formControlName="amount">
                 <ng-container *ngIf="form.get('amount').invalid && (form.get('amount').dirty || form.get('amount').touched)">
                     <div *ngIf="form.get('amount').hasError('required')" class="text-danger small mb-0 mt-2">
-                        Amount is required
+                        {{'ordersContent.amountValidation1' | translate}}
                     </div>
                     <div *ngIf="form.get('amount').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                        Amount should be a number
+                        {{'ordersContent.amountValidation2' | translate}}
                     </div>
                     <div *ngIf="form.get('amount').hasError('max')" class="text-danger small mb-0 mt-2">
-                        Amount should not exceed the remaining amount
+                        {{'ordersContent.amountValidation3' | translate}}
                     </div>
                 </ng-container>
             </div>
         </div>
         <div class="col-12 px-0">
             <button (click)="recordPayment()" class="btn btn-primary">
-                Record Payment
+                {{'ordersContent.recordPayment' | translate}}
             </button>
             <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </div>

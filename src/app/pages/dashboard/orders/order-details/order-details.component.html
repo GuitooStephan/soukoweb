@@ -1,9 +1,9 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid min-vh-100 mt-4">
     <ng-container *ngIf="loading; else noloading;">
         <div class="row">
             <div class="mx-auto my-5">
                 <div class="spinner-border text-primary m-2" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{'loading' | translate}}...</span>
                 </div>
             </div>
         </div>
@@ -18,29 +18,29 @@
                 </div>
                 <div class="col-9 col-sm pr-0">
                     <div class="d-flex align-items-center">
-                        <h1 class="my-0 mr-2">Order</h1>
-                        <span class="badge badge-pill px-3 py-2 mr-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span>
-                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span>
+                        <h1 class="my-0 mr-2">{{'ordersContent.order' | translate}}</h1>
+                        <span class="badge badge-pill px-3 py-2 mr-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{ ( 'ordersContent.' + order.payment_status_translate_key | translate ) | uppercase}}</span>
+                        <span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? ( 'ordersContent.Confirmed' | translate ) : ( 'ordersContent.NotConfirmed' | translate ) )  | uppercase}}</span>
                     </div>
                     <p class="mb-0">#{{order.number}}</p>
                     <p class="mb-1 text-primary">{{order.created_at | date}}</p>
                     <p class="mb-0">
                         <ng-container *ngIf="!order.confirmed">
-                            <a href="javascript:void(0)" (click)="confirmOrder()">Mark as confirmed <i class="fa fa-check-circle"></i></a>
+                            <a href="javascript:void(0)" (click)="confirmOrder()">{{'actions.Markasconfirmed' | translate}} <i class="fa fa-check-circle"></i></a>
                         </ng-container>
                     </p>
                 </div>
             </div>
             <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center justify-content-sm-end">
-                <button class="mr-3 btn btn-neu-light" [routerLink]="['/dashboard/orders/edit', order.id]">Edit <i class="fa fa-pencil"></i></button>
-                <button (click)="promptForDeletingOrder()" class="btn btn-danger" href="javascript:void(0)">Delete <i class="fa fa-trash"></i></button>
+                <button class="mr-3 btn btn-neu-light" [routerLink]="['/dashboard/orders/edit', order.id]">{{'actions.Edit' | translate}} <i class="fa fa-pencil"></i></button>
+                <button (click)="promptForDeletingOrder()" class="btn btn-danger" href="javascript:void(0)">{{'actions.Delete' | translate}} <i class="fa fa-trash"></i></button>
             </div>
         </div>
         <div class="row mb-5">
             <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1 mt-4">
                 <div class="card rounded-xl neu-out">
                     <div class="card-body bg-primary rounded-xl">
-                        <h5 class="mb-3">Customer</h5>
+                        <h5 class="mb-3">{{'ordersContent.customer' | translate}}</h5>
                         <div class="media align-items-center">
                             <div class="avatar avatar-md rounded-circle d-flex align-items-center justify-content-around bg-soft-primary text-center">
                                 <i class="fa fa-2x fa-user"></i>
@@ -55,24 +55,24 @@
                 </div>
                 <div class="card rounded-xl">
                     <div class="card-body">
-                        <h5 class="mb-4">Payments</h5>
+                        <h5 class="mb-4">{{'ordersContent.payments' | translate}}</h5>
                         <ng-container *ngIf="order.payments.length; else nopayments;">
                             <div class="d-flex justify-content-center mb-3">
                                 <div class="col-10">
                                     <div class="card border border-light-dark">
                                         <div class="card-body">
-                                            <p class="mb-1 text-center text-dark-success">{{ percentage | percent }} completed</p>
+                                            <p class="mb-1 text-center text-dark-success">{{ percentage | percent }} {{'ordersContent.completed' | translate}}</p>
                                             <mat-progress-bar mode="determinate" class="bar-success" [value]="percentage * 100"></mat-progress-bar>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <p class="font-size-13">Details</p>
+                                <p class="font-size-13">{{'ordersContent.details' | translate}}</p>
                                 <p *ngIf="order.payment_status !== 'Paid'" class="text-center font-size-13">
                                     <a (click)="recordPayment()" href="javascript:void(0)">
                                         <i class="fa fa-plus"></i>
-                                        Record Payment
+                                        {{'ordersContent.recordPayment' | translate}}
                                     </a>
                                 </p>
                             </div>
@@ -84,12 +84,12 @@
                                 <hr>
                             </ng-container>
                             <div class="d-flex align-items-center justify-content-between">
-                                <p class="mb-0 font-size-16">Total</p>
+                                <p class="mb-0 font-size-16">{{'ordersContent.total' | translate}}</p>
                                 <p class="mb-0 font-size-16 text-right text-primary">{{ cost | currency:currency:'symbol':'1.0-0' }}</p>
                             </div>
                             <ng-container *ngIf="order.payment_status == 'Partially Paid'">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <p class="mb-0 font-size-16">Balance</p>
+                                    <p class="mb-0 font-size-16">{{'ordersContent.balance' | translate}}</p>
                                     <p class="mb-0 font-size-16 text-right">{{ order.balance | currency:currency:'symbol':'1.0-0' }}</p>
                                 </div>
                             </ng-container>
@@ -98,15 +98,15 @@
                             <p class="mb-2 text-center">
                                 <a (click)="recordPayment()" href="javascript:void(0)">
                                     <i class="fa fa-plus"></i>
-                                    Record Payment (Partial Payment)
+                                    {{'ordersContent.partialPayment' | translate}}
                                 </a>
                             </p>
                             <p class="mb-2 text-center">
-                                or
+                                {{'ordersContent.or' | translate}}
                             </p>
                             <p class="mb-2 text-center">
                                 <a class="btn btn-primary" (click)="payOrder()" href="javascript:void(0)">
-                                    Mark as Paid (Full Payment)
+                                    {{'ordersContent.fullPayment' | translate}}
                                 </a>
                             </p>
                         </ng-template>
@@ -114,27 +114,27 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
-                <h4 class="mb-3">Order Items</h4>
+                <h4 class="mb-3">{{'ordersContent.orderItems' | translate}}</h4>
                 <div class="table-responsive mb-5">
                     <table class="table m-0 table-striped">
                         <tbody>
                             <ng-container *ngFor="let item of order.order_items">
                                 <tr class="border-2 mb-3">
                                     <td>
-                                        <span class="font-weight-bold mr-2">Product:</span>
+                                        <span class="font-weight-bold mr-2">{{'ordersContent.product' | translate}}:</span>
                                         <a [routerLink]="['/dashboard/products', item.product.id]">{{item.product.name}}</a>
                                     </td>
-                                    <td class="cursor-pointer"><span class="font-weight-bold">Quantity:</span> {{item.quantity}}</td>
-                                    <td class="cursor-pointer"><span class="font-weight-bold">Cost:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>
+                                    <td class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.quantity' | translate}}:</span> {{item.quantity}}</td>
+                                    <td class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.cost' | translate}}:</span> {{item.cost | currency:currency:'symbol':'1.2-2'}}</td>
                                 </tr>
                             </ng-container>
                             <tr>
-                                <td class="font-weight-bold">Other Expenses</td>
+                                <td class="font-weight-bold">{{'ordersContent.otherExpenses' | translate}}</td>
                                 <td></td>
                                 <td class="font-weight-bold">{{order.delivery_fee | currency:currency:'symbol':'1.2-2'}}</td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Total Cost</td>
+                                <td class="font-weight-bold">{{'ordersContent.totalCost' | translate}}</td>
                                 <td></td>
                                 <td class="font-weight-bold">{{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
                             </tr>

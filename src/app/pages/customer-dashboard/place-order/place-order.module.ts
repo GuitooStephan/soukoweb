@@ -14,6 +14,7 @@ import { ThousandSuffixePipe } from 'src/app/core/pipes/thousand-suffix.pipe';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-prompt.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-
     AvatarModule,
     ReactiveFormsModule,
     NgbPaginationModule,
+    TranslateModule,
     NgbModalModule,
     FormsModule,
     CoreModule,

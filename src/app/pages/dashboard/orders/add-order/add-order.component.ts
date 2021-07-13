@@ -15,6 +15,7 @@ import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { AddCustomerComponent } from '../../customers/add-customer/add-customer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var _: any;
 
@@ -41,6 +42,7 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     private router: Router,
     private modal: NgbModal,
     private ordersService: OrdersService,
+    private translateService: TranslateService,
     private store: Store<AppState>,
     private customersService: CustomersService,
     private productsService: ProductsService,
@@ -163,8 +165,10 @@ export class AddOrderComponent implements OnInit, OnDestroy {
       } )
     ).subscribe(
       data => {
-        this.notificationService.success( null, 'Order has been created' );
-        this.router.navigate( [ '/dashboard' ] );
+        this.translateService.get('notificationMessages.orderHasBeenCreated').subscribe( message => {
+          this.notificationService.success( null, message );
+          this.router.navigate( [ '/dashboard' ] );
+        } );
       }
     );
   }
@@ -181,8 +185,10 @@ export class AddOrderComponent implements OnInit, OnDestroy {
     const modalRef = this.modal.open(AddCustomerComponent, { centered: true, size: 'lg' });
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Customer created successfully!');
-        this.form.get( 'customer_name' ).setValue( '' );
+        this.translateService.get('notificationMessages.customerCreatedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.form.get( 'customer_name' ).setValue( '' );
+        } );
       }
     }, (_) => { });
   }

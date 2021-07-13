@@ -4,7 +4,8 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const ForgotPasswordFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'Email Address *',
+        label: 'Email Address',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'email',

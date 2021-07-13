@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
@@ -24,6 +26,7 @@ export class StocksComponent implements OnInit {
     private router: Router,
     private modal: NgbModal,
     public dialog: MatDialog,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private productsService: ProductsService
   ) {
@@ -50,14 +53,16 @@ export class StocksComponent implements OnInit {
   }
 
   createStock() {
-    const modalRef = this.modal.open(AddStockComponent, { centered: true, size: 'lg' });
-    modalRef.componentInstance.productId = this.route.parent.snapshot.params.id;
-    modalRef.result.then((result) => {
-      if (result === 'success') {
-        this.notificationService.success(null, 'Stock added successfully!');
-        this.fetchStocks(0);
-      }
-    }, (_) => { });
+    this.translateService.get('notificationMessages.stockAddedSuccess').subscribe( message => {
+      const modalRef = this.modal.open(AddStockComponent, { centered: true, size: 'lg' });
+      modalRef.componentInstance.productId = this.route.parent.snapshot.params.id;
+      modalRef.result.then((result) => {
+        if (result === 'success') {
+          this.notificationService.success(null, message);
+          this.fetchStocks(0);
+        }
+      }, (_) => { });
+    } );
   }
 
   promptForDeletingProduct( stock ): void {
@@ -68,9 +73,12 @@ export class StocksComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if ( result ) {
-        this.productsService.deleteStock( stock.id ).subscribe(
-          data => {
-            this.notificationService.success( null, 'Stock deleted.' );
+        combineLatest([
+          this.translateService.get('notificationMessages.stockDeleted'),
+          this.productsService.deleteStock( stock.id )
+        ]).subscribe(
+          ([message, data]) => {
+            this.notificationService.success( null, message );
             this.fetchStocks( 0 );
           }
         );

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 import { CustomersService } from 'src/app/core/services/customers.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { StoreService } from 'src/app/core/services/store.service';
@@ -21,6 +23,7 @@ export class ConfirmationPromptComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private customersService: CustomersService
   ) {
@@ -42,9 +45,12 @@ export class ConfirmationPromptComponent implements OnInit, OnDestroy {
   }
 
   resendOrderConfirmationCode() {
-    // tslint:disable-next-line: max-line-length
-    this.customersService.resendOrderConfirmationCode( this.myStore.id, { order_id: this.route.snapshot.params.orderId } ).subscribe( data => {
-      this.notificationService.success( null, 'Email resent.' );
+    combineLatest([
+      this.translateService.get('notificationMessages.emailResent'),
+      // tslint:disable-next-line: max-line-length
+      this.customersService.resendOrderConfirmationCode( this.myStore.id, { order_id: this.route.snapshot.params.orderId } )
+    ]).subscribe( ([message, data]) => {
+      this.notificationService.success( null, message );
     } );
   }
 
@@ -53,8 +59,12 @@ export class ConfirmationPromptComponent implements OnInit, OnDestroy {
       this.form.markAllAsTouched();
       return;
     }
-    this.customersService.confirmOrder( this.myStore.id, this.form.value ).subscribe( data => {
-      this.notificationService.success( null, 'Order has been confirmed' );
+
+    combineLatest([
+      this.translateService.get('notificationMessages.orderHasBeenConfirmed'),
+      this.customersService.confirmOrder( this.myStore.id, this.form.value )
+    ]).subscribe( ([message, data]) => {
+      this.notificationService.success( null, message );
       this.router.navigate( [ '/customer/confirm-order', this.myStore.id, 'success' ] );
     } );
   }

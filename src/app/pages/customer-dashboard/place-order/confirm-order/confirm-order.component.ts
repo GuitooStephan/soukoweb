@@ -13,6 +13,7 @@ import { selectCart } from 'src/app/core/store/selectors/cart.selectors';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/dynamic-form.component';
 import { CustomerInfoFields } from './customer-information.fields';
 import * as CartActions from 'src/app/core/store/actions/cart.actions';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var _;
 
@@ -41,6 +42,7 @@ export class ConfirmOrderComponent implements OnInit {
     private customersService: CustomersService,
     private ordersService: OrdersService,
     private router: Router,
+    private translateService: TranslateService,
     private store: Store<AppState>,
     private notificationService: NotificationService,
     private activeModal: NgbActiveModal
@@ -135,9 +137,11 @@ export class ConfirmOrderComponent implements OnInit {
       } )
     ).subscribe(
       data => {
-        this.notificationService.success( null, 'Order has been placed, please confirm your order' );
-        this.loading = false;
-        this.activeModal.close( 'success' );
+        this.translateService.get('notificationMessages.orderHasBeenPlaced').subscribe( message => {
+          this.notificationService.success( null, message );
+          this.loading = false;
+          this.activeModal.close( 'success' );
+        } );
       }
     );
   }

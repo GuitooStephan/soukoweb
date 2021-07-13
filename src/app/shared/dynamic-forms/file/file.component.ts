@@ -24,7 +24,7 @@ export class FileComponent implements OnInit, AfterViewInit {
     maxFiles: 1,
     acceptedFiles: 'image/*',
     // tslint:disable-next-line: max-line-length
-    dictDefaultMessage: '<div><h5>Click Here or Drop file to upload</h5><div class="text-center mt-3"><i class="fa fa-2x fa-upload"></i></div></div>',
+    dictDefaultMessage: '<div><div class="text-center mt-3"><i class="fa fa-2x fa-upload"></i></div></div>',
     dictMaxFilesExceeded: 'You can not upload any more files. Remove this file',
     parallelUploads: 2,
     previewTemplate: '\

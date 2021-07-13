@@ -13,14 +13,14 @@
             <p class="mb-4">{{product.description}}</p>
             <ng-container *ngIf="product.total_stock; else outOfStock;">
                 <ng-container *ngIf="!added; else alreadyAdded">
-                    <button (click)="addToCart()" class="btn btn-primary">Add to cart <i class="fa fa-plus ml-2"></i></button>
+                    <button (click)="addToCart()" class="btn btn-primary">{{'customerDashboard.addToCart' | translate}} <i class="fa fa-plus ml-2"></i></button>
                 </ng-container>
                 <ng-template #alreadyAdded>
-                    <button (click)="removeFromCart()" class="btn btn-primary">Remove from cart <i class="fa fa-minus ml-2"></i></button>
+                    <button (click)="removeFromCart()" class="btn btn-primary">{{'customerDashboard.removeFromCart' | translate}} <i class="fa fa-minus ml-2"></i></button>
                 </ng-template>
             </ng-container>
             <ng-template #outOfStock>
-                <span class="badge badge-lg badge-danger py-2 px-3">Out Of Stock</span>
+                <span class="badge badge-lg badge-danger py-2 px-3">{{'customerDashboard.outOfStock' | translate}}</span>
             </ng-template>
         </div>
     </div>

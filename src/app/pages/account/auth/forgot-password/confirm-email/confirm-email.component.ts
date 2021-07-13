@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/dynamic-form.component';
@@ -22,6 +23,7 @@ export class ConfirmEmailComponent implements OnInit {
     private titleService: Title,
     private metaTagService: Meta,
     private userService: UserService,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private router: Router
   ) {
@@ -56,8 +58,10 @@ export class ConfirmEmailComponent implements OnInit {
         );
       },
       error => {
-        this.loading = false;
-        this.notificationService.error( null, 'Error occured.' );
+        this.translateService.get('notificationMessages.errorOccurred').subscribe( message => {
+          this.loading = false;
+          this.notificationService.error( null, message );
+        } );
       }
     );
   }

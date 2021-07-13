@@ -1,17 +1,17 @@
 <div class="container-fluid mt-4">
     <div class="d-md-flex justify-content-md-between align-items-md-center mb-4 mt-4">
         <div class="mb-3 mb-md-0">
-            <h1>Dashboard</h1>
-            <p class="mb-0 text-muted">Welcome, <span class="font-weight-bold text-primary">{{user.first_name}} {{user.last_name}}</span></p>
+            <h1>{{'dashboard' | translate}}</h1>
+            <p class="mb-0 text-muted">{{'welcome' | translate}}, <span class="font-weight-bold text-primary">{{user.first_name}} {{user.last_name}}</span></p>
         </div>
         <div class="d-flex align-items-start align-items-md-end">
             <div class="btn-group mr-2">
                 <div class="form-inline">
                     <select class="custom-select" [(ngModel)]="metricsFilter" (change)="fetchMetrics()">
-                        <option selected value="0">This Week</option>
-                        <option value="1">This Month</option>
-                        <option value="2">This Year</option>
-                        <option value="3">All</option>
+                        <option selected value="0">{{'dashboardContent.week' | translate}}</option>
+                        <option value="1">{{'dashboardContent.month' | translate}}</option>
+                        <option value="2">{{'dashboardContent.year' | translate}}</option>
+                        <option value="3">{{'dashboardContent.all' | translate}}</option>
                     </select>
                 </div>
             </div>
@@ -21,7 +21,7 @@
         <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
             <div class="card rounded-xl mb-4 bg-gradient-primary">
                 <div class="card-body">
-                    <h5 class="mb-4">Profit Per day</h5>
+                    <h5 class="mb-4">{{'dashboardContent.profitPerDay' | translate}}</h5>
                     <ng-container *ngIf="metrics.profitReport.profit_report.length; else noProfitRecord;">
                         <ng-container *ngIf="profitMetricsGraph">
                             <apx-chart
@@ -43,7 +43,7 @@
                     </ng-container>
                     <ng-template #noProfitRecord>
                         <div class="p-4 text-center">
-                            <h5>No profit report available</h5>
+                            <h5>{{'dashboardContent.profitPerDayNotAvailable' | translate}}</h5>
                         </div>
                     </ng-template>
                 </div>
@@ -52,22 +52,22 @@
         <div class="col-12 col-md-6 col-lg-4 order-0 order-md-1">
             <div class="card rounded-xl neu-out">
                 <div class="card-body bg-primary rounded-xl">
-                    <h5 class="mb-2">Your E-commerce Link</h5>
+                    <h5 class="mb-2">{{'dashboardContent.yourEcommerceLink' | translate}}</h5>
                     <a *ngIf="myStore" href="javascript:void(0)" class="btn btn-light" [cdkCopyToClipboard]="'https://souko.me/customer/place-order/' + myStore.id + '/select-products'">
-                        Copy to Clipboard <span><i class="fa fa-copy"></i></span>
+                        {{'dashboardContent.copyToClipboard' | translate}} <span><i class="fa fa-copy"></i></span>
                     </a>
                 </div>
             </div>
             <div class="card rounded-xl mb-4 neu-out">
                 <div class="card-body">
-                    <h5 class="mb-4">Insights</h5>
+                    <h5 class="mb-4">{{'dashboardContent.insights' | translate}}</h5>
                     <div class="media mb-4 align-items-center">
                         <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-around bg-light-primary text-center text-primary">
                             <i [attr.data-feather]="'credit-card'" appFeatherIcon></i>
                         </div>
                         <div class="media-body ml-4">
                             <h3 class="my-0 text-break">{{ metrics.profitReport.profit | currency:currency:'symbol':'1.0-0' }}</h3>
-                            <p class="font-size-14 mb-0 text-muted">Profit</p>
+                            <p class="font-size-14 mb-0 text-muted">{{'dashboardContent.profit' | translate}}</p>
                         </div>
                     </div>
                     <div class="media mb-4 align-items-center">
@@ -76,7 +76,7 @@
                         </div>
                         <div class="media-body ml-4">
                             <h3 class=" my-0 text-break">{{ metrics.ordersReport.number_of_orders.number_of_orders }}</h3>
-                            <p class="font-size-14 mb-0 text-muted">Num. of Orders</p>
+                            <p class="font-size-14 mb-0 text-muted">{{'dashboardContent.numOfOrders' | translate}}</p>
                         </div>
                     </div>
                     <div class="media align-items-center">
@@ -85,7 +85,7 @@
                         </div>
                         <div class="media-body ml-4">
                             <h3 class=" my-0 text-break">{{ metrics.stockReport.best_selling_products ? metrics.stockReport.best_selling_products.name : 'None' }}</h3>
-                            <p class="font-size-14 mb-0 text-muted">Best Selling</p>
+                            <p class="font-size-14 mb-0 text-muted">{{'dashboardContent.bestSelling' | translate}}</p>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card rounded-xl neu-out">
                 <div class="card-body">
-                    <h5 class="mb-3">Low Stock Products</h5>
+                    <h5 class="mb-3">{{'dashboardContent.lowStockProducts' | translate}}</h5>
                     <ng-container *ngIf="metrics.stockReport.low_products.length; else noLowProducts">
                         <ng-container *ngFor="let product of metrics.stockReport.low_products">
                             <div class="media mb-4">
@@ -107,7 +107,7 @@
                                     <p class="font-size-16 mb-2 font-weight-bold">{{ product.name }}</p>
                                     <p *ngIf="metrics" class="my-0">
                                         <span class="font-weight-bold">{{product.total_stock}}</span>
-                                        products left
+                                        {{'dashboardContent.productsLeft' | translate}}
                                     </p>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                     </ng-container>
                     <ng-template #noLowProducts>
                         <div class="p-4 text-center">
-                            <h6>No products available</h6>
+                            <h6>{{'dashboardContent.productsNotAvailable' | translate}}</h6>
                         </div>
                     </ng-template>
                 </div>
@@ -124,7 +124,7 @@
         <div class="col-12 col-md-6 col-lg-8">
             <div class="card rounded-xl bg-primary">
                 <div class="card-body">
-                    <h5 class="mb-3">Orders Per day</h5>
+                    <h5 class="mb-3">{{'dashboardContent.ordersPerDay' | translate}}</h5>
                     <ng-container *ngIf="metrics.ordersReport.orders_record.length; else noOrdersRecord;">
                         <ng-container *ngIf="ordersMetricsGraph">
                             <apx-chart
@@ -146,7 +146,7 @@
                     </ng-container>
                     <ng-template #noOrdersRecord>
                         <div class="p-4 text-center">
-                            <h5>No orders record available</h5>
+                            <h5>{{'dashboardContent.ordersNotAvailable' | translate}}</h5>
                         </div>
                     </ng-template>
                 </div>

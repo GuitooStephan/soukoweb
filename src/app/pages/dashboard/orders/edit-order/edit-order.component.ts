@@ -13,6 +13,9 @@ import { AppState } from 'src/app/core/store/reducers/root.reducers';
 import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddCustomerComponent } from '../../customers/add-customer/add-customer.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var _: any;
 
@@ -43,6 +46,8 @@ export class EditOrderComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private location: Location,
     private store: Store<AppState>,
+    private modal: NgbModal,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private customersService: CustomersService,
     private ordersService: OrdersService,
@@ -201,8 +206,10 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       } )
     ).subscribe(
       data => {
-        this.notificationService.success( null, 'Order has been updated' );
-        this.router.navigate( [ '/dashboard/orders/list' ] );
+        this.translateService.get('notificationMessages.orderHasBeenUpdated').subscribe( message => {
+          this.notificationService.success( null, message );
+          this.router.navigate( [ '/dashboard/orders/list' ] );
+        } );
       }
     );
   }
@@ -230,6 +237,18 @@ export class EditOrderComponent implements OnInit, OnDestroy {
       quantity: o.quantity,
       cost: o.cost
     }) );
+  }
+
+  createCustomer() {
+    const modalRef = this.modal.open(AddCustomerComponent, { centered: true, size: 'lg' });
+    modalRef.result.then((result) => {
+      if (result === 'success') {
+        this.translateService.get('notificationMessages.customerCreatedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.form.get( 'customer_name' ).setValue( '' );
+        } );
+      }
+    }, (_) => { });
   }
 
   displayCustomer(o): string {

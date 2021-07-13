@@ -12,6 +12,7 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsModule } from './customer-details/customer-details.module';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     CustomersRoutingModule,
     MatDialogModule,
     CoreModule,
+    TranslateModule,
     FormsModule,
     SharedModule,
     NgbModalModule,

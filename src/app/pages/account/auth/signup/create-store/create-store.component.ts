@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -14,6 +14,7 @@ import { CategoriesService } from 'src/app/core/services/categories.service';
 import { Categories } from 'src/app/core/common/options/categories.options';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { StoreService } from 'src/app/core/services/store.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var _: any;
 
@@ -42,6 +43,7 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private categoriesService: CategoriesService,
     private store: Store<AppState>,
+    public translateService: TranslateService,
     private storeService: StoreService,
     private titleService: Title,
     private metaTagService: Meta
@@ -98,7 +100,7 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
       data => {
         const categories = data.results;
         // tslint:disable-next-line: max-line-length
-        Categories.push( ..._.xorBy( _.filter(Categories, i => i.value !== ''), categories.map( i => ({ label: i.name, value: i.id }) ), 'value') );
+        Categories.push( ..._.xorBy( _.filter(Categories, i => i.value !== ''), categories.map( i => ({ label: i[this.translateService.currentLang], value: i.id }) ), 'value') );
       }
     );
   }

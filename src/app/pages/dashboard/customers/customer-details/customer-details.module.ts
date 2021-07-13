@@ -9,6 +9,7 @@ import { NgbDropdownModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     CustomerDetailsRoutingModule,
     NgbPaginationModule,
+    TranslateModule,
     NgbDropdownModule,
     ReactiveFormsModule,
     CoreModule,

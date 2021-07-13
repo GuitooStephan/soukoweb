@@ -7,6 +7,7 @@ import { AppState } from 'src/app/core/store/reducers/root.reducers';
 import { TimelineMax, Back } from 'gsap';
 import { AddProductComponent } from 'src/app/pages/dashboard/products/add-product/add-product.component';
 import { selectStore } from 'src/app/core/store/selectors/store.selectors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-bar',
@@ -20,7 +21,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
   constructor(
     private modal: NgbModal,
     private notificationService: NotificationService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private translateService: TranslateService
   ) {
     this.selectStore$ = this.store.pipe( select( selectStore ) ).subscribe( data => {
       this.myStore = data;
@@ -34,12 +36,14 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   addProduct() {
-    const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
-    modalRef.result.then((result) => {
-      if (result === 'success') {
-        this.notificationService.success(null, 'Product added successfully!');
-      }
-    }, (_) => { });
+    this.translateService.get('notificationMessages.productAddedSuccess').subscribe( message => {
+      const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
+      modalRef.result.then((result) => {
+        if (result === 'success') {
+          this.notificationService.success(null, message);
+        }
+      }, (_) => { });
+    } );
   }
 
   logout() {
@@ -47,7 +51,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   getCustomerLink() {
-    this.notificationService.success( null, 'Link was copied to clipboard' );
+    this.translateService.get('notificationMessages.linkWasCopiedToClipboard').subscribe( message => {
+      this.notificationService.success( null, message );
+    } );
     return 'https://souko.me/customer/place-order/' + this.myStore.id + '/select-products';
   }
 

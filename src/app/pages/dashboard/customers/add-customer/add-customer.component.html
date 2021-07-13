@@ -4,8 +4,8 @@
             <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
         </div>
         <div>
-            <h1 class="my-0">Create Customer</h1>
-            <p class="mb-0">Make sure to fill all required fields</p>
+            <h1 class="my-0">{{'customersContent.createCustomer' | translate}}</h1>
+            <p class="mb-0">{{'customersContent.fillTheRequiredFields' | translate}}</p>
         </div>
     </div>
     <div class="row">
@@ -14,10 +14,10 @@
         </div>
         <div class="col-12 px-0">
             <button (click)="createCustomer()" class="btn btn-primary">
-                Create Customer
+                {{'customersContent.createCustomer' | translate}}
             </button>
             <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </div>

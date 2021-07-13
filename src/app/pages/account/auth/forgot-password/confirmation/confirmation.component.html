@@ -1,18 +1,18 @@
 <div class="container-fluid">
-    <div class="row h-100-vh">
+    <div class="row min-vh-100">
         <div class="col-lg-8 d-none d-lg-block bg-dark p-5 position-relative">
             <a [routerLink]="['/account/auth/sign-in']"><img width="100" height="auto" src="../../../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <div class="h-70-vh d-flex align-items-center px-5 mt-5">
                 <div class="mt-5">
-                    <h1 class="text-light font-weight-bold mb-5">You are almost at the end...</h1>
+                    <h1 class="text-light font-weight-bold mb-5">{{'confirmLinkLeft1' | translate}}</h1>
                     <ul class="list-unstyled mt-4 ml-4">
                         <li class="mb-4 font-size-18">
                             <span class="mr-3 text-success"><i [attr.data-feather]="'mail'" appFeatherIcon></i></span>
-                            <span class="text-uppercase text-success">EMAIL DETAILS</span>
+                            <span class="text-uppercase text-success">{{'forgotPasswordSteps1' | translate}}</span>
                         </li>
                         <li class="mb-4 font-size-18">
                             <span class="mr-3 text-primary"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
-                            <span class="text-uppercase text-primary">COMPLETE</span>
+                            <span class="text-uppercase text-primary">{{'forgotPasswordSteps2' | translate}}</span>
                         </li>
                     </ul>
                 </div>
@@ -21,21 +21,21 @@
         </div>
         <div class="col-12 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-4 font-weight-bold">One last thing</h1>
+                <h1 class="mb-4 font-weight-bold">{{'confirmLinkRight1' | translate}}</h1>
                 <p class="mb-0">
-                    Remember your password ?
-                    <a [routerLink]="['/account/auth/sign-in']">Sign In</a>
+                    {{'rememberPassword' | translate}} ?
+                    <a [routerLink]="['/account/auth/sign-in']">{{'login' | translate}}</a>
                 </p>
             </div>
             <div class="mt-4 mb-5">
-                <p>Kindly login to your email and click on the link to reset your password</p>
+                <p>{{'confirmLinkRight2' | translate}}</p>
                 <h5>
                     <span class="text-black">{{ email }}</span>
                 </h5>
             </div>
             <div class="mt-4">
                 <a [routerLink]="['/account/auth/sign-in']" class="btn btn-primary btn-neu-light btn-block">
-                    Done
+                    {{'done' | translate}}
                     <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
                 </a>
             </div>

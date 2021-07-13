@@ -5,14 +5,14 @@
                 <i class="fa fa-2x fa-search"></i>
             </span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="{{'productsContent.searchProductsPlaceholder' | translate}}">
     </div>
 </div>
 <ng-container *ngIf="loading; else noloading;">
     <div class="row" *ngIf="loading">
         <div class="mx-auto my-5">
             <div class="spinner-border text-primary m-2" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </div>
@@ -28,10 +28,10 @@
                     <ng-container *ngFor="let product of products">
                         <tr class="border-2 mb-3">
                             <td (click)="goToDetails(product)" class="cursor-pointer font-weight-bold">{{product.name}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Buy. Price:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Sell. Price:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Num. Orders</span> {{product.num_of_orders}}</td>
-                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="badge badge-pill" [class.badge-soft-success]="product.total_stock >= 10" [class.badge-soft-danger]="product.total_stock < 10">{{product.total_stock}} left</span></td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.buyPrice' | translate}}:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.sellPrice' | translate}}:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.numberOfOrders' | translate}}</span> {{product.num_of_orders}}</td>
+                            <td (click)="goToDetails(product)" class="cursor-pointer"><span class="badge badge-pill" [class.badge-soft-success]="product.total_stock >= 10" [class.badge-soft-danger]="product.total_stock < 10">{{product.total_stock}} {{'productsContent.left' | translate}}</span></td>
                         </tr>
                     </ng-container>
                 </tbody>
@@ -52,7 +52,7 @@
     </ng-container>
     <ng-template #noProducts>
         <div class="text-center py-5 mt-5">
-            <p class="font-weight-normal font-size-15">No products available</p>
+            <p class="font-weight-normal font-size-15">{{'productsContent.noProductsAvailable' | translate}}</p>
         </div>
     </ng-template>
 </ng-template>
