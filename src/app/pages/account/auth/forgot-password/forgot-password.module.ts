@@ -8,6 +8,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
     CommonModule,
     ForgotPasswordRoutingModule,
     SharedModule,
+    TranslateModule,
     LayoutsModule,
     CoreModule
   ]

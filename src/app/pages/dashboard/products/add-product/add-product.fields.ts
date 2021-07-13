@@ -6,7 +6,8 @@ export const AddProductFields: FieldConfig[] = [
         type: 'file',
         wrapper_classes: 'col-lg-12',
         name: 'product_picture_url',
-        label: 'Upload Product Picture *',
+        label: 'Product Picture',
+        required: true,
         placeholder: 'Upload product picture',
         validations: [
             {
@@ -18,7 +19,8 @@ export const AddProductFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Name *',
+        label: 'Name',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 mb-4',
         name: 'name',
@@ -42,7 +44,8 @@ export const AddProductFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Buying/Production Price *',
+        label: 'Buying/Production Price',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'buying_price',
@@ -62,7 +65,8 @@ export const AddProductFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Selling Price *',
+        label: 'Selling Price',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'selling_price',
@@ -82,7 +86,8 @@ export const AddProductFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Quantity *',
+        label: 'Quantity',
+        required: true,
         inputType: 'text',
         wrapper_classes: 'col-12 mb-4',
         name: 'quantity',

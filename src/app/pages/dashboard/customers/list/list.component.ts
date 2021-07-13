@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import { CustomersService } from 'src/app/core/services/customers.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -34,6 +35,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private router: Router,
     private modal: NgbModal,
     private store: Store<AppState>,
+    private translateService: TranslateService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private customerService: CustomersService
@@ -114,8 +116,10 @@ export class ListComponent implements OnInit, OnDestroy {
     const modalRef = this.modal.open(AddCustomerComponent, { centered: true, size: 'lg' });
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Customer created successfully!');
-        this.fetchCustomers(0);
+        this.translateService.get('notificationMessages.customerCreatedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.fetchCustomers(0);
+        } );
       }
     }, (_) => { });
   }
@@ -125,8 +129,10 @@ export class ListComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.customer = customer;
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Customer edited successfully!');
-        this.fetchCustomers(0);
+        this.translateService.get('notificationMessages.customerEditedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.fetchCustomers(0);
+        } );
       }
     }, (_) => { });
   }

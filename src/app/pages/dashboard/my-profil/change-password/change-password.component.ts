@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/dynamic-form.component';
@@ -18,6 +20,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private translateService: TranslateService,
     private notificationService: NotificationService
   ) { }
 
@@ -30,9 +33,12 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
-    this.userService.changePassword( this.changePasswordForm.value ).subscribe(
-      data => {
-        this.notificationService.success( null, 'Password changed.' );
+    combineLatest([
+      this.translateService.get('notificationMessages.passwordChanged'),
+      this.userService.changePassword( this.changePasswordForm.value )
+    ]).subscribe(
+      ([message, data]) => {
+        this.notificationService.success( null, message );
         this.changePasswordForm.reset();
       }
     );

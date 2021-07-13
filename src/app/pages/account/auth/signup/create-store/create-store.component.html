@@ -1,22 +1,22 @@
 <div class="container-fluid">
-    <div class="row h-100-vh">
+    <div class="row min-vh-100">
         <div class="col-md-6 col-lg-8 d-none d-md-block bg-dark p-5 position-relative">
             <a href="javascript:void(0)" (click)="signOut()"><img width="100" height="auto" src="../../../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <div class="h-70-vh d-flex flex-column justify-content-end px-5 mt-5">
                 <div class="mt-5">
-                    <h1 class="text-light font-weight-bold mb-5">You are almost done. Let's create your store...</h1>
+                    <h1 class="text-light font-weight-bold mb-5">{{'createStoreLeft1' | translate}}</h1>
                     <ul class="list-unstyled mt-4 ml-4">
                         <li class="mb-4 mr-4 font-size-18">
                             <span class="mr-3 text-success"><i [attr.data-feather]="'user'" appFeatherIcon></i></span>
-                            <span class="text-uppercase text-success">USER DETAILS</span>
+                            <span class="text-uppercase text-success">{{'signUpSteps1' | translate}}</span>
                         </li>
                         <li class="mb-4 mr-4 font-size-18">
                             <span class="mr-3 text-primary"><i [attr.data-feather]="'shopping-bag'" appFeatherIcon></i></span>
-                            <span class="text-primary text-uppercase">STORE DETAILS</span>
+                            <span class="text-primary text-uppercase">{{'signUpSteps2' | translate}}</span>
                         </li>
                         <li class="mb-4 font-size-18">
                             <span class="mr-3 text-light"><i [attr.data-feather]="'check-circle'" appFeatherIcon></i></span>
-                            <span class="text-uppercase text-light">COMPLETE</span>
+                            <span class="text-uppercase text-light">{{'signUpSteps3' | translate}}</span>
                         </li>
                     </ul>
                 </div>
@@ -25,15 +25,15 @@
         </div>
         <div class="col-12 col-md-6 col-lg-4 p-5">
             <div class="my-5">
-                <h1 class="mb-4 font-weight-bold">Create Your Store</h1>
+                <h1 class="mb-4 font-weight-bold">{{'createYourStore' | translate}}</h1>
                 <p class="mb-0">
-                    Would you like to continue later ?
-                    <a href="javascript:void(0)" (click)="signOut()">Sign Out</a>
+                    {{'createStoreRight1' | translate}}
+                    <a href="javascript:void(0)" (click)="signOut()">{{'logout' | translate}}</a>
                 </p>
             </div>
             <dynamic-form [formClasses]="''" #form [fields]="fields"></dynamic-form>
             <ng-container *ngIf="plans.length">
-                <p class="font-size-14 mb-2">Plans</p>
+                <p class="font-size-14 mb-2">{{'plans' | translate}}</p>
                 <div class="row mb-5">
                     <ng-container *ngFor="let p of plans">
                         <div class="col-12 col-md-6 col-lg-12">
@@ -41,11 +41,11 @@
                                 <input type="radio" name="plan" [(ngModel)]="plan" [value]="p.plan_type">
                                 <div class="d-flex justify-content-between p-4 rounded-lg">
                                     <div>
-                                        <p class="font-size-15 mb-0 font-weight-bold text-primary text-left">{{p.plan_type}}</p>
+                                        <p class="font-size-15 mb-0 font-weight-bold text-primary text-left">{{p.plan_type | translate}}</p>
                                         <p class="small text-muted mb-0 font-weight-semibold text-left">
-                                            {{p.products_limit}} Products; 
-                                            {{p.orders_limit === -1 ? 'Unlimited' : p.orders_limit}} Orders; 
-                                            {{p.customers_limit === -1 ? 'Unlimited' : p.customers_limit}} Customers
+                                            {{p.products_limit}} {{'products' | translate}}; 
+                                            {{p.orders_limit === -1 ? ('unlimited' | translate) : p.orders_limit}} {{'orders' | translate}}; 
+                                            {{p.customers_limit === -1 ? ('unlimited' | translate) : p.customers_limit}} {{'customers' | translate}}
                                         </p>
                                     </div>
                                 </div>
@@ -56,10 +56,10 @@
             </ng-container>
             <div class="mt-4 d-flex align-items-center">
                 <button (click)="createStore()" class="btn btn-primary btn-neu-light">
-                    Create Store
+                    {{'createStore' | translate}}
                     <ng-container *ngIf="loading; else noloading">
                         <div class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                            <span class="sr-only">Loading...</span>
+                            <span class="sr-only">{{'loading' | translate}}...</span>
                         </div>
                     </ng-container>
                     <ng-template #noloading>

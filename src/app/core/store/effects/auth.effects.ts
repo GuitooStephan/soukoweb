@@ -10,6 +10,7 @@ import { exhaustMap, catchError, map, first, last } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers/root.reducers';
+import { TranslateService } from '@ngx-translate/core';
 // import { UserService } from '../../services/user.service';
 
 
@@ -61,7 +62,9 @@ export class AuthEffects {
                         return this.authService.signIn(action.data.payload).pipe(
                             map(user => {
                                 if ( !user.user.is_email_confirmed ) {
-                                    this.notificationService.error( null, 'Kindly confirm your email.' )
+                                    this.translateService.get('notificationMessages.confirmYourEmail').subscribe( message => {
+                                        this.notificationService.error( null, message );
+                                    } );
                                     return AuthActions.signInIncomplete();
                                 }
 
@@ -101,6 +104,7 @@ export class AuthEffects {
         private actions$: Actions,
         private authService: AuthService,
         private store: Store<AppState>,
+        private translateService: TranslateService,
         private notificationService: NotificationService,
         private jwtService: JwtService,
         private router: Router

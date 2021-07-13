@@ -10,6 +10,7 @@ import * as AuthActions from 'src/app/core/store/actions/auth.actions';
 import { selectError } from 'src/app/core/store/selectors/error.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signin',
@@ -28,6 +29,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
+    private translateService: TranslateService,
     private titleService: Title,
     private metaTagService: Meta,
     private notificationService: NotificationService
@@ -45,7 +47,9 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.selectError$ = this.store.pipe( select( selectError ) ).subscribe(
       error => {
         if ( error ) {
-          this.notificationService.error( null, 'Kindly check your credentials and retry' );
+          this.translateService.get('notificationMessages.checkYourCredentials').subscribe( message => {
+            this.notificationService.error( null, message );
+          } );
         }
       }
     );

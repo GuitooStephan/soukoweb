@@ -4,8 +4,9 @@ import { FieldConfig } from 'src/app/shared/dynamic-forms/field.interface';
 export const InformationFields: FieldConfig[] = [
     {
         type: 'input',
-        label: 'First Name *',
+        label: 'First Name',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'first_name',
         placeholder: 'Enter the first name',
@@ -19,8 +20,9 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Last Name *',
+        label: 'Last Name',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'last_name',
         placeholder: 'Enter the last name',
@@ -34,8 +36,9 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Email *',
+        label: 'Email',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'email',
         placeholder: 'Enter the email',
@@ -49,8 +52,9 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'phone_number',
-        label: 'Phone Number *',
+        label: 'Phone Number',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-lg-6 mb-4',
         name: 'phone_number',
         placeholder: 'Enter the phone number',
@@ -73,8 +77,9 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'City *',
+        label: 'City',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-lg-6 col-12 mb-4',
         name: 'city',
         placeholder: 'Enter the city',
@@ -88,8 +93,9 @@ export const InformationFields: FieldConfig[] = [
     },
     {
         type: 'countries',
-        label: 'Country *',
+        label: 'Country',
         wrapper_classes: 'col-lg-6 col-12 mb-4',
+        required: true,
         name: 'country',
         placeholder: 'Enter the country',
         validations: [

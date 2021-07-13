@@ -13,6 +13,7 @@ import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/co
 import { AddProductComponent } from '../add-product/add-product.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import * as ICC from 'iso-country-currency';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var $;
 
@@ -39,6 +40,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private modal: NgbModal,
     public dialog: MatDialog,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private productsService: ProductsService,
     private route: ActivatedRoute
@@ -122,24 +124,28 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   addProduct() {
-    const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
-    modalRef.result.then((result) => {
-      if (result === 'success') {
-        this.notificationService.success(null, 'Product added successfully!');
-        this.fetchProducts(0);
-      }
-    }, (_) => { });
+    this.translateService.get('notificationMessages.productAddedSuccess').subscribe( message => {
+      const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
+      modalRef.result.then((result) => {
+        if (result === 'success') {
+          this.notificationService.success(null, message );
+          this.fetchProducts(0);
+        }
+      }, (_) => { });
+    } );
   }
 
   editProduct( product ) {
-    const modalRef = this.modal.open(EditProductComponent, { centered: true, size: 'lg' });
-    modalRef.componentInstance.product = product;
-    modalRef.result.then((result) => {
-      if (result === 'success') {
-        this.notificationService.success(null, 'Product edited successfully!');
-        this.fetchProducts(0);
-      }
-    }, (_) => { });
+    this.translateService.get('notificationMessages.productEditedSuccess').subscribe( message => {
+      const modalRef = this.modal.open(EditProductComponent, { centered: true, size: 'lg' });
+      modalRef.componentInstance.product = product;
+      modalRef.result.then((result) => {
+        if (result === 'success') {
+          this.notificationService.success(null, message );
+          this.fetchProducts(0);
+        }
+      }, (_) => { });
+    } );
   }
 
   promptForDeletingProduct( product ): void {
@@ -150,9 +156,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if ( result ) {
-        this.productsService.deleteProduct( product.id ).subscribe(
-          data => {
-            this.notificationService.success( null, 'Product deleted successfully' );
+        combineLatest([
+          this.translateService.get('notificationMessages.productDeletedSuccess'),
+          this.productsService.deleteProduct( product.id )
+        ]).subscribe(
+          ([message, data]) => {
+            this.notificationService.success( null, message );
             this.fetchProducts( 0 );
           }
         );

@@ -14,6 +14,7 @@ import { ProductDetailsModule } from './product-details/product-details.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AvatarModule } from 'ngx-avatar';
 import { CoreModule } from 'src/app/core/core.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { CoreModule } from 'src/app/core/core.module';
     NgbModalModule,
     AvatarModule,
     FormsModule,
+    TranslateModule,
     NgbPaginationModule,
     NgbDropdownModule,
     ReactiveFormsModule,

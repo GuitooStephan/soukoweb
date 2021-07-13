@@ -6,20 +6,20 @@
             </a>
         </div>
         <div>
-            <h1 class="my-0">Record New Order</h1>
-            <p class="mb-0">Make sure to fill all required fields</p>
+            <h1 class="my-0">{{'ordersContent.recordNewOrder' | translate}}</h1>
+            <p class="mb-0">{{'ordersContent.fillTheRequiredFields' | translate}}</p>
         </div>
     </div>
     <div *ngIf="form" [formGroup]="form">
         <div class="mb-3">
-            <h3 class="my-0">Customer</h3>
-            <p class="mb-0">Enter customer details</p>
+            <h3 class="my-0">{{'ordersContent.customer' | translate}}</h3>
+            <p class="mb-0">{{'ordersContent.enterCustomerDetails' | translate}}</p>
         </div>
         <div class="mb-5">
             <div class="form-group mb-2">
                 <mat-form-field floatLabel="never" shouldLabelFloat="false" appearance="standard">
-                    <label class="form-control-label" for="customer">Search customer</label>
-                    <input type="text" id="customer" class="form-control autocomplete" placeholder="Enter customer name" aria-label="Number" matInput formControlName="customer_name" [matAutocomplete]="auto">
+                    <label class="form-control-label" for="customer">{{'ordersContent.searchCustomer' | translate}}</label>
+                    <input type="text" id="customer" class="form-control autocomplete" placeholder="{{'ordersContent.customerPlaceholder' | translate}}" aria-label="Number" matInput formControlName="customer_name" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCustomer" (optionSelected)="customerSelected($event)">
                         <mat-option *ngFor="let option of customerOptions" [value]="option">
                             {{option.first_name + ' ' + option.last_name}}
@@ -28,23 +28,23 @@
                 </mat-form-field>
                 <ng-container *ngIf="form.get('customer_name').invalid && (form.get('customer_name').dirty || form.get('customer_name').touched)">
                     <div *ngIf="form.get('customer_name').hasError('required')" class="text-danger small mb-0 mt-2">
-                        Customer is required
+                        {{'ordersContent.customerIsRequired' | translate}}
                     </div>
                 </ng-container>
             </div>
-            <a (click)="createCustomer()" href="javascript:void(0)">Quickly add new customer</a>
+            <a (click)="createCustomer()" href="javascript:void(0)">{{'ordersContent.quicklyAddCustomer' | translate}}</a>
         </div>
         <div class="mb-3">
-            <h3 class="my-0">Items</h3>
-            <p class="mb-0">Products and their quantity</p>
+            <h3 class="my-0">{{'ordersContent.items' | translate}}</h3>
+            <p class="mb-0">{{'ordersContent.productsAndQuantity' | translate}}</p>
         </div>
         <div class="mb-5">
             <ng-container *ngFor="let item of o.controls; let i = index;">
                 <div class="row" [formGroup]="item">
                     <div class="col-12 col-lg-6 mb-2 mb-lg-0 form-group">
                         <mat-form-field floatLabel="never" shouldLabelFloat="false" appearance="standard">
-                            <label class="form-control-label" for="customer">Product</label>
-                            <input type="text" id="customer" class="form-control autocomplete" placeholder="Enter product name" aria-label="Number" matInput formControlName="product_name" [matAutocomplete]="auto">
+                            <label class="form-control-label" for="customer">{{'ordersContent.product' | translate}}</label>
+                            <input type="text" id="customer" class="form-control autocomplete" placeholder="{{'ordersContent.productPlaceholder' | translate}}" aria-label="Number" matInput formControlName="product_name" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayProduct" (optionSelected)="productSelected($event, i)">
                                 <mat-option *ngFor="let option of productOptions" [value]="option">
                                     {{option.name}}
@@ -53,40 +53,40 @@
                         </mat-form-field>
                         <ng-container *ngIf="item.get('total_stock').value">
                             <div class="text-primary small my-0">
-                                The total stock is {{ item.get('total_stock').value }}
+                                {{'ordersContent.totalStockIs' | translate}} {{ item.get('total_stock').value }}
                             </div>
                         </ng-container>
                         <ng-container *ngIf="item.get('product_name').invalid && (item.get('product_name').dirty || item.get('product_name').touched)">
                             <div *ngIf="item.get('product_name').hasError('required')" class="text-danger small mb-0 mt-2">
-                                Product is required
+                                {{'ordersContent.productIsRequired' | translate}}
                             </div>
                         </ng-container>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3 mb-2 mb-md-0 form-group">
-                        <label class="form-control-label" [for]="'quantity' + 1">Quantity</label>
-                        <input type="text" [id]="'quantity' + 1" formControlName="quantity" class="form-control" placeholder="Enter quantity">
+                        <label class="form-control-label" [for]="'quantity' + 1">{{'ordersContent.quantity' | translate}}</label>
+                        <input type="text" [id]="'quantity' + 1" formControlName="quantity" class="form-control" placeholder="{{'ordersContent.quantityPlaceholder' | translate}}">
                         <ng-container *ngIf="item.get('quantity').invalid && (item.get('quantity').dirty || item.get('quantity').touched)">
                             <div *ngIf="item.get('quantity').hasError('required')" class="text-danger small mb-0 mt-2">
-                                Quantity is required
+                                {{'ordersContent.quantityIsRequired' | translate}}
                             </div>
                             <div *ngIf="item.get('quantity').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                                Quantity should be a number
+                                {{'ordersContent.quantityShouldNumber' | translate}}
                             </div>
                             <div *ngIf="item.get('quantity').hasError('max')" class="text-danger small mb-0 mt-2">
-                                Quantity should not exceed your stock
+                                {{'ordersContent.quantityNotExceedStock' | translate}}
                             </div>
                         </ng-container>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3 mb-md-0 d-flex justify-content-between align-items-center">
                         <div class="pl-0 form-group" [class.col-12]="i === 0" [class.col-11]="i > 0" [class.pr-0]="i === 0">
-                            <label class="form-control-label" [for]="'cost' + 1">Cost</label>
-                            <input type="text" [id]="'cost' + 1" formControlName="cost" class="form-control" placeholder="Enter cost">
+                            <label class="form-control-label" [for]="'cost' + 1">{{'ordersContent.cost' | translate}}</label>
+                            <input type="text" [id]="'cost' + 1" formControlName="cost" class="form-control" placeholder="{{'ordersContent.costPlaceholder' | translate}}">
                             <ng-container *ngIf="item.get('cost').invalid && (item.get('cost').dirty || item.get('cost').touched)">
                                 <div *ngIf="item.get('cost').hasError('required')" class="text-danger small mb-0 mt-2">
-                                    Cost is required
+                                    {{'ordersContent.costIsRequired' | translate}}
                                 </div>
                                 <div *ngIf="item.get('cost').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                                    Cost should be a decimal number
+                                    {{'ordersContent.costShouldBeDecimal' | translate}}
                                 </div>
                             </ng-container>
                         </div>
@@ -99,26 +99,26 @@
             </ng-container>
             <div class="my-3">
                 <button class="btn btn-primary btn-neu-light" (click)="addOrderItem()">
-                    Add new order item
+                    {{'ordersContent.addNewOrderItem' | translate}}
                     <i [attr.data-feather]="'plus'" appFeatherIcon></i>
                 </button>
             </div>
         </div>
         <div class="mb-3">
-            <h3 class="my-0">Other expenses</h3>
-            <p class="mb-0">(Delivery, etc...)</p>
+            <h3 class="my-0">{{'ordersContent.otherExpenses' | translate}}</h3>
+            <p class="mb-0">{{'ordersContent.otherExpensesDescription' | translate}}</p>
         </div>
         <div class="mb-5">
             <div class="row">
                 <div class="col-12 col-md-6 mb-2 mb-md-0 form-group">
-                    <label class="form-control-label" for="delivery_fee">Other Expenses</label>
-                    <input type="text" id="delivery_fee" formControlName="delivery_fee" class="form-control" placeholder="Enter other expenses">
+                    <label class="form-control-label" for="delivery_fee">{{'ordersContent.otherExpenses' | translate}}</label>
+                    <input type="text" id="delivery_fee" formControlName="delivery_fee" class="form-control" placeholder="{{'ordersContent.otherExpensesPlaceholder' | translate}}">
                     <ng-container *ngIf="form.get('delivery_fee').invalid && (form.get('delivery_fee').dirty || form.get('delivery_fee').touched)">
                         <div *ngIf="form.get('delivery_fee').hasError('required')" class="text-danger small mb-0 mt-2">
-                            Other expenses should be at least 0.00
+                            {{'ordersContent.otherExpensesValidation1' | translate}}
                         </div>
                         <div *ngIf="form.get('delivery_fee').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                            Other expenses should be a number
+                            {{'ordersContent.otherExpensesValidation2' | translate}}
                         </div>
                     </ng-container>
                 </div>
@@ -128,18 +128,18 @@
         <div class="form-check">
             <input class="custom-checkbox mr-2" formControlName="paying_now" type="checkbox" value="" id="paying_now">
             <label class="form-check-label" for="paying_now">
-                The customer is paying now
+                {{'ordersContent.theCustomerIsPayingNow' | translate}}
             </label>
         </div>
     </div>
     <hr>
     <div class="mt-4 mb-5">
-        <p class="my-0 font-size-16 mb-0">Total</p>
+        <p class="my-0 font-size-16 mb-0">{{'ordersContent.total' | translate}}</p>
         <h4 class="my-0">{{ total | currency:currency:'symbol':'1.0-0' }}</h4>
     </div>
     <div class="mb-5">
         <button (click)="createOrder()" class="btn btn-primary btn-neu-light">
-            Record Order
+            {{'ordersContent.recordOrder' | translate}}
             <i [attr.data-feather]="'arrow-right'" appFeatherIcon></i>
         </button>
     </div>

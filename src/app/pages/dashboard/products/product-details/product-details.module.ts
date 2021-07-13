@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { NgbModalModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
+    TranslateModule,
     MatDialogModule,
     FormsModule,
     NgbModalModule,

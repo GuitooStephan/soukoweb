@@ -9,6 +9,7 @@ import { CreateStoreComponent } from './create-store/create-store.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     LayoutsModule,
     SignupRoutingModule,
     SharedModule,

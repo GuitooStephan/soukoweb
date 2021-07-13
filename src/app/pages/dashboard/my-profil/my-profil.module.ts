@@ -6,6 +6,7 @@ import { InformationComponent } from './information/information.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { CoreModule } from 'src/app/core/core.module';
   imports: [
     CommonModule,
     MyProfilRoutingModule,
+    TranslateModule,
     SharedModule,
     CoreModule
   ]

@@ -67,7 +67,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.customersService.fetchOrders( this.route.parent.snapshot.params.id, offset, q, paymentStatus, confirmed ).subscribe(
       data => {
         this.count = data.count;
-        this.orders = data.results;
+        this.orders = data.results.map( o => ({ ...o, payment_status_translate_key: o.payment_status.replace(' ', '') }) );
         this.loading = false;
       }
     );

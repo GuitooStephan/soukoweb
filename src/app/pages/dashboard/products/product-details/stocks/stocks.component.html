@@ -2,7 +2,7 @@
     <div class="row">
         <div class="mx-auto my-5">
             <div class="spinner-border text-primary m-2" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </div>
@@ -10,7 +10,7 @@
 <ng-template #noLoading>
     <div class="mb-4 text-left text-sm-right">
         <button (click)="createStock()" class="btn btn-primary btn-neu-light" href="javascript:void(0)">
-            Add Stock
+            {{'productsContent.addStock' | translate}}
             <i class="fa fa-plus"></i>
         </button>
     </div>
@@ -22,8 +22,8 @@
                         <i class="fa fa-archive fa-2x"></i>
                     </div>
                     <div class="media-body ml-3">
-                        <p class="font-size-16 mb-0 text-dark">Stock {{i + 1}}</p>
-                        <p class="mb-0"><span class="font-weight-bold">{{ stock.num_of_remaining_items }}</span> items left</p>
+                        <p class="font-size-16 mb-0 text-dark">{{'productsContent.stock' | translate}} {{i + 1}}</p>
+                        <p class="mb-0"><span class="font-weight-bold">{{ stock.num_of_remaining_items }}</span> {{'productsContent.itemsLeft' | translate}}</p>
                         <p class="mb-0">{{ stock.created_at | date }}</p>
                     </div>
                 </div>

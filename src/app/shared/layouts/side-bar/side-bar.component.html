@@ -22,31 +22,31 @@
             <li class="mb-5">
                 <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
-                    <span>Dashboard</span>
+                    <span>{{'dashboard' | translate}}</span>
                 </a>
             </li>
             <li class="mb-5">
                 <a [routerLink]="['/dashboard/products']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'shopping-cart'" appFeatherIcon></i></span>
-                    <span>Products</span>
+                    <span>{{'products' | translate}}</span>
                 </a>
             </li>
             <li class="mb-5">
                 <a [routerLink]="['/dashboard/orders']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'credit-card'" appFeatherIcon></i></span>
-                    <span>Orders</span>
+                    <span>{{'orders' | translate}}</span>
                 </a>
             </li>
             <li class="mb-5">
                 <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'users'" appFeatherIcon></i></span>
-                    <span>Customers</span>
+                    <span>{{'customers' | translate}}</span>
                 </a>
             </li>
             <li class="mb-0">
                 <a [routerLink]="['/dashboard/my-store']" routerLinkActive="active" class="link-item font-size-14 py-3 px-4">
                     <span class="mr-3"><i [attr.data-feather]="'home'" appFeatherIcon></i></span>
-                    <span>My Store</span>
+                    <span>{{'myStore' | translate}}</span>
                 </a>
             </li>
         </ul>

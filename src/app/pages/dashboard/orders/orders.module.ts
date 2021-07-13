@@ -17,6 +17,7 @@ import { EditOrderComponent } from './edit-order/edit-order.component';
 import { OrderDetailsModule } from './order-details/order-details.module';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { RecordPaymentComponent } from './record-payment/record-payment.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { RecordPaymentComponent } from './record-payment/record-payment.componen
     MatAutocompleteModule,
     ReactiveFormsModule,
     FormsModule,
+    TranslateModule,
     NgbDropdownModule,
     NgbPaginationModule,
     OrderDetailsModule,

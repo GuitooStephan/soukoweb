@@ -5,17 +5,17 @@
             <ul class="ml-sm-auto navbar-nav justify-content-end flex-row align-items-center order-1">
                 <li class="nav-item d-none d-md-block mr-4">
                     <a [routerLink]="['/faqs']" class="text-normal font-size-16">
-                        Faqs
+                        {{'faqs' | translate }}
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block mr-4">
                     <a [routerLink]="['/account/auth/sign-in']" class="text-normal font-size-16">
-                        Log In
+                        {{'login' | translate}}
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block">
                     <a class="btn btn-neu-light btn-primary mr-4" [routerLink]="['/account/auth/sign-up']"> 
-                        Create a store
+                        {{'createStore' | translate}}
                     </a>
                 </li>
                 <li ngbDropdown placement="bottom-left" class="nav-item d-md-none" display="dynamic" autoClose="outside">
@@ -24,13 +24,13 @@
                     </a>
                     <div ngbDropdownMenu aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right">
                         <a [routerLink]="['/faqs']" ngbDropdownItem>
-                            Faqs
+                            {{'faqs' | translate }}
                         </a>
                         <a [routerLink]="['/account/auth/sign-in']" ngbDropdownItem>
-                            Sign In
+                            {{'login' | translate}}
                         </a>
                         <a [routerLink]="['/account/auth/sign-up']" ngbDropdownItem>
-                            Create a store
+                            {{'createStore' | translate}}
                         </a>
                     </div>
                 </li>
@@ -41,9 +41,9 @@
         <div class="d-flex justify-content-between h-100">
             <div class="d-flex flex-column justify-content-end h-100 hero-content w-max-400">
                 <div>
-                    <h1 class="font-weight-bold mb-2">Grow with SOUKO,<br>your stock management platform</h1>
-                    <p class="mb-4 font-size-18">We provide you with a dashboard to manage your inventory, sales, customers along with a personalized e-commerce for your products only.</p>
-                    <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary width-md btn-lg">Create a store</a>
+                    <h1 class="font-weight-bold mb-2">{{'homePageHero1' | translate}},<br>{{'homePageHero2' | translate }}</h1>
+                    <p class="mb-4 font-size-18">{{'homePageHero3' | translate }}</p>
+                    <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary width-md btn-lg">{{'createStore' | translate}}</a>
                 </div>
             </div>
             <div class="position-relative hero-illustration d-none d-lg-flex align-items-end justify-content-center">
@@ -56,42 +56,42 @@
     </div>
 </div>
 <div class="container mt-100 text-center px-4 px-sm-0">
-    <h1>Features</h1>
+    <h1>{{'homeFeatures1' | translate}}</h1>
     <div class="row mt-60 justify-content-around justify-content-lg-between">
         <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-sm-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/store.svg" alt="store-icon">
-            <h3 class="mb-4 font-weight-bold">Real Time Insight</h3>
-            <p class="font-weight-bold mb-1">Make decisions that grow your business.</p>
-            <p class="mb-0">Souko provides you with insightful metrics on your sales, revenues, profits, expenses over a period of time.</p>
+            <h3 class="mb-4 font-weight-bold">{{'homeFeatures2' | translate}}</h3>
+            <p class="font-weight-bold mb-1">{{'homeFeatures3' | translate}}</p>
+            <p class="mb-0">{{'homeFeatures4' | translate}}</p>
         </div>
         <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-sm-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
-            <h3 class="mb-4 font-weight-bold">Stock Management</h3>
-            <p class="font-weight-bold mb-1">Have full control over your business at one place.</p>
-            <p class="mb-0">Record order, add new products, save your customers' contacts all at one place.</p>
+            <h3 class="mb-4 font-weight-bold">{{'homeFeatures5' | translate}}</h3>
+            <p class="font-weight-bold mb-1">{{'homeFeatures6' | translate}}</p>
+            <p class="mb-0">{{'homeFeatures7' | translate}}</p>
         </div>
         <div class="col-12 col-sm-5 col-lg-3 text-left mb-5 mb-lg-0 px-5 py-4 neu-out">
             <img class="avatar-sm mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
-            <h3 class="mb-4 font-weight-bold">Personalized E-commerce</h3>
-            <p class="font-weight-bold mb-1">Get more sales, sell anywhere to anyone</p>
-            <p class="mb-0">We offer you a dedicated e-shop that people can visit and do their shopping conveniently.</p>
+            <h3 class="mb-4 font-weight-bold">{{'homeFeatures8' | translate}}</h3>
+            <p class="font-weight-bold mb-1">{{'homeFeatures9' | translate}}</p>
+            <p class="mb-0">{{'homeFeatures10' | translate}}</p>
         </div>
     </div>
 </div>
 <div class="bg-light py-100 mt-100">
     <div class="container text-center">
-        <h1 class="text-primary">Why SOUKO</h1>
+        <h1 class="text-primary">{{'homeWhySouko1' | translate}}</h1>
         <div class="row mt-60 how-to">
             <div class="col-12 mb-5 col-md-4">
                 <div class="mb-5 px-4 px-md-2 text-center">
                     <img class="avatar-md mb-2" src="../../../../assets/images/click.svg" alt="store-icon">
-                    <h3 class="mb-3 font-weight-bold">Easy and flexible</h3>
-                    <p class="mb-3">Souko is user friendly and can be used on any device anywhere</p>
+                    <h3 class="mb-3 font-weight-bold">{{'homeWhySouko2' | translate}}</h3>
+                    <p class="mb-3">{{'homeWhySouko3' | translate}}</p>
                 </div>
                 <div class="px-4 px-md-2 text-center">
                     <img class="avatar-md mb-2" src="../../../../assets/images/metrics.svg" alt="store-icon">
-                    <h3 class="mb-3 font-weight-bold">Real time insights</h3>
-                    <p class="mb-3">Anytime, anywhere have a look at how your business performs in real time.</p>
+                    <h3 class="mb-3 font-weight-bold">{{'homeWhySouko4' | translate}}</h3>
+                    <p class="mb-3">{{'homeWhySouko5' | translate}}</p>
                 </div>
             </div>
             <div class="col-md-4 d-none d-md-flex align-items-center justify-content-center">
@@ -100,13 +100,13 @@
             <div class="col-12 col-md-4">
                 <div class="mb-5 px-4 px-md-2">
                     <img class="avatar-md mb-2" src="../../../../assets/images/free.svg" alt="store-icon">
-                    <h3 class="mb-3 font-weight-bold">Free</h3>
-                    <p class="mb-3">Just create an account and start enjoying Souko. No charges or payments required.</p>
+                    <h3 class="mb-3 font-weight-bold">{{'homeWhySouko6' | translate}}</h3>
+                    <p class="mb-3">{{'homeWhySouko7' | translate}}</p>
                 </div>
                 <div class="px-4 px-md-2">
                     <img class="avatar-md mb-2" src="../../../../assets/images/shopping.svg" alt="store-icon">
-                    <h3 class="mb-3 font-weight-bold">Integrated E-commerce</h3>
-                    <p class="mb-3">Allow your customers to order your products directly on SOUKO</p>
+                    <h3 class="mb-3 font-weight-bold">{{'homeWhySouko8' | translate}}</h3>
+                    <p class="mb-3">{{'homeWhySouko9' | translate}}</p>
                 </div>
             </div>
         </div>
@@ -116,10 +116,10 @@
 <div class="container mt-100 text-center neu-out">
     <div class="rounded-xl row justify-content-between align-items-center p-5 mx-2">
         <div class="col-12 col-md-6 mb-2 text-md-left">
-            <h1>Start managing your store efficiently with Souko today</h1>
+            <h1>{{'homeCallToAction1' | translate}}</h1>
         </div>
         <div class="col-12 col-md-4 text-right">
-            <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary w-100 w-md-auto btn-lg">Create a store</a>
+            <a [routerLink]="['/account/auth/sign-up']" class="btn btn-neu-light btn-primary w-100 w-md-auto btn-lg">{{'createStore' | translate}}</a>
         </div>
     </div>
 </div>
@@ -128,7 +128,7 @@
         <img class="mb-5" width="100" height="auto" src="../../../../assets/images/logo-with-name.png" alt="logo">
         <div class="mt-4 row justify-content-between align-items-start">
             <div class="col-12 col-md-3 col-lg-4 mb-5 mb-md-0">
-                <h2 class="mb-3 text-dark">Connect with us</h2>
+                <h2 class="mb-3 text-dark">{{'footer1' | translate}}</h2>
                 <p class="mb-1">
                     <a class="text-dark" href="mailto:souko.limited@gmail.com" target="_blank">
                         <span><i class="fa fa-envelope"></i></span>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="media-body">
                         <p class="font-weight-bold mb-1">Guy Stephane</p>
-                        <p class="mb-2">Developer</p>
+                        <p class="mb-2">{{'footer2' | translate}}</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/guy-stephane-tanoh-5256a6100" target="_blank">
                                 <span><i class="fa fa-linkedin"></i></span>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="media-body">
                         <p class="font-weight-bold mb-1">Joel Kouame</p>
-                        <p class="mb-2">Marketer</p>
+                        <p class="mb-2">{{'footer3' | translate}}</p>
                         <p class="small mb-1">
                             <a class="text-dark" href="https://www.linkedin.com/in/joel-kouame-05aa5a119" target="_blank">
                                 <span><i class="fa fa-linkedin"></i></span>

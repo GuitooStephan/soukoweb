@@ -7,6 +7,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { SuccessComponent } from './success/success.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LayoutsModule } from 'src/app/shared/layouts/layouts.module';
     CoreModule,
     SharedModule,
     LayoutsModule,
-    AvatarModule
+    AvatarModule,
+    TranslateModule
   ]
 })
 export class ConfirmOrderModule { }

@@ -1,17 +1,17 @@
 <div class="container-fluid">
-    <div class="row h-100-vh">
+    <div class="row min-vh-100">
         <div class="col-lg-3 d-none d-lg-block bg-dark px-5 pb-5 pt-4 position-relative">
             <a href="javascript:void(0)"><img width="100" height="auto" src="../../../../../assets/images/logo-with-name.png" alt="logo"></a>
             <div class="mt-5">
-                <h1 class="text-light mb-5">You are almost done...</h1>
+                <h1 class="text-light mb-5">{{'customerDashboard.confirmOrderLeft1' | translate}}</h1>
                 <ul class="list-unstyled mt-4 ml-4">
                     <li class="mb-4">
                         <span class="mr-3 text-primary"><i [attr.data-feather]="'arrow-right-circle'" appFeatherIcon></i></span>
-                        <span class="text-uppercase text-primary">PLACE ORDER</span>
+                        <span class="text-uppercase text-primary">{{'customerDashboard.selectProductsStep1' | translate}}</span>
                     </li>
                     <li class="mb-4">
                         <span class="mr-3 text-light"><i class="fa fa-check-circle"></i></span>
-                        <span class="text-uppercase text-light">CONFIRM ORDER</span>
+                        <span class="text-uppercase text-light">{{'customerDashboard.selectProductsStep2' | translate}}</span>
                     </li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </nav>
-                <div class="h-100-vh d-flex justify-content-center align-items-start align-items-lg-center">
+                <div class="min-vh-100 d-flex justify-content-center align-items-start align-items-lg-center">
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center">
                             <div class="w-md-max-400">
@@ -44,28 +44,28 @@
                         </div>
                         <div class="col-lg-7 col-12 d-flex align-items-center justify-content-center">
                             <div class="w-md-max-400 px-4 px-lg-0 pt-150 pt-lg-0">
-                                <h2 class="mb-3">Congratulations</h2>
-                                <p class="mb-2">Thank you so much for placing your order.</p>
-                                <p class="mb-3">Now you would need to confirm the order by providing the code sent to your email.</p>
-                                <p class="mb-5">Kindly check your email</p>
-                                <p><a href="javascript:void(0)" (click)="resendOrderConfirmationCode()">Resend code</a></p>
+                                <h2 class="mb-3">{{'customerDashboard.confirmOrderRight1' | translate}}</h2>
+                                <p class="mb-2">{{'customerDashboard.confirmOrderRight2' | translate}}</p>
+                                <p class="mb-3">{{'customerDashboard.confirmOrderRight3' | translate}}</p>
+                                <p class="mb-5">{{'customerDashboard.confirmOrderRight4' | translate}}</p>
+                                <p><a href="javascript:void(0)" (click)="resendOrderConfirmationCode()">{{'customerDashboard.confirmOrderRight5' | translate}}</a></p>
                                 <div *ngIf="form" class="mt-2" [formGroup]="form">
                                     <div class="mb-2">
-                                        <label class="form-control-label" for="code">Verification Code</label>
-                                        <input type="text" id="code" formControlName="code" class="form-control" placeholder="Enter code">
+                                        <label class="form-control-label" for="code">{{'customerDashboard.confirmOrderRight6' | translate}}</label>
+                                        <input type="text" id="code" formControlName="code" class="form-control" placeholder="{{'customerDashboard.confirmOrderRightPlaceholder' | translate}}">
                                         <ng-container *ngIf="form.get('code').invalid && (form.get('code').dirty || form.get('code').touched)">
                                             <div *ngIf="form.get('code').hasError('required')" class="text-danger small mb-0 mt-2">
-                                                Code is required
+                                                {{'customerDashboard.confirmOrderRightValidation1' | translate}}
                                             </div>
                                             <div *ngIf="form.get('code').hasError('pattern')" class="text-danger small mb-0 mt-2">
-                                                Code should be a number
+                                                {{'customerDashboard.confirmOrderRightValidation2' | translate}}
                                             </div>
                                             <div *ngIf="form.get('code').hasError('maxlength')" class="text-danger small mb-0 mt-2">
-                                                Code should be longer than 6
+                                                {{'customerDashboard.confirmOrderRightValidation3' | translate}}
                                             </div>
                                         </ng-container>
                                     </div>
-                                    <div><button (click)="confirmOrder()" class="btn btn-primary">Confirm Order</button></div>
+                                    <div><button (click)="confirmOrder()" class="btn btn-primary">{{'customerDashboard.confirmOrderButton' | translate}}</button></div>
                                 </div>
                             </div>
                         </div>

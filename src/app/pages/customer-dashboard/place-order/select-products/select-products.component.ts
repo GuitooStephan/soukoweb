@@ -12,6 +12,7 @@ import { select, Store } from '@ngrx/store';
 import { selectCart } from 'src/app/core/store/selectors/cart.selectors';
 import * as CartActions from 'src/app/core/store/actions/cart.actions';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var $;
 declare var _;
@@ -29,6 +30,7 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
     private router: Router,
     private store: Store<AppState>,
     private storeService: StoreService,
+    private translateService: TranslateService,
     private notificationService: NotificationService,
     private productsService: ProductsService,
     private modalService: NgbModal
@@ -105,8 +107,10 @@ export class SelectProductsComponent implements OnInit, OnDestroy {
       this.loading = false;
       this.selectCart();
     }, error => {
-      this.notificationService.error( null, 'Store does not exist, kindly contact the store manager.' );
-      this.router.navigate( ['/'] );
+      this.translateService.get('notificationMessages.storeDoesNotExist').subscribe( message => {
+        this.notificationService.error( null, message );
+        this.router.navigate( ['/'] );
+      } );
     } );
   }
 

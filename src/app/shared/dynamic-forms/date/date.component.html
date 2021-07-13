@@ -1,12 +1,19 @@
 <div class="row" [formGroup]="group">
     <div class="col-12">
         <div class="form-group clearfix d-grid form-date">
-            <label class="control-label form-label" [for]="field.name">{{field.label}}</label>
+            <label class="control-label form-label" [for]="field.name">{{field.name | translate}} {{field.required ? '*' : ''}}</label>
             <div class="position-relative">
-                <input class="form-control d-inline-block" matInput [matDatepicker]="picker" (click)="picker.open()" [class]="field.classes" [placeholder]="field.placeholder" [formControlName]="field.name" [attr.id]="field.name">
+                <input class="form-control d-inline-block" matInput [matDatepicker]="picker" (click)="picker.open()" [class]="field.classes" placeholder="{{'placeholders.select' | translate}} {{field.name | translate}}" [formControlName]="field.name" [attr.id]="field.name">
                 <mat-datepicker-toggle class="position-absolute" matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </div>
         </div>
+        <ng-container *ngIf="group.get(field.name).invalid && (group.get(field.name).dirty || group.get(field.name).touched)">
+            <ng-container *ngFor="let validation of field.validations;">
+                <div *ngIf="group.get(field.name).hasError(validation.name)" class="text-danger small mb-0 mt-2">
+                    {{'validations.' + validation.name | translate}}
+                </div>
+            </ng-container>
+        </ng-container>
     </div>
 </div>

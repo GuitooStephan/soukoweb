@@ -11,6 +11,7 @@ import { AddProductComponent } from '../products/add-product/add-product.compone
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import * as ICC from 'iso-country-currency';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -36,6 +37,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private storeService: StoreService,
     private modal: NgbModal,
+    private translateService: TranslateService,
     private notificationService: NotificationService
   ) {
     this.selectData$ = combineLatest( [
@@ -78,32 +80,41 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
   }
 
   generateGraphsForExport() {
-    this.ordersMetricsGraph = null;
-    const ordersMetricsGraph = { ...linewithDataChart };
-    ordersMetricsGraph.series = [];
-    ordersMetricsGraph.xaxis.categories = [];
-    setTimeout( () => {
-      ordersMetricsGraph.series.push( { name: 'Orders', data: this.metrics.ordersReport.orders_record.map( _o => _o.orders ) } );
-      ordersMetricsGraph.xaxis.categories.push( ...this.metrics.ordersReport.orders_record.map( d => d.date ) );
-      this.ordersMetricsGraph = ordersMetricsGraph;
-    }, 1000 );
+    combineLatest([
+      this.translateService.get('dashboardContent.profit'),
+      this.translateService.get('dashboardContent.orders')
+    ]).subscribe( ([profit, orders]) => {
+      console.log('--->>', profit);
+      console.log('--->>', orders);
+      this.ordersMetricsGraph = null;
+      const ordersMetricsGraph = { ...linewithDataChart };
+      ordersMetricsGraph.series = [];
+      ordersMetricsGraph.xaxis.categories = [];
+      setTimeout( () => {
+        ordersMetricsGraph.series.push( { name: orders, data: this.metrics.ordersReport.orders_record.map( _o => _o.orders ) } );
+        ordersMetricsGraph.xaxis.categories.push( ...this.metrics.ordersReport.orders_record.map( d => d.date ) );
+        this.ordersMetricsGraph = ordersMetricsGraph;
+      }, 1000 );
 
-    this.profitMetricsGraph = null;
-    const profitMetricsGraph = { ...linewithDataChart };
-    profitMetricsGraph.series = [];
-    profitMetricsGraph.xaxis.categories = [];
-    setTimeout( () => {
-      profitMetricsGraph.series.push( { name: 'Profit', data: this.metrics.profitReport.profit_report.map( _o => _o.profit ) } );
-      profitMetricsGraph.xaxis.categories.push( ...this.metrics.profitReport.profit_report.map( d => d.date ) );
-      this.profitMetricsGraph = profitMetricsGraph;
-    }, 1000 );
+      this.profitMetricsGraph = null;
+      const profitMetricsGraph = { ...linewithDataChart };
+      profitMetricsGraph.series = [];
+      profitMetricsGraph.xaxis.categories = [];
+      setTimeout( () => {
+        profitMetricsGraph.series.push( { name: profit, data: this.metrics.profitReport.profit_report.map( _o => _o.profit ) } );
+        profitMetricsGraph.xaxis.categories.push( ...this.metrics.profitReport.profit_report.map( d => d.date ) );
+        this.profitMetricsGraph = profitMetricsGraph;
+      }, 1000 );
+    });
   }
 
   addProduct() {
     const modalRef = this.modal.open(AddProductComponent, { centered: true, size: 'lg' });
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Product added successfully!');
+        this.translateService.get('notificationMessages.productAddedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+        } );
       }
     }, (_) => { });
   }

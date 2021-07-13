@@ -11,6 +11,8 @@ import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/
 import { MyStoreFields } from '../my-store.fields';
 import * as StoreActions from 'src/app/core/store/actions/store.actions';
 import { UpdateLogoComponent } from '../update-logo/update-logo.component';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 
 declare var _: any;
 
@@ -32,6 +34,7 @@ export class InformationComponent implements OnInit, AfterViewInit, OnDestroy {
     private store: Store<AppState>,
     private categoriesService: CategoriesService,
     private notificationService: NotificationService,
+    private translateService: TranslateService,
     private storeService: StoreService,
     private modal: NgbModal
   ) {
@@ -81,9 +84,12 @@ export class InformationComponent implements OnInit, AfterViewInit, OnDestroy {
       value.phone_number = value.phone_number.e164Number;
     }
 
-    this.storeService.updateStore( this.myStore.id, value ).subscribe(
-      data => {
-        this.notificationService.success( null, 'Store updated.' );
+    combineLatest([
+      this.translateService.get('notificationMessages.storeUpdated'),
+      this.storeService.updateStore( this.myStore.id, value )
+    ]).subscribe(
+      ([message, data]) => {
+        this.notificationService.success( null, message );
         this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );
       }
     );
@@ -94,8 +100,10 @@ export class InformationComponent implements OnInit, AfterViewInit, OnDestroy {
     modalRef.componentInstance.storeId = this.myStore.id;
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success( null, 'Store Logo updated.' );
-        this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );
+        this.translateService.get('notificationMessages.storeLogoUpdated').subscribe( message => {
+          this.notificationService.success( null, message );
+          this.store.dispatch( StoreActions.fetchStore( { data: { storeId: this.myStore.id } } ) );
+        } );
       }
     }, (_) => { });
   }

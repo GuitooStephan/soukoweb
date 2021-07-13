@@ -1,11 +1,11 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 min-vh-100">
     <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="mb-2 mb-md-0">Products</h1>
+            <h1 class="mb-2 mb-md-0">{{'products' | translate}}</h1>
         </div>
         <div>
             <button (click)="addProduct()" class="btn btn-primary btn-neu-light">
-                Add product
+                {{'productsContent.addProduct' | translate}}
                 <i [attr.data-feather]="'plus'" appFeatherIcon></i>
             </button>
         </div>
@@ -16,13 +16,13 @@
                 <i class="fa fa-search fa-2x"></i>
             </span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="Search for products">
+        <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchProducts($event)" placeholder="{{'productsContent.searchProductsPlaceholder' | translate}}">
     </div>
     <ng-container *ngIf="loading; else noloading;">
         <div class="row" *ngIf="loading">
             <div class="mx-auto my-5">
                 <div class="spinner-border text-primary m-2" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{'loading' | translate}}...</span>
                 </div>
             </div>
         </div>
@@ -51,18 +51,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Buy. Price:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Sell. Price:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">Num. Orders</span> {{product.num_of_orders}}</td>
-                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="badge badge-pill" [class.badge-soft-success]="product.total_stock >= 10" [class.badge-soft-danger]="product.total_stock < 10">{{product.total_stock}} left</span></td>
+                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.buyPrice' | translate}}:</span> {{product.buying_price | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.sellPrice' | translate}}:</span> {{product.selling_price | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="font-weight-bold">{{'productsContent.numberOfOrders' | translate}}:</span> {{product.num_of_orders}}</td>
+                                <td (click)="goToDetails(product)" class="cursor-pointer"><span class="badge badge-pill" [class.badge-soft-success]="product.total_stock >= 10" [class.badge-soft-danger]="product.total_stock < 10">{{product.total_stock}} {{'productsContent.left' | translate}}</span></td>
                                 <td ngbDropdown container="body" class="cursor-pointer">
                                     <span ngbDropdownToggle class="no-dropdown-arrow"><i class="fa fa-2x fa-ellipsis-v"></i></span>
                                     <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
                                         <a (click)="editProduct(product)" href="javascript:void(0)" ngbDropdownItem>
-                                            Edit
+                                            {{'actions.Edit' | translate}}
                                         </a>
                                         <a (click)="promptForDeletingProduct(product)" href="javascript:void(0)" ngbDropdownItem>
-                                            Delete
+                                            {{'actions.Delete' | translate}}
                                         </a>
                                     </div>
                                 </td>
@@ -86,7 +86,7 @@
         </ng-container>
         <ng-template #noProducts>
             <div class="text-center py-5">
-                <p class="font-weight-normal font-size-15">No products available</p>
+                <p class="font-weight-normal font-size-15">{{'productsContent.noProductsAvailable' | translate}}</p>
             </div>
         </ng-template>
     </ng-template>

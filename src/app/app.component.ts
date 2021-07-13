@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let gtag: Function;
 
@@ -10,7 +11,10 @@ declare let gtag: Function;
 })
 export class AppComponent implements OnInit {
 
-  constructor(public router: Router){
+  constructor(
+    public router: Router,
+    public translate: TranslateService
+  ){
     this.router.events.subscribe( event => {
       if ( event instanceof NavigationEnd ){
         gtag('config', 'G-FN77QKZKZ1',
@@ -20,7 +24,19 @@ export class AppComponent implements OnInit {
         );
       }
     } );
+
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('fr');
+    translate.use(this.translate.getBrowserLang());
   }
 
   ngOnInit(): void { }
+
+  changeLanguageToFrench() {
+    this.translate.use('fr');
+  }
+
+  changeLanguageToEnglish() {
+    this.translate.use('en');
+  }
 }

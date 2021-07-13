@@ -14,7 +14,7 @@
                         </div>
                     </ng-template>
                 </div>
-                <a class="d-block mt-3" (click)="updateLogo()" href="javascript:void(0)">Update Logo</a>
+                <a class="d-block mt-3" (click)="updateLogo()" href="javascript:void(0)">{{'myStoreContent.editLogo' | translate}}</a>
             </div>
         </ng-container>
         <div class="col-12 col-md-8">
@@ -22,10 +22,10 @@
         </div>
         <div class="col-12 d-block d-md-flex justify-content-end">
             <div *ngIf="loading" class="spinner-border spinner-border-sm text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
             <button (click)="updateStore()" class="btn btn-primary btn-neu-light ml-3">
-                Update Store
+                {{'myStoreContent.editStore' | translate}}
             </button>
         </div>
     </div>

@@ -3,22 +3,23 @@
         <div class="row">
             <div class="mx-auto my-5">
                 <div class="spinner-border text-primary m-2" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{'loading' | translate}}...</span>
                 </div>
             </div>
         </div>
     </ng-container>
     <ng-template #noloading>
-        <h5 class="mb-3 mt-5">Current Plan</h5>
+        <h5 class="mb-3 mt-5">{{'myStoreContent.currentPlan' | translate}}</h5>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="d-flex justify-content-between p-4 border-primary border rounded-lg">
                     <div>
-                        <p class="font-size-20 mb-2 font-weight-bold text-primary text-left">{{myStore.my_subscription.plan.plan_type}}</p>
+                        <p class="font-size-20 mb-2 font-weight-bold text-primary text-left">{{myStore.my_subscription.plan.plan_type | translate}}</p>
                         <p class="small text-muted mb-0 font-weight-semibold text-left">
-                            {{myStore.my_subscription.plan.products_limit}} Products; 
-                            {{myStore.my_subscription.plan.orders_limit === -1 ? 'Unlimited' : myStore.my_subscription.plan.orders_limit}} Orders; 
-                            {{myStore.my_subscription.plan.customers_limit === -1 ? 'Unlimited' : myStore.my_subscription.plan.customers_limit}} Customers</p>
+                            {{myStore.my_subscription.plan.products_limit}} {{'products' | translate}}; 
+                            {{myStore.my_subscription.plan.orders_limit === -1 ? ('unlimited' | translate) : myStore.my_subscription.plan.orders_limit}} {{'orders' | translate}}; 
+                            {{myStore.my_subscription.plan.customers_limit === -1 ? ('unlimited' | translate) : myStore.my_subscription.plan.customers_limit}} {{'customers' | translate}}
+                        </p>
                     </div>
                 </div>
             </div>

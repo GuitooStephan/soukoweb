@@ -12,6 +12,7 @@ import * as ICC from 'iso-country-currency';
 import { selectUser } from 'src/app/core/store/selectors/user.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { RecordPaymentComponent } from '../record-payment/record-payment.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var _;
 @Component({
@@ -40,6 +41,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog,
     private modal: NgbModal,
+    private translateService: TranslateService,
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private ordersService: OrdersService
@@ -77,7 +79,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.ordersService.fetchOrders( this.user.admin.store_id, offset, q, paymentStatus, confirmed ).subscribe(
       data => {
         this.count = data.count;
-        this.orders = data.results;
+        this.orders = data.results.map( o => ({ ...o, payment_status_translate_key: o.payment_status.replace(' ', '') }) );
         this.loading = false;
       }
     );
@@ -146,9 +148,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if ( result ) {
-        this.ordersService.deleteOrder( order.id ).subscribe(
-          data => {
-            this.notificationService.success( null, 'Order deleted successfully' );
+        combineLatest([
+          this.translateService.get('notificationMessages.orderDeletedSuccess'),
+          this.ordersService.deleteOrder( order.id )
+        ]).subscribe(
+          ([message, data]) => {
+            this.notificationService.success( null, message );
             this.fetchOrders( 0 );
           }
         );
@@ -162,15 +167,20 @@ export class ListComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.remainingAmount = order.total_amount - +_.sumBy( order.payments, 'amount' );
     modalRef.result.then((result) => {
       if (result === 'success') {
-        this.notificationService.success(null, 'Payment recorded successfully!');
-        this.fetchOrders( ( this.page - 1 ) * 10 );
+        this.translateService.get('notificationMessages.paymentRecordedSuccess').subscribe( message => {
+          this.notificationService.success(null, message );
+          this.fetchOrders( ( this.page - 1 ) * 10 );
+        } );
       }
     }, (_) => { });
   }
 
   confirmOrder( order ) {
-    this.ordersService.updateOrder( order.id, { confirmed: true } ).subscribe( data => {
-      this.notificationService.success( null, 'Order has been confirmed.' );
+    combineLatest([
+      this.translateService.get('notificationMessages.orderHasBeenConfirmed'),
+      this.ordersService.updateOrder( order.id, { confirmed: true } )
+    ]).subscribe( ([message, data]) => {
+      this.notificationService.success( null, message );
       this.fetchOrders( ( this.page - 1 ) * 10 );
     } );
   }

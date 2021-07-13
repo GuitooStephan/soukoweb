@@ -4,8 +4,8 @@
             <a href="javascript:void(0)" class="mr-4 display-4 font-weight-light text-dark" (click)="dismiss()">×</a>
         </div>
         <div>
-            <h1 class="my-0">Update Logo</h1>
-            <p class="mb-0">Kindly upload the new image</p>
+            <h1 class="my-0">{{'myStoreContent.editStore' | translate}}</h1>
+            <p class="mb-0">{{'myStoreContent.editLogoDescription' | translate}}</p>
         </div>
     </div>
     <div class="row">
@@ -14,10 +14,10 @@
         </div>
         <div class="col-12 px-0">
             <button (click)="updateLogo()" class="btn btn-primary">
-                Update Logo
+                {{'myStoreContent.editStore' | translate}}
             </button>
             <div *ngIf="loading" class="ml-3 spinner-border spinner-border-sm text-dark" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{'loading' | translate}}...</span>
             </div>
         </div>
     </div>

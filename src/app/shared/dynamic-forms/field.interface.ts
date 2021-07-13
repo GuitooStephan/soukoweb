@@ -17,6 +17,7 @@ export interface FieldConfig {
     collections?: any;
     type?: string;
     value?: any;
+    required?: boolean;
     // Validators
     validations?: Validator[];
     placeholder?: string;

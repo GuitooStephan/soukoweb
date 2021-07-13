@@ -7,7 +7,8 @@ export const CreateStoreFields: FieldConfig[] = [
         type: 'file',
         wrapper_classes: 'col-lg-12 px-0',
         name: 'logo_url',
-        label: 'Upload Store Logo *',
+        required: true,
+        label: 'Store Logo',
         placeholder: 'Upload store logo',
         validations: [
             {
@@ -19,8 +20,9 @@ export const CreateStoreFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'Name *',
+        label: 'Name',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'name',
         placeholder: 'Enter your name',
@@ -34,7 +36,8 @@ export const CreateStoreFields: FieldConfig[] = [
     },
     {
         type: 'multiselect',
-        label: 'Categories *',
+        label: 'Categories',
+        required: true,
         wrapper_classes: 'col-md-12 px-0',
         name: 'categories_ids',
         options: Categories,
@@ -49,8 +52,9 @@ export const CreateStoreFields: FieldConfig[] = [
     },
     {
         type: 'phone_number',
-        label: 'Phone Number *',
+        label: 'Phone Number',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-sm-12 px-0 pr-sm-2 mb-1',
         name: 'phone_number',
         placeholder: 'Enter your phone number',
@@ -64,8 +68,9 @@ export const CreateStoreFields: FieldConfig[] = [
     },
     {
         type: 'input',
-        label: 'City *',
+        label: 'City',
         inputType: 'text',
+        required: true,
         wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 pr-sm-2 mb-1',
         name: 'city',
         placeholder: 'Enter your city',
@@ -79,10 +84,11 @@ export const CreateStoreFields: FieldConfig[] = [
     },
     {
         type: 'countries',
-        label: 'Country *',
+        label: 'Country',
         wrapper_classes: 'col-12 col-sm-6 col-lg-12 px-0 px-sm-2 mb-1',
+        required: true,
         name: 'country',
-        placeholder: 'Enter your country',
+        placeholder: 'Select your country',
         validations: [
             {
                 name: 'required',

@@ -1,43 +1,43 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 min-vh-100">
     <div class="d-block d-md-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="mb-2 mb-md-0">Orders</h1>
+            <h1 class="mb-2 mb-md-0">{{'orders' | translate}}</h1>
         </div>
         <div ngbDropdown container="body" display="dynamic" placement="bottom-right">
             <button ngbDropdownToggle class="btn btn-block btn-primary btn-neu-light no-dropdown-arrow">
-                Filter
+                {{'filter' | translate}}
                 <i class="fa fa-filter"></i>
             </button>
             <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right p-4">
-                <p class="mb-2 font-size-14 font-weight-normal">By Payment Status</p>
+                <p class="mb-2 font-size-14 font-weight-normal">{{'ordersContent.byPaymentStatus' | translate}}</p>
                 <div class="row align-items-center mb-4">
                     <div class="col-6 mb-2 form-check">
                         <input class="form-check-input" type="radio" name="payment_status" id="all" [value]="'ALL'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
-                        <label class="form-check-label" for="all" class="mb-0">All</label>
+                        <label class="form-check-label" for="all" class="mb-0">{{'ordersContent.all' | translate}}</label>
                     </div>
                     <div class="col-6 mb-2 form-check">
                         <input class="form-check-input" type="radio" name="payment_status" id="PAID" [value]="'PAID'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
-                        <label class="form-check-label" for="PAID" class="mb-0">Paid</label>
+                        <label class="form-check-label" for="PAID" class="mb-0">{{'ordersContent.Paid' | translate}}</label>
                     </div>
                     <div class="col-6 form-check">
                         <input class="form-check-input" type="radio" name="payment_status" id="PENDING" [value]="'PENDING'" (change)="filterOrders()" [(ngModel)]="paymentStatus">
-                        <label class="form-check-label" for="PENDING">Not Paid</label>
+                        <label class="form-check-label" for="PENDING">{{'ordersContent.NotPaid' | translate}}</label>
                     </div>
                 </div>
                 <hr>
-                <p class="mb-2 font-size-14 font-weight-normal">By Confirmation Status</p>
+                <p class="mb-2 font-size-14 font-weight-normal">{{'ordersContent.byConfirmationStatus' | translate}}</p>
                 <div class="row align-items-center mb-4">
                     <div class="col-6 mb-2 form-check">
                         <input class="form-check-input" type="radio" name="confirmed" id="confirmationStatusAll" [value]="'ALL'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
-                        <label class="form-check-label" for="confirmationStatusAll" class="mb-0">All</label>
+                        <label class="form-check-label" for="confirmationStatusAll" class="mb-0">{{'ordersContent.all' | translate}}</label>
                     </div>
                     <div class="col-6 mb-2 form-check">
                         <input class="form-check-input" type="radio" name="confirmed" id="NOT_CONFIRMED" [value]="'NOT_CONFIRMED'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
-                        <label class="form-check-label" for="NOT_CONFIRMED" class="mb-0">Not Confirmed</label>
+                        <label class="form-check-label" for="NOT_CONFIRMED" class="mb-0">{{'ordersContent.NotConfirmed' | translate}}</label>
                     </div>
                     <div class="col-6 form-check">
                         <input class="form-check-input" type="radio" name="confirmed" id="CONFIRMED" [value]="'CONFIRMED'" (change)="filterOrders()" [(ngModel)]="confirmationStatus">
-                        <label class="form-check-label" for="CONFIRMED">Confirmed</label>
+                        <label class="form-check-label" for="CONFIRMED">{{'ordersContent.Confirmed' | translate}}</label>
                     </div>
                 </div>
             </div>
@@ -50,14 +50,14 @@
                     <i class="fa fa-2x fa-search"></i>
                 </span>
             </div>
-            <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchOrders($event)" placeholder="Search for orders">
+            <input type="text" class="form-control" [(ngModel)]="q" (keyup)="searchOrders($event)" placeholder="{{'ordersContent.searchOrdersPlaceholder' | translate}}">
         </div>
     </div>
     <ng-container *ngIf="loading; else noloading;">
         <div class="row" *ngIf="loading">
             <div class="mx-auto my-5">
                 <div class="spinner-border text-primary m-2" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{'loading' | translate}}...</span>
                 </div>
             </div>
         </div>
@@ -73,29 +73,29 @@
                         <ng-container *ngFor="let order of orders">
                             <tr class="border-2 mb-3">
                                 <td (click)="goToDetails(order)" class="cursor-pointer">
-                                    <span class="font-weight-bold">Buyer:</span>
+                                    <span class="font-weight-bold">{{'ordersContent.buyer' | translate}}:</span>
                                     {{order.customer.first_name + ' ' + order.customer.last_name}}
                                 </td>
                                 <td (click)="goToDetails(order)" class="cursor-pointer font-weight-bold">#{{order.number}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Num. of Products:</span> {{order.number_of_products}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Tt. Amount:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Amount Paid:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">Balance:</span> {{order.balance | currency:currency:'symbol':'1.2-2'}}</td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{order.payment_status | uppercase}}</span></td>
-                                <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? 'Confirmed' : 'Not Confirmed' )  | uppercase}}</span></td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.numberOfProducts' | translate}}:</span> {{order.number_of_products}}</td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.ttAmount' | translate}}:</span> {{order.total_amount | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.amountPaid' | translate}}:</span> {{order.amount_paid | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer"><span class="font-weight-bold">{{'ordersContent.balance' | translate}}:</span> {{order.balance | currency:currency:'symbol':'1.2-2'}}</td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.payment_status == 'Paid'" [class.badge-light]="order.payment_status == 'Not Paid'" [class.badge-soft-warning]="order.payment_status == 'Partially Paid'">{{ ( 'ordersContent.' + order.payment_status_translate_key | translate ) | uppercase}}</span></td>
+                                <td (click)="goToDetails(order)" class="cursor-pointer text-center"><span class="badge badge-pill px-3 py-2" [class.badge-soft-success]="order.confirmed" [class.badge-light]="!order.confirmed">{{ ( order.confirmed ? ( 'ordersContent.Confirmed' | translate ) : ( 'ordersContent.NotConfirmed' | translate ) )  | uppercase}}</span></td>
                                 <td ngbDropdown container="body" class="cursor-pointer">
                                     <span ngbDropdownToggle class="no-dropdown-arrow"><i class="fa fa-2x fa-ellipsis-v"></i></span>
                                     <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
                                         <a (click)="goToDetails(order)" href="javascript:void(0)" ngbDropdownItem>
-                                            View
+                                            {{'actions.View' | translate}}
                                         </a>
-                                        <a *ngIf="order.payment_status === 'Pending'" [routerLink]="['/dashboard/orders/edit', order.id]" ngbDropdownItem>
-                                            Edit
+                                        <a *ngIf="order.payment_status === 'Not Paid'" [routerLink]="['/dashboard/orders/edit', order.id]" ngbDropdownItem>
+                                            {{'actions.Edit' | translate}}
                                         </a>
-                                        <a *ngIf="!order.confirmed" (click)="confirmOrder(order)" href="javascript:void(0)" ngbDropdownItem>Mark as confirmed</a>
-                                        <a *ngIf="order.payment_status === 'Pending'" (click)="recordPayment(order)" href="javascript:void(0)" ngbDropdownItem>Mark as paid</a>
-                                        <a *ngIf="order.payment_status === 'Pending'" (click)="promptForDeletingOrder( order )" href="javascript:void(0)" ngbDropdownItem>
-                                            Delete
+                                        <a *ngIf="!order.confirmed" (click)="confirmOrder(order)" href="javascript:void(0)" ngbDropdownItem>{{'actions.Markasconfirmed' | translate}}</a>
+                                        <a *ngIf="order.payment_status === 'Not Paid'" (click)="recordPayment(order)" href="javascript:void(0)" ngbDropdownItem>{{'actions.Markaspaid' | translate}}</a>
+                                        <a *ngIf="order.payment_status === 'Not Paid'" (click)="promptForDeletingOrder( order )" href="javascript:void(0)" ngbDropdownItem>
+                                            {{'actions.Delete' | translate}}
                                         </a>
                                     </div>
                                 </td>
@@ -119,7 +119,7 @@
         </ng-container>
         <ng-template #noOrders>
             <div class="text-center py-5">
-                <p class="font-weight-normal font-size-15">No orders available</p>
+                <p class="font-weight-normal font-size-15">{{'ordersContent.Noordersavailable' | translate}}</p>
             </div>
         </ng-template>
     </ng-template>

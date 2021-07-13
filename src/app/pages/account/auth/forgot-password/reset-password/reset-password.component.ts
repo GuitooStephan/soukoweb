@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { DynamicFormComponent } from 'src/app/shared/dynamic-forms/dynamic-form/dynamic-form.component';
@@ -26,6 +28,7 @@ export class ResetPasswordComponent implements OnInit {
     private metaTagService: Meta,
     private route: ActivatedRoute,
     private router: Router,
+    private translateService: TranslateService,
     private userService: UserService,
     private notificationService: NotificationService
   ) {
@@ -62,15 +65,21 @@ export class ResetPasswordComponent implements OnInit {
 
     this.loading = true;
     const payload = { token: this.token, ..._.omit( this.resetPasswordForm.value, ['confirm_password'] ) };
-    this.userService.resetPassword( payload ).subscribe(
-      data => {
+
+    combineLatest([
+      this.translateService.get('notificationMessages.passwordResetSuccess'),
+      this.userService.resetPassword( payload )
+    ]).subscribe(
+      ([message, data]) => {
         this.loading = false;
-        this.notificationService.success( null, 'Password reset was successfull' );
+        this.notificationService.success( null, message );
         this.router.navigate( ['/account/auth/sign-in'] );
       },
       error => {
-        this.loading = false;
-        this.notificationService.error( null, 'Error Occured.' );
+        this.translateService.get('notificationMessages.errorOccurred').subscribe( message => {
+          this.loading = false;
+          this.notificationService.error( null, message );
+        } );
       }
     );
   }

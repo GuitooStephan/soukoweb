@@ -11,6 +11,8 @@ import { selectStore } from 'src/app/core/store/selectors/store.selectors';
 import { ConfirmPromptComponent } from 'src/app/shared/prompts/confirm-prompt/confirm-prompt.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import * as ICC from 'iso-country-currency';
+import { TranslateService } from '@ngx-translate/core';
+import { combineLatest } from 'rxjs';
 
 declare var $;
 @Component({
@@ -32,6 +34,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private modal: NgbModal,
+    private translateService: TranslateService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private productsService: ProductsService
@@ -65,14 +68,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   editProduct() {
-    const modalRef = this.modal.open(EditProductComponent, { centered: true, size: 'lg' });
-    modalRef.componentInstance.product = this.product;
-    modalRef.result.then((result) => {
-      if (result === 'success') {
-        this.notificationService.success(null, 'Product edited successfully!');
-        this.fetchProduct();
-      }
-    }, (_) => { });
+    this.translateService.get('notificationMessages.productEditedSuccess').subscribe( message => {
+      const modalRef = this.modal.open(EditProductComponent, { centered: true, size: 'lg' });
+      modalRef.componentInstance.product = this.product;
+      modalRef.result.then((result) => {
+        if (result === 'success') {
+          this.notificationService.success(null, message );
+          this.fetchProduct();
+        }
+      }, (_) => { });
+    } );
   }
 
   promptForDeletingProduct(): void {
@@ -83,9 +88,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if ( result ) {
-        this.productsService.deleteProduct( this.product.id ).subscribe(
-          data => {
-            this.notificationService.success( null, 'Product deleted successfully' );
+        combineLatest([
+          this.translateService.get('notificationMessages.productDeletedSuccess'),
+          this.productsService.deleteProduct( this.product.id )
+        ]).subscribe(
+          ([message, data]) => {
+            this.notificationService.success( null, message );
             this.router.navigate( ['/dashboard/products/list'] );
           }
         );

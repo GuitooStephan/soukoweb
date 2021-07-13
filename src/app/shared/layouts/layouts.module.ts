@@ -8,6 +8,7 @@ import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DevInfoComponent } from './dev-info/dev-info.component';
 import { AvatarModule } from 'ngx-avatar';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,6 +21,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     CoreModule,
     AvatarModule,
     ClipboardModule,
