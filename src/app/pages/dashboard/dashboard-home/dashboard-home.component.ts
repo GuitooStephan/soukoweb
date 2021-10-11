@@ -84,8 +84,6 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
       this.translateService.get('dashboardContent.profit'),
       this.translateService.get('dashboardContent.orders')
     ]).subscribe( ([profit, orders]) => {
-      console.log('--->>', profit);
-      console.log('--->>', orders);
       this.ordersMetricsGraph = null;
       const ordersMetricsGraph = { ...linewithDataChart };
       ordersMetricsGraph.series = [];

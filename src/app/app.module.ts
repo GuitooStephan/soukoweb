@@ -19,6 +19,36 @@ import { LayoutsModule } from './shared/layouts/layouts.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
+
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'souko.me'// it is recommended to set your domain, for cookies to work properly
+  },
+  palette: {
+    popup: {
+      background: '#0a0a0a'
+    },
+    button: {
+      background: '#FFBA0A'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+  layout: 'my-custom-layout',
+  layouts: {
+    "my-custom-layout": '{{messagelink}}{{compliance}}'
+  },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}}</span>
+    `,
+  },
+  content:{
+    message: 'This website uses cookies to ensure you get the best experience on our website.',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -48,7 +78,8 @@ import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http'
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    NgcCookieConsentModule.forRoot(cookieConfig)
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

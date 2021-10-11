@@ -12,6 +12,7 @@ const userReducerConstructor = createReducer(
     on(AuthActions.createUserSuccess, (state, { data }) => ({ ...data.user })),
     on(AuthActions.updateUserSuccess, (state, { data }) => ({ ...data })),
     on(AuthActions.signInSuccess, (state, { data }) => ({ ...data.user.user })),
+    on(AuthActions.signInAlmostDone, (state, { data }) => ({ ...data.user.user })),
     on(StoreActions.emptyStore, (state, { }) => (null)),
     on(AuthActions.signOut, ( state, {} ) => ( null ) ),
 );

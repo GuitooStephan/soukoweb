@@ -30,6 +30,11 @@ export const signInSuccess = createAction(
     props<{ data: any }>()
 );
 
+export const signInAlmostDone = createAction(
+    '[Auth] Sign In Almost Done',
+    props<{ data: any }>()
+);
+
 export const signInIncomplete = createAction(
     '[Auth] Sign In Incomplete'
 );

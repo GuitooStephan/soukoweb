@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgcCookieConsentService } from 'ngx-cookieconsent';
 
 declare let gtag: Function;
 
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private ccService: NgcCookieConsentService
   ){
     this.router.events.subscribe( event => {
       if ( event instanceof NavigationEnd ){
