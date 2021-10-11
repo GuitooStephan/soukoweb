@@ -128,8 +128,6 @@ export class ListComponent implements OnInit, OnDestroy {
   filterOrders() {
     const paymentStatus = this.paymentStatus === 'ALL' ? null : this.paymentStatus;
     const confirmationStatus = this.confirmationStatus === 'ALL' ? null : this.confirmationStatus;
-    console.log(this.paymentStatus);
-    console.log(this.confirmationStatus);
     this.router.navigate(
       [],
       {

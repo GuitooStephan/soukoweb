@@ -8,6 +8,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaqsComponent } from './faqs/faqs.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NgbNavModule,
     NgbNavModule,
     NgbAccordionModule,
-    CountdownModule
+    CountdownModule,
+    NgcCookieConsentModule
   ]
 })
 export class LandingModule { }

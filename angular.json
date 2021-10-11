@@ -40,7 +40,8 @@
               "src/assets/css/dropzone.css",
               "src/assets/libs/lobibox/lobibox.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
-              "node_modules/country-select-js/build/css/countrySelect.css"
+              "node_modules/country-select-js/build/css/countrySelect.css",
+              "node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
@@ -57,7 +58,8 @@
               "src/assets/js/moment-duration-format.min.js",
               "src/assets/js/jquery.magnific-popup.min.js",
               "node_modules/country-select-js/build/js/countrySelect.js",
-              "node_modules/gsap/dist/gsap.min.js"
+              "node_modules/gsap/dist/gsap.min.js",
+              "node_modules/cookieconsent/build/cookieconsent.min.js"
             ]
           },
           "configurations": {
