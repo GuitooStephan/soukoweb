@@ -1,27 +1,40 @@
-# Soukoweb
+# Souko
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
+Souko is a web-based application designed to simplify 
+store management. Its services can be summarized in two 
+main tasks:
+- Centralize the management of inventory, customers, and 
+orders in one location.
+- Create a personalized e-commerce page to sell your 
+products.
 
-## Development server
+## Project description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Opening a first business can be a daunting task for most 
+entrepreneurs as they encounter numerous challenges, 
+including managing their inventory, customer relations, 
+and sales. Existing solutions can be time-consuming and 
+difficult to set up and utilize. However, Souko offers a 
+user-friendly solution that enables store owners to manage 
+their business operations with greater ease.
 
-## Code scaffolding
+## Architecture
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The solution was constructed using the **MVP 
+architecture**, with the API built on **Django**, 
+utilizing a **Postgres Database** and **Celery** Workers. 
+The web interface was developed using **Angular**.
 
-## Build
+## Repositories
+- [**API**](https://github.com/GuitooStephan/soukoapi)
+- [**WEB**](https://github.com/GuitooStephan/soukoweb)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Info
 
-## Running unit tests
+Due to financial constraints, the solution's hosting on 
+Digital Ocean and AWS has been suspended for the time 
+being.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## License
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
